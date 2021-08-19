@@ -13,4 +13,9 @@ class Vendor extends Model
     {
         return $this->belongsTo(Item::class);
     }
+
+    public function purchase()
+    {
+        return $this->hasMany(Purchase::class);
+    }
 }

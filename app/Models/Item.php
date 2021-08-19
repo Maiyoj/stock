@@ -13,4 +13,14 @@ class Item extends Model
     {
         return $this->hasMany(Vendor::class);
     }
+
+
+    public function purchase()
+    {
+        return $this->hasMay(Purchase::class);
+    }
+    public function stock()
+    {
+        return $this->hasMany(Stock::class);
+    }
 }

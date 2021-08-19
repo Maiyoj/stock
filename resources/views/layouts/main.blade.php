@@ -91,27 +91,74 @@
                            
                              
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts3" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-layer-group"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fa fa-archive"></i></div>
                               Stocks
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapseLayouts3" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.html">Add Stock</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Issuance</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Issue Stock</
+                                    <a class="nav-link" href="{{route('stocks.index')}}">View Stock</a>
+                                    <!--<a class="nav-link" href="layout-sidenav-light.html">Issuance</a>
+                                    <a class="nav-link" href="layout-sidenav-light.html">Issue Stock</a>-->
                                 </nav>
                             </div>
-                           
+
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts13" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fa fa-truck"></i></div>
+                              Zones
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayouts13" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="{{route('zone.index')}}">View Zones</a>
+                                    <a class="nav-link" href="{{route('zone.create')}}">Add Zones</a>
+                                   
+                             </nav>
+                            </div>
+                            
+
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts4" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fa fa-file"></i></div>
+                              Issuance Team Lead
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayouts4" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="layout-static.html">View Issuance</a>
+                                    <a class="nav-link" href="layout-static.html">Add Issuance</a>
+                            </nav>
+                            </div>
+
+
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts5" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fa fa-file"></i></div>
+                              Issuance Engineer
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayouts5" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="layout-static.html">View Issuance</a>
+                                    <a class="nav-link" href="layout-static.html">Add Issuance</a>
+                            </nav>
+                            </div>
+                            
                             <div class="sb-sidenav-menu-heading">Action</div>
                             <a class="nav-link" href="charts.html">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 reports
                             </a>
-                            <a class="nav-link" href="tables.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
-                                users
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts6" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fa fa-users"></i></div>
+                              Users
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
+                            <div class="collapse" id="collapseLayouts6" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="{{route('user.index')}}">View User</a>
+                                    <a class="nav-link" href="{{route('user.create')}}">Add User</a>
+                            </nav>
+                            </div>
+                            
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">

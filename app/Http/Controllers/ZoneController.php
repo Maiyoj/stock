@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Vendor;
-use App\Models\Item;
-
-class VendorController extends Controller
+use App\Models\User;
+use App\Models\Zone;
+class ZoneController extends Controller
 {
+
+
     public function __construct()
     {
 
@@ -20,9 +21,9 @@ class VendorController extends Controller
      */
     public function index()
     {
-        $vendors=vendor::all();
+        $zones=zone::all();
 
-        return view('vendor.index', compact('vendors'));
+        return view('zone.index', compact('zones'));
     }
 
     /**
@@ -32,8 +33,8 @@ class VendorController extends Controller
      */
     public function create()
     {
-        $items=Item::all();
-        return view('vendor.create',compact('items'));
+        $users=User::where('role_id','!=',0)->get();
+        return view('zone.create',compact('users'));
     
     }
 
@@ -48,20 +49,21 @@ class VendorController extends Controller
         
         $request->validate([
             
-            'name'=>'required|string',
-            'price'=>'numeric|required',
+            'zone'=>'required|string|unique:zones',
+            
         ]);
 
 
-        $vendor=new Vendor;
-        $vendor->name=$request->name;
-        $vendor->item_id=$request->item_id;
-        $vendor->price=$request->price;
-        $vendor->save();
+        $zone=new Zone;
+        $zone->user_id=$request->user_id;
+        $zone->zone=$request->zone;
+
+        $zone->save();
 
 
-        return redirect()->route('vendor.index')->with('success', 'Vendor Added Sucessfully');
+        return redirect()->route('zone.index')->with('success', 'Zone Added Sucessfully');
     }
+
     /**
      * Display the specified resource.
      *
@@ -80,12 +82,12 @@ class VendorController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {   
-        $items=Item::all();
+    {
+        $users=User::where('role_id','!=',0)->get();
     
-        $vendor= Vendor::findOrFail($id);
+        $zone= Zone::findOrFail($id);
 
-        return view('vendor.edit',compact('vendor','items'));
+        return view('zone.edit',compact('zone','users'));
     }
 
     /**
@@ -99,18 +101,19 @@ class VendorController extends Controller
     {
         $request->validate([
             
-            'name'=>'required|string', 
-            'price'=>'numeric|required'
+            'zone'=>'required|string', 
+        
         ]);
 
 
-        $vendor=Vendor::findOrFail($id);
-        $vendor->name=$request->name;
-        $vendor->item_id=$request->item_id;
-        $vendor->price=$request->price;
-        $vendor->save();
+        $zone=Zone::findOrFail($id);
+        $zone->user_id=$request->user_id;
+        $zone->zone=$request->zone;
+        
+    
+        $zone->save();
 
-        return redirect()->route('vendor.index')->with('success', 'Vendor Updated Sucessfully');
+        return redirect()->route('zone.index')->with('success', 'Zone Updated Sucessfully');
     }
 
     /**
@@ -122,8 +125,9 @@ class VendorController extends Controller
     public function destroy($id)
     {
         
-        $vendor=Vendor::findOrFail($id);
-        $vendor->delete();
-        return redirect()->route('vendor.index')->with('success', ' Vendor Deleted Successfully');
+        
+        $zone=Zone::findOrFail($id);
+        $zone->delete();
+        return redirect()->route('zone.index')->with('success', ' Zone Deleted Successfully');
     }
 }

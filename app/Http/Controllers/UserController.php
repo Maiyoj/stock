@@ -5,8 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Vendor;
 use App\Models\Item;
+use App\Models\Purchase;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
-class VendorController extends Controller
+
+class UserController extends Controller
 {
     public function __construct()
     {
@@ -20,9 +24,9 @@ class VendorController extends Controller
      */
     public function index()
     {
-        $vendors=vendor::all();
+        $users=User::where('role_id','!=',0)->get();
 
-        return view('vendor.index', compact('vendors'));
+        return view('user.index', compact('users'));
     }
 
     /**
@@ -32,9 +36,7 @@ class VendorController extends Controller
      */
     public function create()
     {
-        $items=Item::all();
-        return view('vendor.create',compact('items'));
-    
+        return view('user.create');
     }
 
     /**
@@ -45,23 +47,23 @@ class VendorController extends Controller
      */
     public function store(Request $request)
     {
-        
         $request->validate([
-            
             'name'=>'required|string',
-            'price'=>'numeric|required',
+            'email'=>'required|email|unique:users',
+            'password'=>'required|string'
         ]);
 
+        $user=new User;
+        $user->name=$request->name;
+        $user->email=$request->email;
+        $user->password=Hash::make($request->password);
+        $user->role_id=$request->role_id;
+        $user->save();
 
-        $vendor=new Vendor;
-        $vendor->name=$request->name;
-        $vendor->item_id=$request->item_id;
-        $vendor->price=$request->price;
-        $vendor->save();
+        return redirect()->route('user.index')->with('success','User added successfully');
 
-
-        return redirect()->route('vendor.index')->with('success', 'Vendor Added Sucessfully');
     }
+
     /**
      * Display the specified resource.
      *
@@ -80,12 +82,9 @@ class VendorController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {   
-        $items=Item::all();
-    
-        $vendor= Vendor::findOrFail($id);
-
-        return view('vendor.edit',compact('vendor','items'));
+    {
+        $user=User::findOrFail($id);
+        return view('user.edit',compact('user'));
     }
 
     /**
@@ -98,19 +97,19 @@ class VendorController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            
-            'name'=>'required|string', 
-            'price'=>'numeric|required'
+            'name'=>'required|string',
+            'email'=>'required|email',
+            'password'=>'required|string'
         ]);
 
+        $user=User::findOrFail($id);
+        $user->name=$request->name;
+        $user->email=$request->email;
+        $user->password=Hash::make($request->password);
+        $user->role_id=$request->role_id;
+        $user->save();
 
-        $vendor=Vendor::findOrFail($id);
-        $vendor->name=$request->name;
-        $vendor->item_id=$request->item_id;
-        $vendor->price=$request->price;
-        $vendor->save();
-
-        return redirect()->route('vendor.index')->with('success', 'Vendor Updated Sucessfully');
+        return redirect()->route('user.index')->with('success','User updated successfully');
     }
 
     /**
@@ -121,9 +120,9 @@ class VendorController extends Controller
      */
     public function destroy($id)
     {
-        
-        $vendor=Vendor::findOrFail($id);
-        $vendor->delete();
-        return redirect()->route('vendor.index')->with('success', ' Vendor Deleted Successfully');
+        $user=User::findOrFail($id);
+        $user->delete();
+
+        return redirect()->route('user.index')->with('success','User delete successfully');
     }
 }

@@ -3,22 +3,22 @@
 @extends('layouts.main')
 
 @section('title')
-<title>Purchase</title>
+<title>Add Zone</title>
 @endsection
 @section('content') 
 <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Purchase</h1>
+                        <h1 class="mt-4">Zones</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active"> Purchase</li>
+                            <li class="breadcrumb-item active">Add Zone</li>
                         </ol>
                        
                         
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fab fa-product-hunt"></i>
-                                Purchase
+                                Zones
                             </div>
                             <div class="card-body">
 
@@ -32,41 +32,32 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Item</th>
-                                            <th>Vendor</th>
-                                            <th>PO Number</th>
-                                            <th>Quantity</th>
-                                            <th>Price</th>
+                                            <th>User</th>
+                                            <th>Zone</th>
                                             <th>Date Added</th>
-
+                                            <th>Action</th>
                                             
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>ID</th>
-                                            <th>Item</th>
-                                            <th>Vendor</th>
-                                            <th>PO Number</th>
-                                            <th>Quantity</th>
-                                            <th>Price</th>
+                                        <th>ID</th>
+                                        <th>User</th>
+                                        <th>Zone</th>
                                             <th>Date Added</th>
                                             <th colspan="2">Action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        @forelse($purchases as $purchase)
+                                        @forelse($zones as $zone)
                                         <tr>
-                                            <td>{{$purchase->id}}</td>
-                                            <td>{{$purchase->item->name}}</td>
-                                            <td>{{$purchase->vendor->name}}</td>
-                                            <td>{{$purchase->PO_number}}</td>
-                                            <td>{{$purchase->quantity}}</td>
-                                            <td>{{$purchase->price}}</td>
-                                             <td>{{$purchase->created_at}}</td>
-                                            <td><a href="{{route('purchase.edit', $purchase->id)}}"><i class="fa fa-edit text-primary"> </i></td>
+                                            <td>{{$zone->id}}</td>
+                                            <td>{{$zone->user->name}}</td>
+                                            <td>{{$zone->zone}}</td>
+                                             <td>{{$zone->created_at}}</td>
+                                            <td><a href="{{route('zone.edit', $zone->id)}}"><i class="fa fa-edit text-primary"> </i></td>
                                             <td>
-                                            <form id= "delete" action="{{route('purchase.destroy', $purchase->id)}}" method="post">
+                                            <form id= "delete" action="{{route('zone.destroy', $zone->id)}}" method="post">
                                                  @csrf
                                                 @method('DELETE')    
                                                 <button type="submit" form="delete" style="border: none;background:color:transparent;"> 
