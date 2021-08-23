@@ -12,7 +12,7 @@ use App\Models\TeamLeadStock;
 use Illuminate\Support\Facades\Auth;
 
 
-class IssuanceeController extends Controller
+class EngineerIssuanceeController extends Controller
 {
 
 
@@ -40,8 +40,8 @@ class IssuanceeController extends Controller
     {
         $items=Item::all();
         $zones=Zone::all();
-        $users=User::where('role_id',2)->get();
-        return view('issuancee.create', compact('items','zones','users'));
+        $users=User::where('role_id',1)->get();
+        return view('engineer_issuancee.create', compact('items','zones','users'));
     }
 
     /**
@@ -56,14 +56,14 @@ class IssuanceeController extends Controller
             'quantity'=>'numeric|required',
             'purpose'=>'string|required'
         ]);
-       $stock=TeamLeadStock::where('user_id',Auth::user()->id)->where('item_id',$request->item_id)->first();
+       $stock=TeamLeadStock::where('user_id',$request->user_id)->where('item_id',$request->item_id)->first();
         $available_stock=$stock->quantity;
         if($request->quantity>$available_stock)
        {
            return redirect()->back()->with('error','The available is too low for requested issuance');
         }
         $issuancee = new Issuancee;
-        $issuancee->user_id=$request->user_id;
+        $issuancee->user_id=Auth::user()->id;
         $issuancee->zone_id=$request->zone_id;
         $issuancee->item_id=$request->item_id;
         $issuancee->quantity=$request->quantity;
@@ -74,7 +74,7 @@ class IssuanceeController extends Controller
         $stock->save();
 
 
-        return redirect()->route('issuancee.index')->with('success','Issuance added successfully');
+        return redirect()->route('myissuancee.index')->with('success','Issuance added successfully');
     }
 
     /**
@@ -100,9 +100,9 @@ class IssuanceeController extends Controller
         
         $items=Item::all();
         $zones=Zone::all();
-        $users=User::where('role_id',2)->get();
+        $users=User::where('role_id',1)->get();
 
-        return view('issuancee.edit',compact('items','zones','users','issuancee'));
+        return view('myissuancee.edit',compact('items','zones','users','issuancee'));
     }
 
     /**
@@ -122,7 +122,7 @@ class IssuanceeController extends Controller
 
         $issuancee = Issuancee::findOrFail($id);
         $original_quantity=$issuancee->quantity;
-        $stock=TeamLeadStock::where('user_id',Auth::user()->id)->where('item_id',$request->item_id)->first();
+        $stock=TeamLeadStock::where('user_id',$request->id)->where('item_id',$request->item_id)->first();
         $available_stock=$stock->quantity;
         if($request->quantity>$available_stock)
         {
@@ -138,7 +138,7 @@ class IssuanceeController extends Controller
         $stock->quantity=($stock->quantity+$original_quantity)-$request->quantity;
         $stock->save();
         
-        return redirect()->route('issuancee.index')->with('success','Issuance updated successfully');
+        return redirect()->route('engineer_issuancee.index')->with('success','Issuance updated successfully');
     }
 
     /**

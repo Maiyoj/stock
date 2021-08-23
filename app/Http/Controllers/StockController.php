@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Stock;
 use App\Models\TeamLeadStock;
+use App\Models\Issuancee;
 use Illuminate\Support\Facades\Auth;
 
 class StockController extends Controller
@@ -24,9 +25,11 @@ class StockController extends Controller
         $stocks=TeamLeadStock::where('user_id',Auth::user()->id)->get();
          return view('stocks.teamleadstocks',compact('stocks'));
     }
-    public function engineer()
+    public function engineerstocks()
     {
         $stocks=Issuancee::where('user_id',Auth::user()->id)->get();
         return view('stocks.engineer',compact('stocks'));
     }
+
+    
 }

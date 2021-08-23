@@ -67,7 +67,7 @@ class IssuancesController extends Controller
         $issuance->zone_id=$request->zone_id;
         $issuance->item_id=$request->item_id;
         $issuance->quantity=$request->quantity;
-        $issuance->purpose=$request->purpose;
+    
         $issuance->save();
 
         $stock->quantity=$stock->quantity-$request->quantity;
@@ -143,7 +143,7 @@ class IssuancesController extends Controller
         $issuance->zone_id=$request->zone_id;
         $issuance->item_id=$request->item_id;
         $issuance->quantity=$request->quantity;
-        $issuance->purpose=$request->purpose;
+
         $issuance->save();
 
       

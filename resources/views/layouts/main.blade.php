@@ -140,7 +140,11 @@
                                 <div class="collapse" id="collapseLayouts5" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                     <nav class="sb-sidenav-menu-nested nav">
                                         <a class="nav-link" href="{{route('issuancee.index')}}">View Issuance</a>
-                                     <a class="nav-link" href="">Add Issuance</a>
+                                        <!--<a class="nav-link" href="{{route('issuancee.index')}}">Add Issuance</a>-->
+
+
+                                     <!--<a class="nav-link" href="">Add Issuance</a>-->
+                                     
                                 </nav>
                                 </div>
                                 
@@ -175,8 +179,7 @@
                             <div class="collapse" id="collapseLayouts3" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="{{route('teamleadstocks.index')}}">View Stock</a>
-                                    <!--<a class="nav-link" href="layout-sidenav-light.html">Issuance</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Issue Stock</a>-->
+                                    
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts4" aria-expanded="false" aria-controls="collapseLayouts">
@@ -192,28 +195,31 @@
                         </div>   
                         </div>
                     </div>
+                <!-- tring to display user/engineer to view and add items -->
 
-
-                    @elseif(Auth::user()->role_id==2)
+           
+         @elseif(Auth::user()->role_id==2)
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Home</div>
                         
-                            <a class="nav-link collapsed" href="{{route('myissuancee.index')}}" data-bs-toggle="collapse" data-bs-target="#collapseLayouts4" aria-expanded="false" aria-controls="collapseLayouts">
+
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts4" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fa fa-file"></i></div>
                               Issuances
-                            
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
-                           
-                            
-                            
+                            <div class="collapse" id="collapseLayouts4" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="{{route('myissuancee.index')}}">View Issuance</a>
+                                    <a class="nav-link" href="{{route('engineer-issuancee.create')}}">Add Issuance</a>
+                            </nav>
+                        </div>   
                         </div>
+                        
                     </div>
-
-
-
-
-                    @endif
+                    
+                  @endif
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
                         {{Auth::user()->name}}
