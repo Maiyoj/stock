@@ -23,4 +23,16 @@ class Item extends Model
     {
         return $this->hasMany(Stock::class);
     }
+
+    public function issuance()
+    {
+        return $this->hasMany(Issuance::class);
+    }
+    public function issuancee()
+    {
+        return $this->hasMany(Issuancee::class);
+    }
+
+
+    
 }

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Issuancee;
+
 
 class HomeController extends Controller
 {
@@ -23,6 +26,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('admin.index');
+        if(Auth::user()->role_id==2)
+        {
+            $stocks=Issuancee::where('user_id',Auth::user()->id)->get();
+            return view('stocks.engineer',compact('stocks'));
+        }
+        $stocks=Issuancee::all();
+        return view('admin.index',compact('stocks'));
     }
 }

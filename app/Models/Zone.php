@@ -14,4 +14,14 @@ class Zone extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function issuance()
+    {
+        return $this->hasMany(Issuance::class);
+    }
+
+
+    public function issuancee()
+    {
+        return $this->belongsTo(Issuancee::class);
+    }
 }

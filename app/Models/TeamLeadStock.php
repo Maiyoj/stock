@@ -5,17 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Stock extends Model
+class TeamLeadStock extends Model
 {
     use HasFactory;
-
     public function item()
     {
         return $this->belongsTo(Item::class);
     }
-
-    public function isssuance()
+    public function user()
     {
-        return $this->belongsTo(Issuance::class);
+        return $this->belongsTo(User::class);
     }
 }

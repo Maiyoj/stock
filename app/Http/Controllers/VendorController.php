@@ -20,7 +20,7 @@ class VendorController extends Controller
      */
     public function index()
     {
-        $vendors=vendor::all();
+        $vendors=Vendor::all();
 
         return view('vendor.index', compact('vendors'));
     }

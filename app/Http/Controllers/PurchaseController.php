@@ -52,7 +52,7 @@ class PurchaseController extends Controller
         
         $request->validate([
             'quantity'=>'numeric|required',
-            'PO_number'=>'required|string',
+            'PO_number'=>'required|string|unique:purchases',
         ]);
 
 

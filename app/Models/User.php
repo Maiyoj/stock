@@ -44,4 +44,18 @@ class User extends Authenticatable
     {
         return $this->hasMany(Zone::class);
     }
+
+    public function issuancee()
+    {
+        return $this->hasMany(Issuancee::class);
+    }
+
+    public function issuance()
+    {
+        return $this->hasMany(Issuance::class);
+    }
+    public function teamleadstocks()
+    {
+        return $this->hasMany(TeamLeadStock::class);
+    }
 }

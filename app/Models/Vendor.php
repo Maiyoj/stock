@@ -18,4 +18,16 @@ class Vendor extends Model
     {
         return $this->hasMany(Purchase::class);
     }
+
+
+    
+    public function issuance()
+    {
+        return $this->hasMany(Issuance::class);
+    }
+    public function issuancee()
+    {
+        return $this->hasMany(Issuancee::class);
+    }
+
 }
