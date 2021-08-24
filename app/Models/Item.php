@@ -4,9 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+#using soft delete
+#use Illuminate\Database\Eloquent\SoftDeletes;
 class Item extends Model
 {
+    #added the soft deletes
+    #use SoftDeletes;
+
     use HasFactory;
 
     public function vendors()
