@@ -17,7 +17,7 @@ class CreateVendorsTable extends Migration
             $table->id();
             $table->string('name');
             $table->integer('item_id');
-            $table->float('price');
+            $table->BigInteger('price');
             $table->timestamps();
         });
     }

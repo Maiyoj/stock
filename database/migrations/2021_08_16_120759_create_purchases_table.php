@@ -19,7 +19,7 @@ class CreatePurchasesTable extends Migration
             $table->integer('vendor_id');
             $table->string('PO_number');
             $table->integer('quantity');
-            $table->float('price');
+            $table->BigInteger('price');
             $table->timestamps();
         });
     }
