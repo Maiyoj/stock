@@ -4,18 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-#using soft delete
-#use Illuminate\Database\Eloquent\SoftDeletes;
+
+use Illuminate\Database\Eloquent\SoftDeletes;
 class Item extends Model
 {
     #added the soft deletes
-    #use SoftDeletes;
+    
 
-    use HasFactory;
+    use HasFactory, SoftDeletes ;
 
     public function vendors()
     {
-        return $this->hasMany(Vendor::class);
+        return $this->hasMany(Vendor::class)->withTrashed();
     }
 
 
@@ -30,11 +30,11 @@ class Item extends Model
 
     public function issuance()
     {
-        return $this->hasMany(Issuance::class);
+        return $this->hasMany(Issuance::class)->withTrashed();
     }
     public function issuancee()
     {
-        return $this->hasMany(Issuancee::class);
+        return $this->hasMany(Issuancee::class)->withTrashed();
     }
 
 

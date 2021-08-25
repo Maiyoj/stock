@@ -6,12 +6,13 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -44,17 +45,17 @@ class User extends Authenticatable
     ];
     public function zone()
     {
-        return $this->hasMany(Zone::class);
+        return $this->hasMany(Zone::class)->withTrashed();
     }
 
     public function issuancee()
     {
-        return $this->hasMany(Issuancee::class);
+        return $this->hasMany(Issuancee::class)->withTrashed();
     }
 
     public function issuance()
     {
-        return $this->hasMany(Issuance::class);
+        return $this->hasMany(Issuance::class)->withTrashed();
     }
     public function teamleadstocks()
     {
