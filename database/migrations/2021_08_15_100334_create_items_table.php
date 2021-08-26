@@ -16,7 +16,6 @@ class CreateItemsTable extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->id();
             $table->String('name');
-            #$table->softDeletes();
             $table->timestamps();
         });
     }

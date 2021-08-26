@@ -45,7 +45,7 @@ class ItemController extends Controller
     {
         $request->validate([
             
-            'name'=>'required|string|unique:items'
+            #'name'=>'required|string|unique:items'
         ]);
 
 

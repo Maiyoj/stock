@@ -30,7 +30,7 @@
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="#!">View Profile</a></li>
-                        <li><a class="dropdown-item" href="#!">Change password</a></li>
+                        <li><a class="dropdown-item" href="{{route('password.request')}}">Change password</a></li>
                         <li><hr class="dropdown-divider" /></li>
                         <li><button class="dropdown-item"  form="form" type="submit">Logout</button></li>
                         <form id="form" action="{{route('logout')}}" method="post">

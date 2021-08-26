@@ -11,6 +11,8 @@ use App\Http\Controllers\IssuancesController;
 use App\Http\Controllers\IssuanceeController;
 use App\Http\Controllers\EngineerIssuanceeController;
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,6 +27,10 @@ use App\Http\Controllers\EngineerIssuanceeController;
 Route::get('/', function () {
     return view('auth.login');
 });
+
+
+
+
 Route::resource('/item', ItemController::class);
 Route::resource('/vendor', VendorController::class);
 Route::resource('/purchase', PurchaseController::class);
@@ -40,8 +46,14 @@ Route::get('/teamleadstocks',[StockController::class,'teamleadstocks'])->name('t
 Route::get('/engineeer-stocks',[StockController::class,'engineerstocks'])->name('myissuancee.index');
 
 
+
+
 Auth::routes();
 
 
 Route::get('/admin', [App\Http\Controllers\HomeController::class, 'index'])->name('admin.index');
+#Route::get('/passwords/reset', 'Auth\ResetPasswordController@resetPassword')->name('passwords.reset');
+#Route::get('Auth/passwords/reset/{token}', 'ResetPasswordController@showResetForm')->name('passwords.reset');
+
+
 
