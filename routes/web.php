@@ -10,6 +10,7 @@ use App\Http\Controllers\StockController;
 use App\Http\Controllers\IssuancesController;
 use App\Http\Controllers\IssuanceeController;
 use App\Http\Controllers\EngineerIssuanceeController;
+use App\Http\Controllers\ProfileController;
 
 
 
@@ -39,6 +40,8 @@ Route::resource('/zone', ZoneController::class);
 Route::resource('/issuance',IssuancesController::class);
 Route::resource('/issuancee',IssuanceeController::class);
 Route::resource('/engineer-issuancee',EngineerIssuanceeController::class);
+Route::resource('/profile', ProfileController::class);
+
 
 
 Route::get('/stocks',[StockController::class,'index'])->name('stocks.index');

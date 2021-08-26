@@ -149,6 +149,9 @@ class PurchaseController extends Controller
     {
         
         $purchase=Purchase::findOrFail($id);
+        $stock=Stock::where('item_id',$purchase->item_id)->first();
+        $stock->quantity=$stock->quantity-$purchase->quantity;
+        $stock->save();
         $purchase->delete();
         return redirect()->route('purchase.index')->with('success', ' Purchase Deleted Successfully');
     }

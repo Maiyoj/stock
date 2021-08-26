@@ -18,7 +18,7 @@ class Issuance extends Model
 
     public function vendor()
     {
-        return $this->belongsTo(Vendor::class);
+        return $this->belongsTo(Vendor::class)->withTrashed();
     }
     public function issuance()
     {
@@ -31,7 +31,7 @@ class Issuance extends Model
 
     public function stock()
     {
-        return $this->belongsTo(Stock::class);
+        return $this->belongsTo(Stock::class)->withTrashed();
     }
     public function zone()
     {

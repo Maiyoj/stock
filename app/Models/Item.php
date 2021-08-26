@@ -21,11 +21,11 @@ class Item extends Model
 
     public function purchase()
     {
-        return $this->hasMay(Purchase::class);
+        return $this->hasMay(Purchase::class)->withTrashed();
     }
     public function stock()
     {
-        return $this->hasMany(Stock::class);
+        return $this->hasMany(Stock::class)->withTrashed();
     }
 
     public function issuance()

@@ -59,6 +59,6 @@ class User extends Authenticatable
     }
     public function teamleadstocks()
     {
-        return $this->hasMany(TeamLeadStock::class);
+        return $this->hasMany(TeamLeadStock::class)->withTrashed();
     }
 }
