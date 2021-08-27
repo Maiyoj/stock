@@ -1,9 +1,4 @@
 
-
-
-
-
-
 @extends('layouts.main')
 
 @section('title')
@@ -49,25 +44,7 @@
 
                                                 </div>
 
-                                                <div class="col-md-8 mt-4">
-                                                    <div class="form-floating mb-3 mb-md-0">
-                                                        <select name="item_id" id="" class="form-control"> 
-                                                            @foreach ($items as $item)
-                                                                <option value="{{$item->id}}" {{$item->id==$vendor->item_id ?  'selected' : ''}}>{{$item->name}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                        <label for="inputFirstName">Item</label>
-                                                    </div>
-
-                                                    </div>
-
-                                                    <div class="col-md-8 mt-4">
-                                                    <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" value="{{$vendor->price}}" id="inputFirstName" type="text" name="price" placeholder="Enter your first name" />
-                                                        <label for="inputFirstName">Price</label>
-                                                    </div>
-                                                    </div>
-                                                </div>
+                                               
                                           
                                             <div class="mt-4 mb-0">
                                                 <div class="d-grid"><button class="btn btn-primary btn-block"  type="submit">Update Vendor</a></div>

@@ -40,26 +40,8 @@
                                                         <label for="inputFirstName">Name</label>
                                                     </div>
 
-                                                </div>
-                                                <div class="col-md-8 mt-4">
-                                                    <div class="form-floating mb-3 mb-md-0">
-                                                        <select name="item_id" id="" class="form-control"> 
-                                                            @foreach ($items as $item)
-                                                                <option value="{{$item->id}}">{{$item->name}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                        
-                                                        <label for="inputFirstName">Item</label>
-                                                    </div>
+                                                
 
-                                                    </div>
-
-                                                <div class="col-md-8 mt-4">
-                                                    <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputFirstName" type="text" name="price" placeholder="Enter your first name" />
-                                                        <label for="inputFirstName">Price</label>
-                                                    </div>
-                                                </div>
                                           
                                             <div class="mt-4 mb-0">
                                                 <div class="d-grid"><button class="btn btn-primary btn-block"  type="submit">Add Vendor</a></div>

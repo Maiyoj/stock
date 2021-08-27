@@ -7,6 +7,7 @@ use App\Models\Purchase;
 use App\Models\Item;
 use App\Models\Vendor;
 use App\Models\Stock;
+use App\Models\Price;
 
 class PurchaseController extends Controller
 {
@@ -36,6 +37,7 @@ class PurchaseController extends Controller
     {
         $items=Item::all();
         $vendors=vendor::all();
+        
 
 
         return view('purchase.create',compact('vendors', 'items'));
@@ -61,8 +63,8 @@ class PurchaseController extends Controller
         $purchase->vendor_id=$request->vendor_id;
         $purchase->PO_number=$request->PO_number;
         $purchase->quantity=$request->quantity;
-        $vendor= Vendor::where('id',$request->vendor_id)->first();
-        $purchase->price=$request->quantity*$vendor->price;
+        $price= Price::where('item_id',$request->item_id)->first();
+        $purchase->price=$request->quantity*$price->price;
         $purchase->save();
 
         $stock= Stock::where('item_id',$purchase->item_id)->first();
@@ -128,8 +130,8 @@ class PurchaseController extends Controller
         $purchase->vendor_id=$request->vendor_id;
         $purchase->PO_number=$request->PO_number;
         $purchase->quantity=$request->quantity;
-        $vendor= Vendor::where('id',$request->vendor_id)->first();
-        $purchase->price=$request->quantity*$vendor->price;
+        $price= Price::where('id',$request->price_id)->first();
+        $purchase->price=$request->quantity*$price->price;
         $purchase->save();
 
         $stock= Stock::where('item_id',$purchase->item_id)->first();

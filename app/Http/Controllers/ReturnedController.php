@@ -3,17 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Issuance;
+use App\Models\Zone;
+use App\Models\User;
 use App\Models\Item;
-use App\Models\Vendor;
+use App\Models\Stock;
+use App\Models\TeamLeadStock;
+use App\Models\Returned;
 
-class VendorController extends Controller
+class ReturnedController extends Controller
 {
-
-    public function __construct()
-    {
-
-        $this->middleware('auth');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -21,9 +20,7 @@ class VendorController extends Controller
      */
     public function index()
     {
-        $vendors=Vendor::all();
-
-        return view('vendor.index', compact('vendors'));
+        //
     }
 
     /**
@@ -33,7 +30,7 @@ class VendorController extends Controller
      */
     public function create()
     {
-        return view('vendor.create');
+        //
     }
 
     /**
@@ -44,20 +41,7 @@ class VendorController extends Controller
      */
     public function store(Request $request)
     {
-        
-
-        $request->validate([
-            
-            'name'=>'required|string|unique:vendors'
-        ]);
-
-
-        $vendor=new Vendor;
-        $vendor->name=$request->name;
-        $vendor->save();
-
-        return redirect()->route('vendor.index')->with('success', 'Vendor added sucessfully');
-
+        //
     }
 
     /**
@@ -79,10 +63,7 @@ class VendorController extends Controller
      */
     public function edit($id)
     {
-        
-        $vendor= Vendor::findOrFail($id);
-
-        return view('vendor.edit',compact('vendor'));
+        //
     }
 
     /**
@@ -94,17 +75,7 @@ class VendorController extends Controller
      */
     public function update(Request $request, $id)
     {
-           $request->validate([
-            
-            'name'=>'required|string'
-        ]);
-
-
-        $vendor=Vendor::findOrFail($id);
-        $vendor->name=$request->name;
-        $vendor->save();
-
-        return redirect()->route('vendor.index')->with('success', 'Vendor Updated sucessfully');
+        //
     }
 
     /**
@@ -115,10 +86,6 @@ class VendorController extends Controller
      */
     public function destroy($id)
     {
-        
-        $vendor=Vendor::findOrFail($id);
-        $vendor->delete();
-        return redirect()->route('vendor.index')->with('success', 'Vendor deleted success');
-    
+        //
     }
 }

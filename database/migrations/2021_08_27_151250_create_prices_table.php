@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddsSoftdeletesToVendors extends Migration
+class CreatePricesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class AddsSoftdeletesToVendors extends Migration
      */
     public function up()
     {
-        Schema::table('vendors', function (Blueprint $table) {
-            
-
-            $table->softDeletes();
+        Schema::create('prices', function (Blueprint $table) {
+            $table->id();
+            $table->integer('vendor_id');
+            $table->integer('item_id');
+            $table->BigInteger('price');
+            $table->timestamps();
         });
     }
 
@@ -27,8 +29,6 @@ class AddsSoftdeletesToVendors extends Migration
      */
     public function down()
     {
-        Schema::table('vendors', function (Blueprint $table) {
-            $table->dropSoftDeletes();
-        });
+        Schema::dropIfExists('prices');
     }
 }

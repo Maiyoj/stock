@@ -6,22 +6,28 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Purchase extends Model
+
+class Price extends Model
 {
     use HasFactory, SoftDeletes;
 
-    public function item()
+
+    
+    public function purchases()
     {
-        return $this->belongsTo(Item::class)->withTrashed();
+        return $this->hasMany(Purchase::class)->withTrashed();
     }
+
 
     public function vendor()
     {
         return $this->belongsTo(Vendor::class)->withTrashed();
     }
 
-    public function price()
+    public function item()
     {
-        return $this->belongsTo(price::class)->withTrashed();
+        return $this->belongsTo(Item::class)->withTrashed();
     }
+
+
 }

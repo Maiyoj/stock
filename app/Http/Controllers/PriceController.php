@@ -5,25 +5,30 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\Vendor;
+use App\Models\Price;
 
-class VendorController extends Controller
+
+class PriceController extends Controller
 {
 
+    
     public function __construct()
     {
 
         $this->middleware('auth');
     }
     /**
+     * 
+     * 
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $vendors=Vendor::all();
+        $prices=Price::all();
 
-        return view('vendor.index', compact('vendors'));
+        return view('price.index', compact('prices'));
     }
 
     /**
@@ -33,7 +38,12 @@ class VendorController extends Controller
      */
     public function create()
     {
-        return view('vendor.create');
+        $items=Item::all();
+        $vendors=vendor::all();
+
+
+        return view('price.create',compact('vendors', 'items'));
+    
     }
 
     /**
@@ -44,20 +54,22 @@ class VendorController extends Controller
      */
     public function store(Request $request)
     {
-        
-
         $request->validate([
             
-            'name'=>'required|string|unique:vendors'
+           
+            
         ]);
 
 
-        $vendor=new Vendor;
-        $vendor->name=$request->name;
-        $vendor->save();
+        $price=new Price;
+        $price->vendor_id=$request->vendor_id;
+        $price->item_id=$request->item_id;
+        $price->price=$request->price;
 
-        return redirect()->route('vendor.index')->with('success', 'Vendor added sucessfully');
+        $price->save();
 
+
+        return redirect()->route('price.index')->with('success', 'Price Added Sucessfully');
     }
 
     /**
@@ -79,10 +91,11 @@ class VendorController extends Controller
      */
     public function edit($id)
     {
-        
-        $vendor= Vendor::findOrFail($id);
+        $items=Item::all();
+        $prices=Price::findOrFail($id);
+        $vendors= Vendor::all();
 
-        return view('vendor.edit',compact('vendor'));
+        return view('price.edit',compact('vendors','items','prices'));
     }
 
     /**
@@ -94,17 +107,24 @@ class VendorController extends Controller
      */
     public function update(Request $request, $id)
     {
-           $request->validate([
+        
+        $request->validate([
             
-            'name'=>'required|string'
+            
+        
         ]);
 
 
-        $vendor=Vendor::findOrFail($id);
-        $vendor->name=$request->name;
-        $vendor->save();
+        $price=Price::findOrFail($id);
+        $price->vendor_id=$request->vendor_id;
+        $price->item_id=$request->item_id;
+        $price->price=$request->price;
+        
+    
+        $price->save();
 
-        return redirect()->route('vendor.index')->with('success', 'Vendor Updated sucessfully');
+        return redirect()->route('zone.index')->with('success', 'Price Updated Sucessfully');
+    
     }
 
     /**
@@ -115,10 +135,8 @@ class VendorController extends Controller
      */
     public function destroy($id)
     {
-        
-        $vendor=Vendor::findOrFail($id);
-        $vendor->delete();
-        return redirect()->route('vendor.index')->with('success', 'Vendor deleted success');
-    
+        $price=Price::findOrFail($id);
+        $price->delete();
+        return redirect()->route('price.index')->with('success', ' Price Deleted Successfully');
     }
 }

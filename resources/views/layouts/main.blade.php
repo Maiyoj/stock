@@ -79,6 +79,21 @@
                                 </div>
                                 </a>
                                 
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts12" aria-expanded="false" aria-controls="collapseLayouts">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                  Prices
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse" id="collapseLayouts12" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <a class="nav-link" href="{{route('price.index')}}">View prices</a>
+                                        <a class="nav-link" href="{{route('price.create')}}">Add prices</a>
+                                    </nav>
+                                </div>
+                                </a>
+
+
+
                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts2" aria-expanded="false" aria-controls="collapseLayouts">
                                     <div class="sb-nav-link-icon"><i class="fas fa-shopping-cart"></i></div>
                                   Purchases
@@ -140,17 +155,27 @@
                                 <div class="collapse" id="collapseLayouts5" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                     <nav class="sb-sidenav-menu-nested nav">
                                         <a class="nav-link" href="{{route('issuancee.index')}}">View Issuance</a>
-                                        <!--<a class="nav-link" href="{{route('issuancee.index')}}">Add Issuance</a>-->
-
-
-                                     <!--<a class="nav-link" href="">Add Issuance</a>-->
-                                     
-                                </nav>
+                                    </nav>
                                 </div>
                                 
+                                
                                 <div class="sb-sidenav-menu-heading">Action</div>
-                                <a class="nav-link" href="charts.html">
-                                    <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+
+                                 <!--returns addtion-->
+                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts8" aria-expanded="false" aria-controls="collapseLayouts">
+                                    <div class="sb-nav-link-icon"><i class="fa fa-window-restore"></i></div>
+                                  Teamlead Returns
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse" id="collapseLayouts8" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <a class="nav-link" href="{{route('returned.index')}}">View Returns</a>
+                                    </nav>
+                                </div>
+
+                                <!--end of returns-->
+                                 <a class="nav-link" href="charts.html">
+                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                     reports
                                 </a>
                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts6" aria-expanded="false" aria-controls="collapseLayouts">
@@ -192,12 +217,30 @@
                                     <a class="nav-link" href="{{route('issuancee.index')}}">View Issuance</a>
                                     <a class="nav-link" href="{{route('issuancee.create')}}">Add Issuance</a>
                             </nav>
-                        </div>   
+                            </div>  
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts8" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fa fa-file"></i></div>
+                                           Returns
+                                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                         </a>
+                                         <div class="collapse" id="collapseLayouts8" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                             <nav class="sb-sidenav-menu-nested nav">
+                                                 <a class="nav-link" href="{{route('returned.index')}}">View Returns</a>
+                                                 <a class="nav-link" href="{{route('returned.create')}}">Add Returns</a>
+                                         </nav>
+                                     </div>   
+                        
                         </div>
                     </div>
-                <!-- tring to display user/engineer to view and add items -->
+                <!-- Teamlead to add returns-->
+             
+                
+               
+                <!--end of teamlead to add returns-->
 
-           
+
+
+                    <!-- tring to display user/engineer to view and add items -->   
          @elseif(Auth::user()->role_id==2)
                     <div class="sb-sidenav-menu">
                         <div class="nav">

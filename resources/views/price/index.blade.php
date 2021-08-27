@@ -1,24 +1,23 @@
 
-
 @extends('layouts.main')
 
 @section('title')
-<title>Add Vendor</title>
+<title>Prices</title>
 @endsection
 @section('content') 
 <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Vendor</h1>
+                        <h1 class="mt-4">Prices</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Add Vendor</li>
+                            <li class="breadcrumb-item active"> Prices</li>
                         </ol>
                        
                         
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fab fa-product-hunt"></i>
-                                Vendors
+                                Prices
                             </div>
                             <div class="card-body">
 
@@ -32,30 +31,35 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>name</th>
+                                            <th>Vendor</th>
+                                            <th>Item</th>
+                                            <th>Price</th>
                                             <th>Date Added</th>
-                                            <th>Action</th>
+
                                             
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                        
                                             <th>ID</th>
-                                            <th>name</th>
+                                            <th>Vendor</th>
+                                            <th>Item</th>
+                                            <th>Price</th>
                                             <th>Date Added</th>
                                             <th colspan="2">Action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        @forelse($vendors as $vendor)
+                                        @forelse($prices as $price)
                                         <tr>
-                                            <td>{{$vendor->id}}</td>
-                                            <td>{{$vendor->name}}</td>
-                                            <td>{{$vendor->created_at}}</td>
-                                            <td><a href="{{route('vendor.edit', $vendor->id)}}"><i class="fa fa-edit text-primary"> </i></td>
+                                            <td>{{$price->id}}</td>
+                                            <td>{{$price->item->name}}</td>
+                                            <td>{{$price->vendor->name}}</td>
+                                            <td>{{$price->price}}</td>
+                                             <td>{{$price->created_at}}</td>
+                                            <td><a href="{{route('price.edit', $price->id)}}"><i class="fa fa-edit text-primary"> </i></td>
                                             <td>
-                                            <form id= "delete" action="{{route('vendor.destroy', $vendor->id)}}" method="post">
+                                            <form id= "delete" action="{{route('price.destroy', $price->id)}}" method="post">
                                                  @csrf
                                                 @method('DELETE')    
                                                 <button type="submit" form="delete" style="border: none;background:color:transparent;"> 
