@@ -55,17 +55,17 @@
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        @forelse($returneds as $returned)
+                                        @forelse($returnss as $returns)
                                         <tr>
-                                            <td>{{$returned->id}}</td>
-                                            <td>{{$returned->user->name}}</td>
-                                            <td>{{$returned->zone->zone}}</td>
-                                            <td>{{$returned->item->name}}</td>
-                                            <td>{{$returned->quantity}}</td>
-                                             <td>{{$returned->created_at}}</td>
-                                            <td><a href="{{route('returned.edit', $returned->id)}}"><i class="fa fa-edit text-primary"> </i></td>
+                                            <td>{{$returns->id}}</td>
+                                            <td>{{$returns->user->name}}</td>
+                                            <td>{{$returns->zone->zone}}</td>
+                                            <td>{{$returns->item->name}}</td>
+                                            <td>{{$returns->quantity}}</td>
+                                             <td>{{$returns->created_at}}</td>
+                                            <td><a href="{{route('returns.edit', $returns->id)}}"><i class="fa fa-edit text-primary"> </i></td>
                                             <td>
-                                            <form id= "delete" action="{{route('returned.destroy', $returned->id)}}" method="post">
+                                            <form id= "delete" action="{{route('returns.destroy', $returns->id)}}" method="post">
                                                  @csrf
                                                 @method('DELETE')    
                                                 <button type="submit" form="delete" style="border: none;background:color:transparent;"> 

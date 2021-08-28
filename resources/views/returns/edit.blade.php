@@ -24,7 +24,7 @@
                                         {{session('error')}}
                                     </div>
                                 @endif
-                                        <form action="{{route('returned.update',$returned->id)}}" method="post">  
+                                        <form action="{{route('returns.update',$returns->id)}}" method="post">  
                                             @csrf
                                             @method('PUT')
                                             <div class="row mb-3">
@@ -46,7 +46,7 @@
                                                     <div class="form-floating mb-3 mb-md-0">
                                                         <select name="user_id" id="" class="form-control"> 
                                                             @foreach ($users as $user)
-                                                                <option value="{{$user->id}}" {{$user->id==$returned->user_id ? 'selected':''}}>{{$user->name}}</option>
+                                                                <option value="{{$user->id}}" {{$user->id==$returns->user_id ? 'selected':''}}>{{$user->name}}</option>
                                                             @endforeach
                                                         </select>
                                                         
@@ -59,7 +59,7 @@
                                                     <div class="form-floating mb-3 mb-md-0">
                                                         <select name="zone_id" id="" class="form-control"> 
                                                             @foreach ($zones as $zone)
-                                                                <option value="{{$zone->id}}" {{$zone->id==$returned->zone_id ? 'selected': ''}}>{{$zone->zone}}</option>
+                                                                <option value="{{$zone->id}}" {{$zone->id==$returns->zone_id ? 'selected': ''}}>{{$zone->zone}}</option>
                                                             @endforeach
                                                         </select>
                                                         <label for="inputFirstName">Zone</label>
@@ -69,7 +69,7 @@
                                                     <div class="form-floating mb-3 mb-md-0">
                                                         <select name="item_id" id="" class="form-control"> 
                                                             @foreach ($items as $item)
-                                                                <option value="{{$item->id}}" {{$item->id==$returned->item_id ? 'selected':''}}>{{$item->name}}</option>
+                                                                <option value="{{$item->id}}" {{$item->id==$returns->item_id ? 'selected':''}}>{{$item->name}}</option>
                                                             @endforeach
                                                         </select>
                                                         
@@ -79,7 +79,7 @@
 
                                                 <div class="col-md-8 mt-4">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" value="{{$returned->quantity}}" id="inputFirstName" type="text" name="quantity" placeholder="Enter your first name" />
+                                                        <input class="form-control" value="{{$returns->quantity}}" id="inputFirstName" type="text" name="quantity" placeholder="Enter your first name" />
                                                         <label for="inputFirstName">Quantity</label>
                                                     </div>
                                                 </div>    

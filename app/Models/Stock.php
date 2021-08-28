@@ -17,6 +17,11 @@ class Stock extends Model
 
     public function isssuance()
     {
-        return $this->belongsTo(Issuance::class)->withTrashed();
+        return $this->hasMany(Issuance::class)->withTrashed();
+    }
+
+    public function returned()
+    {
+        return $this->hasMany(Returned::class)->withTrashed();
     }
 }

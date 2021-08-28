@@ -13,6 +13,7 @@ use App\Http\Controllers\EngineerIssuanceeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReturnedController;
 use App\Http\Controllers\PriceController;
+use App\Http\Controllers\ReturnsController;
 
 
 
@@ -45,6 +46,8 @@ Route::resource('/engineer-issuancee',EngineerIssuanceeController::class);
 Route::resource('/profile', ProfileController::class);
 Route::resource('/returned', ReturnedController::class);
 Route::resource('/price', PriceController::class);
+Route::resource('/returned', ReturnedController::class);
+Route::resource('/returns', ReturnsController::class);
 
 
 

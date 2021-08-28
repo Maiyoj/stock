@@ -231,13 +231,7 @@
                                      </div>   
                         
                         </div>
-                    </div>
-                <!-- Teamlead to add returns-->
-             
-                
-               
-                <!--end of teamlead to add returns-->
-
+                    </div>       
 
 
                     <!-- tring to display user/engineer to view and add items -->   
@@ -257,7 +251,19 @@
                                     <a class="nav-link" href="{{route('myissuancee.index')}}">View Issuance</a>
                                     <a class="nav-link" href="{{route('engineer-issuancee.create')}}">Add Issuance</a>
                             </nav>
-                        </div>   
+                        </div>  
+                                 <!-- Engineer to add returns-->
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts8" aria-expanded="false" aria-controls="collapseLayouts">
+                            <div class="sb-nav-link-icon"><i class="fa fa-file"></i></div>
+                                       Returns
+                                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                     </a>
+                                     <div class="collapse" id="collapseLayouts8" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                         <nav class="sb-sidenav-menu-nested nav">
+                                             <a class="nav-link" href="{{route('returns.index')}}">View Returns</a>
+                                             <a class="nav-link" href="{{route('returns.create')}}">Add Returns</a>
+                                     </nav>
+                                 </div>   
                         </div>
                         
                     </div>

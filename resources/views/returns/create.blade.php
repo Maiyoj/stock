@@ -1,13 +1,13 @@
 @extends('layouts.main')
 
 @section('title')
-<title>Add Returned</title>
+<title>Add returns</title>
 @endsection
 @section('content') 
 <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4"> Returned</h1>
+                        <h1 class="mt-4"> returns</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">Add Returns</li>
                         </ol>
@@ -24,7 +24,7 @@
                                     {{session('error')}}
                                 </div>
                             @endif
-                                        <form action="{{route('returned.store')}}" method="post">  
+                                        <form action="{{route('returns.store')}}" method="post">  
                                             @csrf
                                             <div class="row mb-3">
                                             <div class="col-md-8">

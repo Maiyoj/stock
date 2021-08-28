@@ -33,5 +33,9 @@ public function teamleadstocks()
 {
     return $this->hasMany(TeamLeadstock::class)->withTrashed();
 }
+public function returns()
+{
+    return $this->hasMany(Returns::class)->withTrashed();
+}
 
 }

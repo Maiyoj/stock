@@ -22,4 +22,14 @@ class Zone extends Model
     {
         return $this->belongsTo(Issuancee::class)->withTrashed();
     }
+
+    public function returns()
+    {
+        return $this->hasMany(Returns::class)->withTrashed();
+    }
+
+    public function returned()
+    {
+        return $this->hasMany(Returned::class)->withTrashed();
+    }
 }

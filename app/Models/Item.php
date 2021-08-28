@@ -35,8 +35,16 @@ class Item extends Model
     public function issuancee()
     {
         return $this->hasMany(Issuancee::class)->withTrashed();
+
     }
 
-
+    public function returns()
+    {
+        return $this->hasMany(Returns::class)->withTrashed();
+    }
+    public function returned()
+    {
+        return $this->hasMany(Returned::class)->withTrashed();
     
+}
 }

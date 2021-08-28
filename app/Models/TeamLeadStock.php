@@ -17,4 +17,20 @@ class TeamLeadStock extends Model
     {
         return $this->belongsTo(User::class)->withTrashed();
     }
+
+    public function issuances()
+    {
+        return $this->belongsTo(Issuances::class)->withTrashed();
+    }
+    public function returned()
+    {
+        return $this->hasMany(Returned::class)->withTrashed();
+    }
+
+
+    /*public function returns()
+    {
+        return $this->hasMany(Returns::class)->withTrashed();
+    }
+    */
 }

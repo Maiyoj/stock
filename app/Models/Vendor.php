@@ -23,4 +23,14 @@ class Vendor extends Model
     }
 
 
+    public function returnss()
+    {
+        return $this->hasMany(Returns::class)->withTrashed();
+    }
+
+    public function returneds()
+    {
+        return $this->hasMany(Returned::class)->withTrashed();
+    }
+
 }
