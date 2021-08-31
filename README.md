@@ -16,4 +16,4 @@ Incase of any issue send an email with a screenshot of the issue to maiyoj12@gma
 ### License
 *MIT*  
 
-Copyright (c) {2021} *Valentine Maiyo**
+Copyright (c) {2021} Valentine Maiyo
