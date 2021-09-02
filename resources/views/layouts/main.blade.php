@@ -174,10 +174,28 @@
                                 </div>
 
                                 <!--end of returns-->
-                                 <a class="nav-link" href="charts.html">
-                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                    reports
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts16" aria-expanded="false" aria-controls="collapseLayouts">
+                                    <div class="sb-nav-link-icon"><i class="fa fa-users"></i></div>
+                                  Reports
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                 </a>
+
+                                <div class="collapse" id="collapseLayouts16" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <a class="nav-link" href="{{route('reports.itemreport')}}">Item Reports</a>
+                                        <a class="nav-link" href="{{route('reports.vendorreport')}}">Vendor Reports </a>
+                                        <a class="nav-link" href="{{route('reports.pricereport')}}">Price Reports </a>
+                                        <a class="nav-link" href="{{route('reports.purchasereport')}}">purchase Reports </a>
+                                        <a class="nav-link" href="{{route('reports.zonereport')}}">Zone Reports </a>
+                                        <a class="nav-link" href="{{route('reports.issuancereport')}}">Issuance Reports </a>
+                                        <a class="nav-link" href="{{route('reports.issuanceereport')}}">Issuancee Reports </a>
+                                        <a class="nav-link" href="{{route('reports.returnreport')}}">Returns Reports </a>
+                                        <a class="nav-link" href="{{route('reports.returnedreport')}}"> Engineer_Returns Reports </a>
+                                
+                                </nav>
+                                </div>
+
+
                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts6" aria-expanded="false" aria-controls="collapseLayouts">
                                     <div class="sb-nav-link-icon"><i class="fa fa-users"></i></div>
                                   Users

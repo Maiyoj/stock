@@ -14,6 +14,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReturnedController;
 use App\Http\Controllers\PriceController;
 use App\Http\Controllers\ReturnsController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\IssuanceController;
+
 
 
 
@@ -62,8 +65,16 @@ Auth::routes();
 
 
 Route::get('/admin', [App\Http\Controllers\HomeController::class, 'index'])->name('admin.index');
-#Route::get('/passwords/reset', 'Auth\ResetPasswordController@resetPassword')->name('passwords.reset');
-#Route::get('Auth/passwords/reset/{token}', 'ResetPasswordController@showResetForm')->name('passwords.reset');
 
 
 
+#routes for reports
+Route::get('/items-reports', [App\Http\Controllers\HomeController::class, 'itemreport'])->name('reports.itemreport');
+Route::get('/vendors-reports', [App\Http\Controllers\HomeController::class, 'vendorreport'])->name('reports.vendorreport');
+Route::get('/prices-reports', [App\Http\Controllers\HomeController::class, 'pricereport'])->name('reports.pricereport');
+Route::get('/purchases-reports', [App\Http\Controllers\HomeController::class, 'purchasereport'])->name('reports.purchasereport');
+Route::get('/zones-reports', [App\Http\Controllers\HomeController::class, 'zonereport'])->name('reports.zonereport');
+Route::get('/issuances-reports', [App\Http\Controllers\HomeController::class, 'issuancereport'])->name('reports.issuancereport');
+Route::get('/issuancees-reports', [App\Http\Controllers\HomeController::class, 'issuanceereport'])->name('reports.issuanceereport');
+Route::get('/returns-reports', [App\Http\Controllers\HomeController::class, 'returnreport'])->name('reports.returnreport');
+Route::get('/returneds-reports', [App\Http\Controllers\HomeController::class, 'returnedreport'])->name('reports.returnedreport');
