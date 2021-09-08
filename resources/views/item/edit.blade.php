@@ -41,12 +41,55 @@
 
                                             @endif
                                             
-                                                <div class="col-md-8">
-                                                    <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" value="{{$item->name}}" id="inputFirstName" type="text" name="name" placeholder="Enter your first name" />
-                                                        <label for="inputFirstName">Name</label>
-                                                    </div>
-                                                </div>
+                                               
+                                           <div class="col-md-8 mt-4">
+                                            <div class="form-floating mb-3 mb-md-0">
+                                                <select name="purpose" id="" class="form-control"> 
+                                            
+                                              <option value="Deployment">Goods</option>
+                                              <option value="Support">Services</option>
+                                             
+        
+                                                </select>
+
+                                                <label for="inputFirstName">Type</label>
+                                            </div>
+                                        </div>
+
+
+                                
+                                    <div class="col-md-8">
+                                        <div class="form-floating mb-3 mb-md-0">
+                                            <input class="form-control" id="inputFirstName" type="text" name="name" placeholder="Enter your first name" />
+                                            <label for="inputFirstName">Name</label>
+                                        </div>
+                                    </div>
+                              
+                              
+                                    <div class="col-md-8">
+                                        <div class="form-floating mb-3 mb-md-0">
+                                            <textarea name="comment" form="usrform"></textarea>
+                                             <label for="inputFirstName">Description</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="form-floating mb-3 mb-md-0">
+                                            <input class="form-control" id="inputFirstName" type="text" name="name" placeholder="Enter your first name" />
+                                            <label for="inputFirstName">Units</label>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="col-md-8">
+                                        <div class="form-floating mb-3 mb-md-0">
+                                            <input class="form-control" id="inputFirstName" type="text" name="name" placeholder="Enter your first name" />
+                                            <label for="inputFirstName">SKU</label>
+                                        </div>
+                                    </div>
+                              
+
+
                                           
                                             <div class="mt-4 mb-0">
                                                 <div class="d-grid"><button class="btn btn-primary btn-block"  type="submit">Update Item</a></div>

@@ -30,7 +30,11 @@
                                     <thead>
                                         <tr>
                                              <th>ID</th>
+                                             <th>Type</th>
                                             <th>name</th>
+                                            <th>Description</th>
+                                            <th>Units</th>
+                                            <th>SKU</th>
                                             <th>Date Added</th>
                                             <th>Action</th>
                                             
@@ -39,16 +43,25 @@
                                     <tfoot>
                                         <tr>
                                             <th>ID</th>
-                                            <th>name</th>
-                                            <th>Date Added</th>
-                                            <th colspan="2">Action</th>
+                                            <th>Type</th>
+                                           <th>name</th>
+                                           <th>Description</th>
+                                           <th>Units</th>
+                                           <th>SKU</th>
+                                           <th>Date Added</th>
+                                           <th>Action</th>
+                                        
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                         @forelse($items as $item)
                                         <tr>
-                                            {{$item->id}}</td>
+                                           <td> {{$item->id}}</td>
+                                            <td>{{$item->type}}</td>
                                             <td>{{$item->name}}</td>
+                                            <td>{{$item->description}}</td>
+                                            <td>{{$item->units}}</td>
+                                            <td>{{$item->sku}}</td>
                                              <td>{{$item->created_at}}</td>
                                             <td><a href="{{route('item.edit', $item->id)}}"><i class="fa fa-edit text-primary"> </i></td>
                                             <td>
