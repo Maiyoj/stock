@@ -36,14 +36,59 @@
 
                                             @endif
                                             
-                                                <div class="col-md-8 mt-4">
-                                                    <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" value="{{$vendor->name}}" id="inputFirstName" type="text" name="name" placeholder="Enter your first name" />
-                                                        <label for="inputFirstName">Name</label>
-                                                    </div>
-
+                                            <div class="col-md-8 mt-4">
+                                                <div class="form-floating mb-3 mb-md-0">
+                                                    <select name="title" id="" class="form-control"> 
+                                                
+                                                  <option value="Company">Company</option>
+                                                  <option value="Mr">Mr</option>
+                                                  <option value="Mrs">Mrs</option>
+                                                  <option value="Miss">Miss</option>
+                                                  <option value="Dr">Dr</option>
+                                                  <option value="Sir">Sir</option>
+                                                    </select>
+    
+                                                   <label for="inputFirstName">Tittle</label>
                                                 </div>
+                                            </div>
+                                            
+                                            <div class="col-md-8 mt-4">
+                                                <div class="form-floating mb-3 mb-md-0">
+                                                    <input class="form-control" id="inputFirstName" type="text" name="name" placeholder="Enter your first name" />
+                                                    <label for="inputFirstName"> Vendor Name</label>
+                                                </div>
+                                            </div>
+                                               
+                                                    <div class="col-md-8 mt-4">
+                                                        <div class="form-floating mb-3 mb-md-0">
+                                                            <input class="form-control" id="inputFirstName" type="email" name="email" placeholder="name@example.com"  />
+                                                            <label for="inputFirstName"> Vendor Email</label>
+                                                        </div>
+                                                    </div>
+                                                        <div class="col-md-8 mt-4">
+                                                            <div class="form-floating mb-3 mb-md-0">
+                                                                <input class="form-control" id="inputFirstName" type="number" name="number" placeholder="Enter your first name" />
+                                                                <label for="inputFirstName">Vendor Number</label>
+                                                            </div>
+                                                        </div>
+                                                
 
+                                                            <div class="col-md-8 mt-4">
+                                                                <div class="form-floating mb-3 mb-md-0">
+                                                                    <input class="form-control" id="inputFirstName" type="address" name="address" placeholder="Enter your first name" />
+                                                                    <label for="inputFirstName">vendor Address</label>
+                                                                </div>
+                                                            </div>
+
+                                          
+
+                                                                <div class="col-md-8 mt-4">
+                                                                    <div class="form-floating mb-3 mb-md-0">
+                                                                        <input class="form-control" id="inputFirstName" type="country" name="country" placeholder="Enter your first name" />
+                                                                        <label for="inputFirstName">Country</label>
+                                                                    </div>
+                                                                </div>
+    
                                                
                                           
                                             <div class="mt-4 mb-0">

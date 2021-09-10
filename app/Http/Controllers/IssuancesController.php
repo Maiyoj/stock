@@ -67,7 +67,7 @@ class IssuancesController extends Controller
         $issuance->zone_id=$request->zone_id;
         $issuance->item_id=$request->item_id;
         $issuance->quantity=$request->quantity;
-    
+        $issuance->status='pending';
         $issuance->save();
 
         $stock->quantity=$stock->quantity-$request->quantity;
@@ -155,6 +155,22 @@ class IssuancesController extends Controller
             $team_lead->quantity=($team_lead->quantity-$original_quantity)+$request->quantity;
             $team_lead->save();
         
+            /*approval starts from here
+            $status = $request->input('status');
+            if($status =='Approved'){
+                $issuance = Issuance::findOrFail($id);
+                $issuance->status = $request->input('status');
+                $issuance->save();
+            return redirect('/approve')->with('success','Application Successfully Updated!');
+            }else{
+                $issuance = Issuance::findOrFail($id);
+                $issuance->status = $request->input('status');
+                $issuance->save();
+                return redirect('/approve')->with('success','Application Successfully Updated!');
+
+            }*/
+
+
         return redirect()->route('issuance.index')->with('success','Issuance updated successfully');
     }
 

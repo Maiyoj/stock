@@ -17,6 +17,9 @@ use App\Models\Issuance;
 use App\Models\Returns;
 use App\Models\Returned;
 use PDF;
+use App\Models\Requests;
+use App\Models\Stock;
+use App\Models\TeamLeadStock;
 class HomeController extends Controller
 {
     /**
@@ -326,8 +329,40 @@ $returneds=Returned::whereBetween('created_at', [$from, $to])->get();
     
  }
 
- 
+ public function approve($id)
+ {
+    
+    $request=Requests::findOrFail($id);
+    
+    $stock=Stock::where('item_id',$request->item_id)->first();
+    $available_stock=$stock->quantity;
+    if($request->quantity>$available_stock)
+    {
+        return redirect()->back()->with('error','The available is too low for requested issuance');
+    }
+
+    $request->status='approved';
+    $request->save(); 
+   
+    $stock->quantity=($stock->quantity)-$request->quantity;
+    $stock->save();
+    
+    $team_lead=TeamLeadStock::where('user_id',$request->user_id)->where('item_id',$request->item_id)->first();
+        $team_lead->quantity=($team_lead->quantity)+$request->quantity;
+        $team_lead->save();
+
+    return redirect()->back()->with('success','Request approved successfully');
+ }
+ public function reject($id)
+ {
+    $request=Requests::findOrFail($id);
+    $request->status='rejected';
+    $request->save();
+
+    return redirect()->back()->with('success','Request rejected successfully');
+ }
 
 }
-  
+
+
 

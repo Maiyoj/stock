@@ -16,7 +16,8 @@ use App\Http\Controllers\PriceController;
 use App\Http\Controllers\ReturnsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IssuanceController;
-
+use App\Http\Controllers\ApproveController;
+use App\Http\Controllers\RequestsController;
 
 
 
@@ -51,6 +52,8 @@ Route::resource('/returned', ReturnedController::class);
 Route::resource('/price', PriceController::class);
 Route::resource('/returned', ReturnedController::class);
 Route::resource('/returns', ReturnsController::class);
+Route::resource('/approve', ApproveController::class);
+Route::resource('/request', RequestsController::class);
 
 
 
@@ -66,7 +69,8 @@ Auth::routes();
 
 Route::get('/admin', [App\Http\Controllers\HomeController::class, 'index'])->name('admin.index');
 
-
+Route::get('/approve-request/{id}',[HomeController::class,'approve'])->name('request.approve');
+Route::get('/reject/{id}',[HomeController::class,'reject'])->name('request.reject');
 
 #routes for reports
 Route::get('/items-reports', [App\Http\Controllers\HomeController::class, 'itemreport'])->name('reports.itemreport');
