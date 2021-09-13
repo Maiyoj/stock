@@ -32,4 +32,9 @@ class Zone extends Model
     {
         return $this->hasMany(Returned::class)->withTrashed();
     }
+
+    public function requestengineer()
+    {
+        return $this->hasMany(ReturneEngineer::class)->withTrashed();
+    }
 }

@@ -20,6 +20,7 @@ use PDF;
 use App\Models\Requests;
 use App\Models\Stock;
 use App\Models\TeamLeadStock;
+use App\Models\RequestEngineer;
 class HomeController extends Controller
 {
     /**
@@ -335,6 +336,10 @@ $returneds=Returned::whereBetween('created_at', [$from, $to])->get();
     $request=Requests::findOrFail($id);
     
     $stock=Stock::where('item_id',$request->item_id)->first();
+    if($stock==null)
+    {
+      return redirect()->back()->with('error','You have no stock to issue');
+    }
     $available_stock=$stock->quantity;
     if($request->quantity>$available_stock)
     {
@@ -348,8 +353,18 @@ $returneds=Returned::whereBetween('created_at', [$from, $to])->get();
     $stock->save();
     
     $team_lead=TeamLeadStock::where('user_id',$request->user_id)->where('item_id',$request->item_id)->first();
-        $team_lead->quantity=($team_lead->quantity)+$request->quantity;
-        $team_lead->save();
+    if( $team_lead==null)  
+    {
+       $new_stock=new TeamLeadStock;
+       $new_stock->user_id=$request->user_id;
+       $new_stock->item_id=$request->item_id;
+       $new_stock->quantity=$request->quantity;
+       $new_stock->save();
+
+       return redirect()->back()->with('success','Request approved successfully');
+    } 
+    $team_lead->quantity=($team_lead->quantity)+$request->quantity;
+      $team_lead->save();
 
     return redirect()->back()->with('success','Request approved successfully');
  }
@@ -360,6 +375,39 @@ $returneds=Returned::whereBetween('created_at', [$from, $to])->get();
     $request->save();
 
     return redirect()->back()->with('success','Request rejected successfully');
+ }
+
+ public function approval(Request $request, $id)
+ {
+   $requestengineer = RequestEngineer::findOrFail($id);
+        $original_quantity=$requestengineer->quantity;
+        $stock=TeamLeadStock::where('user_id',Auth::user()->id)->where('item_id',$request->item_id)->first();
+        if($stock==null)
+        {
+          return redirect()->back()->with('error','You have no stock to issue');
+        }
+        $available_stock=$stock->quantity;
+        if($request->quantity>$available_stock)
+        {
+            return redirect()->back()->with('error','The available is too low for requested issuance');
+        }
+       
+        $requestengineer->status='approved';
+        $requestengineer->save();
+      
+        $stock->quantity=($stock->quantity+$original_quantity)-$request->quantity;
+        $stock->save();
+        
+        return redirect()->back()->with('success','Request approved successfully');
+ }
+
+ public function rejected($id)
+ {
+    $requestengineer=$requestngineer::findOrFail($id);
+    $requestengineer->status='rejected';
+    $requestengineer->save();
+
+    return redirect()->back()->with('success','request rejected successfully');
  }
 
 }

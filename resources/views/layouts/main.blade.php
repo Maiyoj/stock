@@ -260,6 +260,8 @@
                                     <a class="nav-link" href="{{route('issuance.create')}}">Add Issuance</a>
                             </nav>
                             </div> 
+
+                            
                             
 
 
@@ -274,6 +276,22 @@
                                                  <a class="nav-link" href="{{route('returned.create')}}">Add Returns</a>
                                          </nav>
                                      </div>   
+
+
+                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts89" aria-expanded="false" aria-controls="collapseLayouts">
+                                        <div class="sb-nav-link-icon"><i class="fa fa-file"></i></div>
+                                                   Approve Request
+                                                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                                 </a>
+                                                 <div class="collapse" id="collapseLayouts89" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                                     <nav class="sb-sidenav-menu-nested nav">
+                                                         <a class="nav-link" href="{{route('approval.index')}}">View request</a>
+                                                         <a class="nav-link" href="{{route('approval.index')}}">Approve Requests</a>
+                                                 </nav>
+                                             </div>   
+        
+
+                                     
                         
                         </div>
                     </div>       
@@ -297,6 +315,19 @@
                                     <a class="nav-link" href="{{route('engineer-issuancee.create')}}">Add Issuance</a>
                             </nav>
                         </div>  
+
+
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts41" aria-expanded="false" aria-controls="collapseLayouts">
+                            <div class="sb-nav-link-icon"><i class="fa fa-file"></i></div>
+                          Request
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseLayouts41" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="{{route('requestengineer.index')}}">View Requests</a>
+                                <a class="nav-link" href="{{route('requestengineer.create')}}">Add Requests</a>
+                        </nav>
+                    </div> 
                                  <!-- Engineer to add returns-->
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts8" aria-expanded="false" aria-controls="collapseLayouts">
                             <div class="sb-nav-link-icon"><i class="fa fa-file"></i></div>

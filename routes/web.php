@@ -18,6 +18,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IssuanceController;
 use App\Http\Controllers\ApproveController;
 use App\Http\Controllers\RequestsController;
+use App\Http\Controllers\RequestEngineercontroller;
+use App\Http\Controllers\ApprovalController;
 
 
 
@@ -54,7 +56,9 @@ Route::resource('/returned', ReturnedController::class);
 Route::resource('/returns', ReturnsController::class);
 Route::resource('/approve', ApproveController::class);
 Route::resource('/request', RequestsController::class);
+Route::resource('/approval', ApprovalController::class);
 
+Route::resource('/requestengineer', RequestEngineercontroller::class);
 
 
 Route::get('/stocks',[StockController::class,'index'])->name('stocks.index');
@@ -71,6 +75,10 @@ Route::get('/admin', [App\Http\Controllers\HomeController::class, 'index'])->nam
 
 Route::get('/approve-request/{id}',[HomeController::class,'approve'])->name('request.approve');
 Route::get('/reject/{id}',[HomeController::class,'reject'])->name('request.reject');
+#engineer approval
+Route::get('/approval-requestengineer/{id}',[HomeController::class,'approval'])->name('requestengineer.approval');
+Route::get('/rejected/{id}',[HomeController::class,'rejected'])->name('requestengineer.rejected');
+
 
 #routes for reports
 Route::get('/items-reports', [App\Http\Controllers\HomeController::class, 'itemreport'])->name('reports.itemreport');

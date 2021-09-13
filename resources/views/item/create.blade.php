@@ -57,13 +57,11 @@
                               
                               
                                     <div class="col-md-8  mt-4">
+                                        <label for="">Description</label>
                                         <div class="form-floating mb-3 mb-md-0">
-                                            <textarea rows = "5" cols = "50" name = "description"> Description </textarea>
-                                            
+                                            <textarea rows = "5" cols = "50" name = "description"></textarea>
                                         </div>
                                     </div>
-
-
                                     <div class="col-md-8 mt-4" >
                                         <div class="form-floating mb-3 mb-md-0">
                                             <input class="form-control" id="inputFirstName" type="text" name="units" placeholder="Enter your first name" />
@@ -72,7 +70,12 @@
                                     </div>
 
 
-
+                                    <div class="col-md-8 mt-4" >
+                                        <div class="form-floating mb-3 mb-md-0">
+                                            <input class="form-control" id="threshold" type="number" name="threshold" placeholder="Enter product threshold" />
+                                            <label for="threshold">Threshold</label>
+                                        </div>
+                                    </div>
                                     <div class="col-md-8 mt-4">
                                         <div class="form-floating mb-3 mb-md-0">
                                             <input class="form-control" id="inputFirstName" type="text" name="sku" placeholder="Enter your first name" />

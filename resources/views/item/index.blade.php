@@ -65,11 +65,14 @@
                                              <td>{{$item->created_at}}</td>
                                             <td><a href="{{route('item.edit', $item->id)}}"><i class="fa fa-edit text-primary"> </i></td>
                                             <td>
+                                            
                                             <form id= "delete" action="{{route('item.destroy', $item->id)}}" method="post">
                                              @csrf
                                              @method('DELETE')    
-                                             <button type="submit" form="delete" style="border: none;background:color:transparent;">  
-                                      </form>
+                                            <button type="submit" form="delete" onclick="return confirm('Confirm Delete?')"  style="border: none;background:color:transparent;">  
+                                  
+                                            </form>
+                                       
                                       <i class="fa fa-trash text-danger"></i></td>
                                             </tr>                                                           
                                         @empty

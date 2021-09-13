@@ -39,4 +39,9 @@ class Vendor extends Model
     {
         return $this->hasMany(Requests::class)->withTrashed();
     }
+
+    public function requestengineer()
+    {
+        return $this->hasMany(RequestEngineer::class)->withTrashed();
+    }
 }

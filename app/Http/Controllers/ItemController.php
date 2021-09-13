@@ -55,6 +55,7 @@ class ItemController extends Controller
         $item->name=$request->name;
         $item->description=$request->description;
         $item->units=$request->units;
+        $item->threshold=$request->threshold;
         $item->sku=$request->sku;
         $item->save();
 
@@ -97,6 +98,7 @@ class ItemController extends Controller
      */
     public function update(Request $request, $id)
     {
+     
         $request->validate([
             
             'name'=>'required|string'
@@ -104,7 +106,12 @@ class ItemController extends Controller
 
 
         $item=Item::findOrFail($id);
+        $item->type=$request->type;
         $item->name=$request->name;
+        $item->description=$request->description;
+        $item->units=$request->units;
+        $item->threshold=$request->threshold;
+        $item->sku=$request->sku;
         $item->save();
 
         return redirect()->route('item.index')->with('success', 'Item Updated sucessfully');

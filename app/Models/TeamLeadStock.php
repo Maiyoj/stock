@@ -26,7 +26,10 @@ class TeamLeadStock extends Model
     {
         return $this->hasMany(Returned::class)->withTrashed();
     }
-
+    public function requestengineer()
+    {
+        return $this->hasMany(RequestEngineer::class)->withTrashed();
+    }
 
     /*public function returns()
     {

@@ -10,6 +10,8 @@ use App\Models\Item;
 use App\Models\Stock;
 use App\Models\TeamLeadStock;
 use App\Models\Requests;
+use App\Notifications\StockRequestNotification;
+use Illuminate\Support\Facades\Notification;
 
 class Requestscontroller extends Controller
 {
@@ -63,6 +65,8 @@ class Requestscontroller extends Controller
         $requests->status ='pending';
         $requests->save();
 
+        $admin=User::where('role_id',0)->get();
+        Notification::send($admin,new StockRequestNotification());
         return redirect()->route('request.index')->with('success','Request sent successfully');
     }
 
@@ -126,6 +130,9 @@ class Requestscontroller extends Controller
      */
     public function destroy($id)
     {
-        //
+        $request= Requests::findOrFail($id);
+        $request->delete();
+
+        return redirect()->route('request.index')->with('success','Request deleted successfully');
     }
 }

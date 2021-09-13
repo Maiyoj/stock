@@ -34,7 +34,7 @@
                                             <th>ID</th>
                                             <th>Item</th>
                                             <th>Quantity</th>
-
+                                            <th>Stock Level</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -42,6 +42,7 @@
                                             <th>ID</th>
                                             <th>Item</th>
                                             <th>Quantity</th>
+                                            <th>Stock Level</th>
                                             
 
                                         </tr>
@@ -52,6 +53,7 @@
                                             <td>{{$stock->id}}</td>
                                             <td>{{$stock->item->name}}</td>
                                             <td>{{$stock->quantity}}</td>
+                                            <td class="text-white {{$stock->quantity <$stock->item->threshold ? 'bg-danger' : 'bg-success'}}">{{$stock->quantity <$stock->item->threshold ? 'Low' : 'High'}}</td>
                                             </tr>                                                           
                                         @empty
                                         

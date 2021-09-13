@@ -31,66 +31,61 @@
                                             <div class="row mb-3">
                                             <div class="col-md-8">
 
-                                            @if ($errors->any())
-                                            @foreach($errors->all() as $error)
-                                            <div class="alert alert-danger">
-                                                {{$error}}
-                                        </div>
-
-                                            @endforeach
-
-                                            @endif
-                                            
-                                               
+                                                @if ($errors->any())
+                                                    @foreach($errors->all() as $error)
+                                                        <div class="alert alert-danger">
+                                                            {{$error}}
+                                                        </div>
+                                                    @endforeach
+                                                @endif
+                                            </div> 
                                            <div class="col-md-8 mt-4">
                                             <div class="form-floating mb-3 mb-md-0">
-                                                <select name="purpose" id="" class="form-control"> 
-                                            
-                                              <option value="Deployment">Goods</option>
-                                              <option value="Support">Services</option>
-                                             
-        
+                                                <select name="type" id="" class="form-control"> 
+                                                    <option value="Deployment">Goods</option>
+                                                    <option value="Support">Services</option>
                                                 </select>
-
                                                 <label for="inputFirstName">Type</label>
                                             </div>
                                         </div>
 
 
                                 
-                                    <div class="col-md-8">
+                                    <div class="col-md-8 mt-4">
                                         <div class="form-floating mb-3 mb-md-0">
-                                            <input class="form-control" id="inputFirstName" type="text" name="name" placeholder="Enter your first name" />
+                                            <input class="form-control" id="inputFirstName" type="text" name="name" placeholder="Enter your first name" value="{{$item->name}}" />
                                             <label for="inputFirstName">Name</label>
                                         </div>
                                     </div>
                               
                               
-                                    <div class="col-md-8">
+                                    <div class="col-md-8  mt-4">
+                                        <label for="">Description</label>
                                         <div class="form-floating mb-3 mb-md-0">
-                                            <textarea name="comment" form="usrform"></textarea>
-                                             <label for="inputFirstName">Description</label>
+                                            <textarea rows = "5" cols = "50" name = "description">{{$item->description}}</textarea>
                                         </div>
                                     </div>
-                                    <div class="col-md-8">
+                                    <div class="col-md-8 mt-4">
                                         <div class="form-floating mb-3 mb-md-0">
-                                            <input class="form-control" id="inputFirstName" type="text" name="name" placeholder="Enter your first name" />
+                                            <input class="form-control" id="inputFirstName" type="text" name="units" value="{{$item->units}}" placeholder="Enter your first name" />
                                             <label for="inputFirstName">Units</label>
                                         </div>
                                     </div>
-
-
-
-                                    <div class="col-md-8">
+                                    <div class="col-md-8 mt-4" >
                                         <div class="form-floating mb-3 mb-md-0">
-                                            <input class="form-control" id="inputFirstName" type="text" name="name" placeholder="Enter your first name" />
+                                            <input class="form-control" id="threshold" type="number" name="threshold" value="{{$item->threshold}}" placeholder="Enter product threshold" />
+                                            <label for="threshold">Threshold</label>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="col-md-8 mt-4">
+                                        <div class="form-floating mb-3 mb-md-0">
+                                            <input class="form-control" id="inputFirstName" type="text" value="{{$item->sku}}" name="sku" placeholder="Enter your first name" />
                                             <label for="inputFirstName">SKU</label>
                                         </div>
                                     </div>
-                              
-
-
-                                          
                                             <div class="mt-4 mb-0">
                                                 <div class="d-grid"><button class="btn btn-primary btn-block"  type="submit">Update Item</a></div>
                                             </div>

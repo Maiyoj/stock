@@ -3,12 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Issuance;
+use App\Models\Zone;
 use App\Models\User;
-use App\Models\Profile;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Item;
+use App\Models\Approval;
+use App\Models\RequestEngineer;
 
-class ProfileController extends Controller
+class ApprovalController extends Controller
 {
+
+
+    public function __construct()
+    {
+
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,8 +26,9 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        $user=Auth::user();
-        return view('profile.create',compact('user'));
+        $requestengineer=RequestEngineer::all();
+
+        return view('approval.index', compact('requestengineer'));
     }
 
     /**
@@ -27,7 +38,9 @@ class ProfileController extends Controller
      */
     public function create()
     {
-        //
+        $approvals=Approval::all();
+
+        return view('approval.create', compact('approvals')); 
     }
 
     /**
@@ -38,17 +51,7 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name'=>'required|string',
-            'email'=>'required|email',
-        ]);
-        $user=Auth::user();
-        $user=User::where('id',$user->id)->first();
-        $user->name=$request->name;
-        $user->email=$request->email;
-        $user->save();
-
-        return redirect()->back()->with('success','Profile updated successfully');
+        //
     }
 
     /**

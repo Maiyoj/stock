@@ -76,4 +76,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Requests::class)->withTrashed();
     }
+
+    public function requestengineer()
+    {
+        return $this->hasMany(RequestEngineer::class)->withTrashed();
+    }
 }
