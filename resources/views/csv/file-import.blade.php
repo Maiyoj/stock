@@ -1,4 +1,5 @@
 
+
 <style>
     #item {
       font-family: Arial, Helvetica, sans-serif;
@@ -27,8 +28,6 @@
     }
     }
     </style>
-
-
 
 
 <div class="table-responsive">

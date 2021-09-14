@@ -65,16 +65,16 @@
                                              <td>{{$item->created_at}}</td>
                                             <td><a href="{{route('item.edit', $item->id)}}"><i class="fa fa-edit text-primary"> </i></td>
                                             <td>
-                                            
                                             <form id= "delete" action="{{route('item.destroy', $item->id)}}" method="post">
                                              @csrf
                                              @method('DELETE')    
-                                            <button type="submit" form="delete" onclick="return confirm('Confirm Delete?')"  style="border: none;background:color:transparent;">  
-                                  
-                                            </form>
-                                       
+                                             <button type="submit" form="delete" onclick="return confirm('Confirm Delete?')"  style="border: none;background:color:transparent;">  
+                                      </form>
                                       <i class="fa fa-trash text-danger"></i></td>
-                                            </tr>                                                           
+                                            </tr>     
+                                            
+                                            
+                                           
                                         @empty
                                         
 
@@ -83,6 +83,17 @@
                                         
                                        
                                     </tbody>
+                                    <form action="{{ route('csv.file-import') }}" method="POST" enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="form-group mb-4" style="max-width: 400px; margin: 0 auto;">
+                                            <div class="custom-file text-right">
+                                                <input type="file" name="file" class="custom-file-input" id="customFile">
+                                                <label class="custom-file-label" for="customFile">Choose file</label>
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-primary">Import data</button>
+                                        <a class="btn btn-success" href="{{ route('csv.file-export') }}">Export data</a>
+                                    </form>
                                 </table>
                             </div>
                         </div>

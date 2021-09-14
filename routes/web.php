@@ -20,6 +20,7 @@ use App\Http\Controllers\ApproveController;
 use App\Http\Controllers\RequestsController;
 use App\Http\Controllers\RequestEngineercontroller;
 use App\Http\Controllers\ApprovalController;
+use App\Http\Controllers\CsvController;
 
 
 
@@ -57,7 +58,6 @@ Route::resource('/returns', ReturnsController::class);
 Route::resource('/approve', ApproveController::class);
 Route::resource('/request', RequestsController::class);
 Route::resource('/approval', ApprovalController::class);
-
 Route::resource('/requestengineer', RequestEngineercontroller::class);
 
 
@@ -90,3 +90,9 @@ Route::get('/issuances-reports', [App\Http\Controllers\HomeController::class, 'i
 Route::get('/issuancees-reports', [App\Http\Controllers\HomeController::class, 'issuanceereport'])->name('reports.issuanceereport');
 Route::get('/returns-reports', [App\Http\Controllers\HomeController::class, 'returnreport'])->name('reports.returnreport');
 Route::get('/returneds-reports', [App\Http\Controllers\HomeController::class, 'returnedreport'])->name('reports.returnedreport');
+
+
+//csv and excel controller
+Route::get('file-import-export', [CsvController::class, 'csv.fileImportExport']);
+Route::post('file-import', [CsvController::class, 'fileImport'])->name('csv.file-import');
+Route::get('file-export', [CsvController::class, 'fileExport'])->name('csv.file-export');

@@ -1,13 +1,17 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Str;
+use Carbon\Carbon;
+use DB;
 use Illuminate\Http\Request;
 use App\Models\Vendor;
 use App\Models\Item;
 use App\Models\Purchase;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use App\Mail\WelcomeMail;
+use Illuminate\Support\Facades\Mail;
 
 
 class UserController extends Controller
@@ -47,6 +51,9 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+
+
+
         $request->validate([
             'name'=>'required|string',
             'email'=>'required|email|unique:users',
@@ -58,8 +65,11 @@ class UserController extends Controller
         $user->email=$request->email;
         $user->password=Hash::make($request->password);
         $user->role_id=$request->role_id;
+    
         $user->save();
 
+
+       
         return redirect()->route('user.index')->with('success','User added successfully');
 
     }

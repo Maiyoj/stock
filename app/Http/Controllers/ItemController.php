@@ -130,4 +130,13 @@ class ItemController extends Controller
         $item->delete();
         return redirect()->route('item.index')->with('success', 'Item deleted success');
     }
+
+    public function DeleteAll(Request $request)
+    {
+        $ids = $request->ids;
+        DB::table("item")->whereIn('id',explode(",",$ids))->delete();
+        return response()->json(['success'=>"Item Deleted successfully."]);
+    }
+
+
 }

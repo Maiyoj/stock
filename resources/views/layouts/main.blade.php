@@ -203,6 +203,7 @@
                                         <a class="nav-link" href="{{route('reports.issuanceereport')}}">Issuancee Reports </a>
                                         <a class="nav-link" href="{{route('reports.returnreport')}}">Returns Reports </a>
                                         <a class="nav-link" href="{{route('reports.returnedreport')}}"> Engineer_Returns Reports </a>
+                                        <a class="nav-link" href="{{route('csv.file-import')}}"> itemreports </a>
                                 
                                 </nav>
                                 </div>
