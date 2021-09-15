@@ -54,11 +54,12 @@ class RequestEngineercontroller extends Controller
             'quantity'=>'numeric|required'
         ]);
 
-        $requestengineer =  new RequestEngineer;
+        
+        $requestengineer =  new Requestengineer;
         $requestengineer->user_id=$request->user_id;
         $requestengineer->zone_id=$request->zone_id;
-        $requestengineer->item_id=$request->item_id;
-        $requestengineer->quantity=$request->quantity;
+        $requestengineer->item_id=$request->item_id;  
+        $requestengineer->quantity=$request->quantity; 
         $requestengineer->purpose=$request->purpose;
         $requestengineer->status ='pending';
         $requestengineer->save();
@@ -111,8 +112,9 @@ class RequestEngineercontroller extends Controller
         $requestengineer = requestengineer::findOrFail($id);
         $requestengineer->user_id=$request->user_id;
         $requestengineer->zone_id=$request->zone_id;
-        $requestengineer->item_id=$request->item_id;
-        $requestengineer->quantity=$request->quantity;
+        $requestengineer->item_id=$request->item_id;  
+        $requestengineer->quantity=$request->quantity; 
+        $requestengineer->purpose=$request->purpose;
         $requestengineer->status ='pending';
         $requestengineer->save();
 

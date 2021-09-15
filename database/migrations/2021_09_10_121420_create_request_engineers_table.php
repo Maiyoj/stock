@@ -18,7 +18,7 @@ class CreateRequestEngineersTable extends Migration
             $table->integer('user_id');
             $table->integer('zone_id');
             $table->integer('item_id');
-            $table->integer('quantity');
+            $table->string('quantity');
             $table->string('purpose');
             $table->string('status')->default('pending');
             $table->timestamps();
