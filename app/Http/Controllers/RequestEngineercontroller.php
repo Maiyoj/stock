@@ -64,7 +64,8 @@ class RequestEngineercontroller extends Controller
         $requestengineer->status ='pending';
         $requestengineer->save();
         $user=User::findOrFail($requestengineer->user_id);
-        
+
+       
         Notification::send($user,new StockRequestNotification());
         return redirect()->route('requestengineer.index')->with('success','Request sent successfully');
     }

@@ -12,6 +12,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Mail\WelcomeMail;
 use Illuminate\Support\Facades\Mail;
+use App\Notifications\Welcome;
+use Illuminate\Support\Facades\Notification;
 
 
 class UserController extends Controller
@@ -69,7 +71,7 @@ class UserController extends Controller
         $user->save();
 
 
-       
+        Notification::send($user,new Welcome());
         return redirect()->route('user.index')->with('success','User added successfully');
 
     }
