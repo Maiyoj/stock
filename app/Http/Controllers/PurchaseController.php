@@ -102,6 +102,7 @@ class PurchaseController extends Controller
     public function edit($id)
     {   
         $items=Item::all();
+       
         $purchase=Purchase::findOrFail($id);
         $vendors= Vendor::all();
 
@@ -126,11 +127,12 @@ class PurchaseController extends Controller
         
         $original_quantity=$purchase->quantity;
 
+        $purchase=new Purchase;
         $purchase->item_id=$request->item_id;
         $purchase->vendor_id=$request->vendor_id;
         $purchase->PO_number=$request->PO_number;
         $purchase->quantity=$request->quantity;
-        $price= Price::where('id',$request->price_id)->first();
+        $price= Price::where('item_id',$request->item_id)->first();
         $purchase->price=$request->quantity*$price->price;
         $purchase->save();
 

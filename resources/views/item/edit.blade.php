@@ -42,8 +42,8 @@
                                            <div class="col-md-8 mt-4">
                                             <div class="form-floating mb-3 mb-md-0">
                                                 <select name="type" id="" class="form-control"> 
-                                                    <option value="Deployment">Goods</option>
-                                                    <option value="Support">Services</option>
+                                                    <option value="Goods">Goods</option>
+                                                    <option value="Service">Services</option>
                                                 </select>
                                                 <label for="inputFirstName">Type</label>
                                             </div>

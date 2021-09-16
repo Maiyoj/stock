@@ -92,10 +92,10 @@ class PriceController extends Controller
     public function edit($id)
     {
         $items=Item::all();
-        $prices=Price::findOrFail($id);
+        $price=Price::findOrFail($id);
         $vendors= Vendor::all();
 
-        return view('price.edit',compact('vendors','items','prices'));
+        return view('price.edit',compact('vendors','items','price'));
     }
 
     /**
@@ -123,7 +123,7 @@ class PriceController extends Controller
     
         $price->save();
 
-        return redirect()->route('zone.index')->with('success', 'Price Updated Sucessfully');
+        return redirect()->route('price.index')->with('success', 'Price Updated Sucessfully');
     
     }
 
