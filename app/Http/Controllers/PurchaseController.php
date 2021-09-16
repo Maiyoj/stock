@@ -127,7 +127,6 @@ class PurchaseController extends Controller
         
         $original_quantity=$purchase->quantity;
 
-        $purchase=new Purchase;
         $purchase->item_id=$request->item_id;
         $purchase->vendor_id=$request->vendor_id;
         $purchase->PO_number=$request->PO_number;
