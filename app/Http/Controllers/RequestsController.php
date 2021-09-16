@@ -12,6 +12,7 @@ use App\Models\TeamLeadStock;
 use App\Models\Requests;
 use App\Notifications\StockRequestNotification;
 use Illuminate\Support\Facades\Notification;
+use App\Notifications\Approval;
 
 class Requestscontroller extends Controller
 {
@@ -66,7 +67,7 @@ class Requestscontroller extends Controller
         $requests->save();
 
         $admin=User::where('role_id',0)->get();
-        Notification::send($admin,new StockRequestNotification());
+        Notification::send($admin,new Approval());
         return redirect()->route('request.index')->with('success','Request sent successfully');
     }
 

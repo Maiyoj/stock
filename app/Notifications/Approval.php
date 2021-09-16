@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class StockRequestNotification extends Notification
+class Approval extends Notification
 {
     use Queueable;
 
@@ -41,9 +41,11 @@ class StockRequestNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('You have a new Stock Alert in the BTN solutions portal. Please click the button below to login and Reorder Items.')
-                    ->action('Login', url('/login'))
-                    ->line('Thank you for your services!');
+        ->line('You have a new Stock request to approve. Please click the button below to log in and Approve')
+        ->action('Login', url('login'))
+        ->line('Thank you for using our application!');
+
+
     }
 
     /**

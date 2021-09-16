@@ -12,6 +12,8 @@ use Illuminate\Http\Request;
 use App\Models\TeamLeadStock;
 use App\Models\RequestEngineer;
 use Illuminate\Support\Facades\Notification;
+use App\Notifications\Approval;
+
 use App\Notifications\StockRequestNotification;
 
 class RequestEngineercontroller extends Controller
@@ -65,8 +67,8 @@ class RequestEngineercontroller extends Controller
         $requestengineer->save();
         $user=User::findOrFail($requestengineer->user_id);
 
-       
-        Notification::send($user,new StockRequestNotification());
+        $user=User::where('role_id',1)->get();
+        Notification::send($user,new Approval());
         return redirect()->route('requestengineer.index')->with('success','Request sent successfully');
     }
 
