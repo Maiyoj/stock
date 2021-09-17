@@ -54,7 +54,7 @@
                                             <td>{{$user->id}}</td>
                                             <td>{{$user->name}}</td>
                                             <td>{{$user->email}}</td>
-                                            <td>{{$user->role_id==1 ? 'Team Lead': 'Engineer'}}</td>
+                                           <td>{{$user->role_id==0 ? 'Admin': ($user->role_id=1 ? 'Team lead' : 'Engineer')}}</td>
                                              <td>{{$user->created_at}}</td>
                                             <td><a href="{{route('user.edit', $user->id)}}"><i class="fa fa-edit text-primary"> </i></td>
                                             <td>

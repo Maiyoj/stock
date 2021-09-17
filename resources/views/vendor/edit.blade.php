@@ -54,20 +54,20 @@
                                             
                                             <div class="col-md-8 mt-4">
                                                 <div class="form-floating mb-3 mb-md-0">
-                                                    <input class="form-control" id="inputFirstName" type="text" name="name" placeholder="Enter your first name" />
+                                                    <input class="form-control" id="inputFirstName" type="text" name="name" placeholder="Enter your first name"  value="{{$vendor->name}}" />
                                                     <label for="inputFirstName"> Vendor Name</label>
                                                 </div>
                                             </div>
                                                
                                                     <div class="col-md-8 mt-4">
                                                         <div class="form-floating mb-3 mb-md-0">
-                                                            <input class="form-control" id="inputFirstName" type="email" name="email" placeholder="name@example.com"  />
+                                                            <input class="form-control" id="inputFirstName" type="email" name="email" placeholder="name@example.com"   value="{{$vendor->email}}" />
                                                             <label for="inputFirstName"> Vendor Email</label>
                                                         </div>
                                                     </div>
                                                         <div class="col-md-8 mt-4">
                                                             <div class="form-floating mb-3 mb-md-0">
-                                                                <input class="form-control" id="inputFirstName" type="number" name="number" placeholder="Enter your first name" />
+                                                                <input class="form-control" id="inputFirstName" type="number" name="number" placeholder="Enter your first name"   value="{{$vendor->number}}"/>
                                                                 <label for="inputFirstName">Vendor Number</label>
                                                             </div>
                                                         </div>
@@ -75,7 +75,7 @@
 
                                                             <div class="col-md-8 mt-4">
                                                                 <div class="form-floating mb-3 mb-md-0">
-                                                                    <input class="form-control" id="inputFirstName" type="address" name="address" placeholder="Enter your first name" />
+                                                                    <input class="form-control" id="inputFirstName" type="address" name="address" placeholder="Enter your first name"  value="{{$vendor->address}}" />
                                                                     <label for="inputFirstName">vendor Address</label>
                                                                 </div>
                                                             </div>
@@ -84,7 +84,7 @@
 
                                                                 <div class="col-md-8 mt-4">
                                                                     <div class="form-floating mb-3 mb-md-0">
-                                                                        <input class="form-control" id="inputFirstName" type="country" name="country" placeholder="Enter your first name" />
+                                                                        <input class="form-control" id="inputFirstName" type="country" name="country" placeholder="Enter your first name"  value="{{$vendor->country}}" />
                                                                         <label for="inputFirstName">Country</label>
                                                                     </div>
                                                                 </div>

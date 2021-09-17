@@ -30,7 +30,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users=User::where('role_id','!=',0)->get();
+        $users=User::where('role_id','!=',3)->get();
 
         return view('user.index', compact('users'));
     }

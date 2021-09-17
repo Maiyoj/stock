@@ -50,6 +50,7 @@
                                                         <select name="role_id" id="" class="form-control"> 
                                                             <option value="1">Team Lead</option>
                                                             <option value="2">Engineer</option>
+                                                            <option value="0">Admin</option>
                                                         </select>
                                                         <label for="inputFirstName">Role</label>
                                                     </div>
