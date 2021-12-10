@@ -11,6 +11,7 @@ use App\Models\Requests;
 use Illuminate\Http\Request;
 use App\Models\TeamLeadStock;
 use App\Models\RequestEngineer;
+use App\Models\Comments;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\Approval;
 use Illuminate\Support\Facades\Auth;
@@ -93,7 +94,8 @@ class RequestEngineercontroller extends Controller
     {
         $requestengineer=Requestengineer::findOrFail($id);
         $items=Item::all();
-        return view('requestengineer.show',compact('requestengineer','items'));
+        $comments=Comments::all();
+        return view('requestengineer.show',compact('requestengineer','items', 'comments'));
     }
 
     /**

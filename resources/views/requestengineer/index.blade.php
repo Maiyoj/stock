@@ -105,7 +105,8 @@
                                                 </form>
                                               </td>
                                           @if ($requestengineer->rstatus=='Not Received')
-                                          <td><a href="{{route('requestengineer.approval', $requestengineer->id)}}"><i class="fa fa-check text-danger"></i></td>
+                                          {{-- <td><a href="{{route('requestengineer.approval', $requestengineer->id)}}"><i class="fa fa-check text-danger"></i></td> --}}
+                                          <td><a href="{{route('requestengineer.approval', $requestengineer->id)}}"><i class="btn-btn-primary text-danger"  type="submit"  data-bs-toggle="modal" data-bs-target="#exampleModal">Receive</i></td>  
 
                                          @endif
                                         </tr>                                                           

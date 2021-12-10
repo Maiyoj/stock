@@ -474,8 +474,13 @@ $returneds=Returned::whereBetween('created_at', [$from, $to])->get();
  return redirect()->back()->with('success','Items Received successfully');
  }
 
- public function rejected($id)
+ public function rejected(Request $request, $id)
  {
+
+   $comment= new Comments;
+   $comment->comments=$request->comments;
+   $comment->save();
+
     $requestengineer=RequestEngineer::findOrFail($id);
     $requestengineer->status='rejected';
     $requestengineer->save();
