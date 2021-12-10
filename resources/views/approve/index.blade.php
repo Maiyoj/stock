@@ -138,7 +138,7 @@
                                             @if ($request->status=='pending')
                                                 <td><a href="{{route('request.approve', $request->id)}}"><i class="fa fa-check text-primary" class="btn btn-primary"> </i></td>
                                                 {{-- <td><a href="#"><i class="fa fa-times text-danger"  data-bs-toggle="modal" data-bs-target="#exampleModal"> </i></td>   --}}
-                                                      <td><a href="{{route('request.reject', $request->id)}}"><i class="btn-btn-primary text-danger"  type="submit"  data-bs-toggle="modal" data-bs-target="#exampleModal">Submit Comment</i></td>  
+                                                      <td><a href="#"><i class="btn-btn-primary text-danger"  type="submit"  data-bs-toggle="modal" data-bs-target="#exampleModal">Submit Comment</i></td>  
                                             @endif
                                             </tr>                                                           
                                         @empty
@@ -154,7 +154,7 @@
 
 
 
-
+                     {{-- Comments form --}}
                     
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
@@ -165,8 +165,9 @@
                             </div>
                             <div class="modal-body">
 
-                                <form action="{{route('comments.store')}}" method="post">  
+                                <form action="{{route('request.reject',  $request->id)}}" method="HEAD">  
                                     @csrf
+                                 
                                     <div class="row mb-3">
                                     <div class="col-md-8">
 
@@ -182,10 +183,8 @@
                                     <div class="form-floating mb-3 mb-md-0">
                                 <textarea rows = "5" cols = "50" name = "comments"></textarea>
                                     </div>
-                           
-                              
-                            </div>
-                            <div class="modal-footer">
+                                    </div>
+                               <div class="modal-footer">
                                 {{-- <td><a href="{{route('comments.store', $request->id)}}"><i class="btn-btn-primary text-danger"  type="submit"  data-bs-toggle="modal" data-bs-target="#exampleModal">Submit Comment</i></td>   --}}
 
                               <button type="submit" class="btn btn-primary">Save changes</button> 

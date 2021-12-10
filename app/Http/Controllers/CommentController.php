@@ -34,12 +34,17 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        $comment= new Comments;
-        $comment->comments=$request->comments;
-        $comment->save();
+       
     
+
+        
+        $request=Requests::findOrFail($id);
+         $request->status='rejected';
+         $request->save();
+
+
 
          return redirect()->route('request.index')->with('success', 'Comments added sucessfully');
      

@@ -423,6 +423,9 @@ $returneds=Returned::whereBetween('created_at', [$from, $to])->get();
  public function reject( Request $request, $id)
  {
 
+   $comment= new Comments;
+   $comment->comments=$request->comments;
+   $comment->save();
    
     $request=Requests::findOrFail($id);
     $request->status='rejected';
