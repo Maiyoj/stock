@@ -30,5 +30,9 @@ class Stock extends Model
         return $this->hasMany(Requests::class)->withTrashed();
     
 }
+public function request_item()
+    {
+        return $this->hasMany(RequestItems::class)->withTrashed();
+    }
 
 }

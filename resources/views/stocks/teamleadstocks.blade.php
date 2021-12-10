@@ -1,6 +1,6 @@
 
 
-@extends('layouts.main')
+@extends('front.index')
 
 @section('title')
 <title>My Stock</title>
@@ -54,8 +54,6 @@
                                             <td>{{$stock->quantity}}</td>
                                             </tr>                                                           
                                         @empty
-                                        
-
                                         @endforelse
                                   
                                         

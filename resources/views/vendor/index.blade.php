@@ -13,8 +13,32 @@
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">Add Vendor</li>
                         </ol>
-                       
-                        
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fab fa-product-hunt"></i>
+                                Files
+                            <form action="{{ route('csv.vendor-import') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+    
+                                <div class="form-group mb-10" style="max-width: 400px; margin: 5 ;">
+                                    
+                                    <div class="custom-file text-right"   class="card mb-6">
+                                    <input type="file" name="file" class="custom-file-input" id="customFile" >
+                                    <button class="btn btn-primary">Import data</button>
+                                    <a class="btn btn-success" href="{{ route('csv.vendor-export') }}">Export data</a>
+                            </div>
+                        </div>    
+                        </form>
+                        </div>
+                        </div>
+
+                 
+           <!-- Add Vendor-->
+           @can('vendor-create')
+                    <div class="d-flex flex-row-reverse bd-highlight"> 
+                    <div class="p-2 bd-highlight"><a class="btn btn-primary"  href="{{ route('vendor.create') }}">Add Vendor</a></div>
+                    </div>
+                    @endcan
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fab fa-product-hunt"></i>
@@ -32,12 +56,12 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th> Vendor Title</th>
-                                            <th> Vendor Name</th>
-                                            <th> Vendor Email</th>
-                                            <th>Vendor Number</th>
-                                            <th>Vendor Address</th>
-                                            <th>Vendor Country</th>
+                                            <th>Title</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Number</th>
+                                            <th>Address</th>
+                                            <th>Country</th>
                                             <th>Date Added</th>
                                             <th>Action</th>
                                             
@@ -47,12 +71,12 @@
                                         <tr>
                                         
                                             <th>ID</th>
-                                            <th> Vendor Title</th>
-                                            <th> Vendor Email</th>
-                                            <th>Vendor Name</th>
-                                            <th>Vendor Number</th>
-                                            <th>Vendor Address</th>
-                                            <th>Vendor Country</th>
+                                            <th>Title</th>
+                                            <th>Email</th>
+                                            <th>Name</th>
+                                            <th>Number</th>
+                                            <th>Address</th>
+                                            <th>Country</th>
                                             <th>Date Added</th>
                                             <th colspan="2">Action</th>
                                         </tr>
@@ -68,15 +92,18 @@
                                             <td>{{$vendor->address}}</td>
                                             <td>{{$vendor->country}}</td>
                                             <td>{{$vendor->created_at}}</td>
+                                            @can('vendor-edit')
                                             <td><a href="{{route('vendor.edit', $vendor->id)}}"><i class="fa fa-edit text-primary"> </i></td>
+                                            @endcan
                                             <td>
-                                            <form id= "delete" action="{{route('vendor.destroy', $vendor->id)}}" method="post">
-                                                 @csrf
-                                                @method('DELETE')    
-                                                <button type="submit" form="delete" style="border: none;background:color:transparent;"> 
-                                                    <i class="fa fa-trash text-danger"></i>
-                                                </button> 
-                                            </form>
+                                                @can('vendor-delete')
+                                                <form action="{{url('vendor/'.$vendor->id)}}" method="post">
+                                                    @csrf
+                                                    @method('DELETE')  
+                                                    <button type="submit" onclick="return confirm('Confirm Delete?')"  style="border: none;background:color:transparent;">  
+                                                        <i class="fa fa-trash text-danger"></i></button> 
+                                                </form>
+                                                @endcan
                                      </td>
                                             </tr>                                                           
                                         @empty

@@ -28,7 +28,7 @@ public function issuancee()
 }
 public function user()
 {
-    return $this->belongsTo(User::class)->withTrashed();
+    return $this->belongsTo(User::class,'engineer_id')->withTrashed();
 }
 public function teamleadstocks()
 {
@@ -38,5 +38,8 @@ public function returns()
 {
     return $this->hasMany(Returns::class)->withTrashed();
 }
-
+ public function erequests_item()
+ {
+     return $this->hasMany(RequestEngineersItem::class);
+ }
 }

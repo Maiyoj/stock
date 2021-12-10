@@ -24,4 +24,8 @@ class Purchase extends Model
     {
         return $this->belongsTo(price::class)->withTrashed();
     }
+    public function purchase_items()
+    {
+        return $this->hasMany(PurchaseItem::class);
+    }
 }

@@ -45,21 +45,18 @@
                                                         <label for="inputFirstEmail">Email</label>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-8 mt-4">
-                                                    <div class="form-floating mb-3 mb-md-0">
-                                                        <select name="role_id" id="" class="form-control"> 
-                                                            <option value="1">Team Lead</option>
-                                                            <option value="2">Engineer</option>
-                                                            <option value="0">Admin</option>
-                                                        </select>
-                                                        <label for="inputFirstName">Role</label>
-                                                    </div>
-                                                </div>
+                                               
                                                 <div class="col-md-8 mt-4">
                                                     <div class="form-floating mb-3 mb-md-0">
                                                         <input class="form-control" id="inputFirstpassword" type="password" name="password" placeholder="Enter password" />
                                                         <label for="inputFirstpassword">Password</label>
                                                     </div>
+                                                </div>
+
+
+                                                <div class="form-group">
+                                               <strong>Role:</strong>
+                                                {!! Form::select('roles[]', $roles,[], array('class' => 'form-control','multiple')) !!}
                                                 </div>
                                           
                                             <div class="mt-4 mb-0">

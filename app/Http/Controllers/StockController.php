@@ -14,6 +14,12 @@ class StockController extends Controller
     {
 
         $this->middleware('auth');
+
+
+        
+      $this->middleware('permission:teamleadstocks-list|teamleadstocks-create|teamleadstocks-edit|teamleadstock-delete', ['only' => ['index', 'show']]);
+      $this->middleware('permission:stocks-list|stocks-create|stocks-edit|stocks-delete', ['only' => ['index', 'show']]);
+      #$this->middleware('permission:team-list|team-create|team-edit|team-delete', ['only' => ['index', 'show']]);
     }
     public function index()
     {
@@ -22,8 +28,18 @@ class StockController extends Controller
     }
     public function teamleadstocks()
     {
-        $stocks=TeamLeadStock::where('user_id',Auth::user()->id)->get();
-         return view('stocks.teamleadstocks',compact('stocks'));
+        
+        #$stocks=TeamLeadStock::where('user_id',Auth::user()->id)->get();
+        if (Auth::check())
+        {
+            
+             $stocks=TeamLeadStock::where('user_id',Auth::user()->id)->get();
+             return view('stocks.teamleadstocks',compact('stocks'));
+        }
+       /* $stocks=TeamLeadStock::where('id', Auth::id())->get();
+         return view('stocks.teamleadstocks',compact('stocks'));*/
+
+         
     }
     public function engineerstocks()
     {

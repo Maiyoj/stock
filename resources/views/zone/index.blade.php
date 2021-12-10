@@ -11,8 +11,29 @@
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">Add Zone</li>
                         </ol>
-                       
-                        
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fab fa-product-hunt"></i>
+                                Files
+                            <form action="{{ route('csv.zone-import') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+    
+                                <div class="form-group mb-10" style="max-width: 400px; margin: 5 ;">
+                                    
+                                    <div class="custom-file text-right"   class="card mb-6">
+                                    <input type="file" name="file" class="custom-file-input" id="customFile" >
+                                    <button class="btn btn-primary">Import data</button>
+                                    <a class="btn btn-success" href="{{ route('csv.zone-export') }}">Export data</a>
+                            </div>
+                        </div>
+                        </form>
+                        </div>
+                        </div>
+                 @can('zone-create')
+                 <div class="d-flex flex-row-reverse bd-highlight">
+                 <div class="p-2 bd-highlight"><a class="btn btn-primary" href="{{ route('zone.create') }}">Add Zone</a></div>
+                 </div>
+                @endcan
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fab fa-product-hunt"></i>
@@ -53,15 +74,18 @@
                                             <td>{{$zone->user->name}}</td>
                                             <td>{{$zone->zone}}</td>
                                              <td>{{$zone->created_at}}</td>
-                                            <td><a href="{{route('zone.edit', $zone->id)}}"><i class="fa fa-edit text-primary"> </i></td>
-                                            <td>
-                                            <form id= "delete" action="{{route('zone.destroy', $zone->id)}}" method="post">
-                                                 @csrf
-                                                @method('DELETE')    
-                                                <button type="submit" form="delete" style="border: none;background:color:transparent;"> 
-                                                    <i class="fa fa-trash text-danger"></i>
-                                                </button> 
-                                            </form>
+                                             @can('zone.edit')
+                                             <td><a href="{{route('zone.edit', $zone->id)}}"><i class="fa fa-edit text-primary"> </i></td>
+                                            @endcan
+                                             <td>
+                                                 @can('zone-delete')
+                                                <form action="{{url('zone/'.$zone->id)}}" method="post">
+                                                    @endcan
+                                                    @csrf
+                                                    @method('DELETE')  
+                                                    <button type="submit" onclick="return confirm('Confirm Delete?')"  style="border: none;background:color:transparent;">  
+                                                        <i class="fa fa-trash text-danger"></i></button> 
+                                                </form>
                                      </td>
                                             </tr>                                                           
                                         @empty

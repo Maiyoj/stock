@@ -21,6 +21,11 @@ use App\Http\Controllers\RequestsController;
 use App\Http\Controllers\RequestEngineercontroller;
 use App\Http\Controllers\ApprovalController;
 use App\Http\Controllers\CsvController;
+use App\Http\Controllers\RolesController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\PmController;
+use App\Http\Controllers\CommentController;
+
 
 
 
@@ -41,9 +46,10 @@ Route::get('/', function () {
 
 
 
-
-Route::resource('/item', ItemController::class);
+Route::resource('/permissions', PermissionController::class);
+Route::resource('/roles', RolesController::class);
 Route::resource('/vendor', VendorController::class);
+Route::resource('/item', VendorController::class);
 Route::resource('/purchase', PurchaseController::class);
 Route::resource('/user', UserController::class);
 Route::resource('/zone', ZoneController::class);
@@ -56,10 +62,13 @@ Route::resource('/price', PriceController::class);
 Route::resource('/returned', ReturnedController::class);
 Route::resource('/returns', ReturnsController::class);
 Route::resource('/approve', ApproveController::class);
-Route::resource('/request', RequestsController::class);
+Route::resource('/comments', CommentController::class);
+Route::resource('/request', RequestsController::class)->except('drafts');
 Route::resource('/approval', ApprovalController::class);
-Route::resource('/requestengineer', RequestEngineercontroller::class);
+Route::resource('/requestengineer', RequestEngineercontroller::class)->except('drafts');
 
+Route::get('/req-drafts',[RequestEngineercontroller::class,'drafts'])->name('requests.drafts');
+Route::get('/drafts',[RequestsController::class,'drafts'])->name('request.drafts');
 
 Route::get('/stocks',[StockController::class,'index'])->name('stocks.index');
 Route::get('/teamleadstocks',[StockController::class,'teamleadstocks'])->name('teamleadstocks.index');
@@ -68,13 +77,27 @@ Route::get('/engineeer-stocks',[StockController::class,'engineerstocks'])->name(
 
 
 
+
 Auth::routes();
 
 
 Route::get('/admin', [App\Http\Controllers\HomeController::class, 'index'])->name('admin.index');
+Route::get('/home', [App\Http\Controllers\FrontController::class, 'index'])->name('home.index');
+
+
+//directs to user layout
+Route::get('/home', [App\Http\Controllers\FrontController::class, 'index'])->name('home.index');
+Route::get('/pm', [App\Http\Controllers\PmController::class, 'index'])->name('pm.index');
+//pm approval
+Route::get('/pm-request/{id}',[PmController::class,'approve'])->name('pm.approve');
+Route::get('/reject/{id}',[PmController::class,'reject'])->name('pm.reject');
+Route::get('/pm.draft/{id}',[PmController::class,'draft'])->name('pm.draft');
+Route::get('/pm.drafts/{id}',[PmController::class,'drafts'])->name('pm.drafts');
+//requsetengineer approvee
+Route::get('/approvee-requestengineer/{id}',[PmController::class,'approvee'])->name('requestengineer.approvee');
 
 Route::get('/approve-request/{id}',[HomeController::class,'approve'])->name('request.approve');
-Route::get('/reject/{id}',[HomeController::class,'reject'])->name('request.reject');
+Route::get('/pm.reject/{id}',[HomeController::class,'reject'])->name('request.reject');
 #engineer approval
 Route::get('/approval-requestengineer/{id}',[HomeController::class,'approval'])->name('requestengineer.approval');
 Route::get('/rejected/{id}',[HomeController::class,'rejected'])->name('requestengineer.rejected');
@@ -92,7 +115,95 @@ Route::get('/returns-reports', [App\Http\Controllers\HomeController::class, 'ret
 Route::get('/returneds-reports', [App\Http\Controllers\HomeController::class, 'returnedreport'])->name('reports.returnedreport');
 
 
+
+
+//adding more than item routes
+
+Route::post('add-item',[HomeController::class,'purchase'])->name('item.add');
+Route::get('remove-item/{id}',[HomeController::class,'remove'])->name('item.remove');
+Route::get('item-complete',[HomeController::class,'complete'])->name('items.complete');
+
+Route::post('add-request',[HomeController::class,'request'])->name('request.add');
+Route::get('remove-request/{id}',[HomeController::class,'removerequest'])->name('request.remove');
+Route::get('request-complete',[HomeController::class,'completerequest'])->name('request.complete');
+
+Route::post('add-e_request',[HomeController::class,'e_request'])->name('e_request.add');
+Route::get('remove-e_request/{id}',[HomeController::class,'removee_request'])->name('e_request.remove');
+Route::get('e_request-complete',[HomeController::class,'completee_request'])->name('e_request.complete');
+
+
+
 //csv and excel controller
 Route::get('file-import-export', [CsvController::class, 'csv.fileImportExport']);
 Route::post('file-import', [CsvController::class, 'fileImport'])->name('csv.file-import');
 Route::get('file-export', [CsvController::class, 'fileExport'])->name('csv.file-export');
+
+
+//vendor csv route
+Route::get('vendor-import-export', [CsvController::class, 'csv.vendorImportExport']);
+Route::post('vendor-import', [CsvController::class, 'vendorImport'])->name('csv.vendor-import');
+Route::get('vendor-export', [CsvController::class, 'vendorExport'])->name('csv.vendor-export');
+
+//price csv route
+Route::get('price-import-export', [CsvController::class, 'csv.priceImportExport']);
+Route::post('price-import', [CsvController::class, 'priceImport'])->name('csv.price-import');
+Route::get('price-export', [CsvController::class, 'priceExport'])->name('csv.price-export');
+
+//purchases csv route
+Route::get('purchase-import-export', [CsvController::class, 'csv.purchaseImportExport']);
+Route::post('purchase-import', [CsvController::class, 'purchaseImport'])->name('csv.purchase-import');
+Route::get('purchase-export', [CsvController::class, 'purchaseExport'])->name('csv.purchase-export');
+
+//zones csv route
+Route::get('zone-import-export', [CsvController::class, 'csv.zoneImportExport']);
+Route::post('zone-import', [CsvController::class, 'zoneImport'])->name('csv.zone-import');
+Route::get('zone-export', [CsvController::class, 'zoneExport'])->name('csv.zone-export');
+
+//  user csv route
+Route::get('user-import-export', [CsvController::class, 'csv.userImportExport']);
+Route::post('user-import', [CsvController::class, 'userImport'])->name('csv.user-import');
+Route::get('user-export', [CsvController::class, 'userExport'])->name('csv.user-export');
+
+
+// request csv route
+Route::get('request-import-export', [CsvController::class, 'csv.requestImportExport']);
+Route::post('request-import', [CsvController::class, 'requestImport'])->name('csv.request-import');
+Route::get('request-export', [CsvController::class, 'requestExport'])->name('csv.request-export');
+
+// requestengineer csv route
+Route::get('requestengineer-import-export', [CsvController::class, 'csv.requestengineerImportExport']);
+Route::post('requestengineer-import', [CsvController::class, 'requestengineerImport'])->name('csv.requestengineer-import');
+Route::get('requestengineer-export', [CsvController::class, 'requestengineerExport'])->name('csv.requestengineer-export');
+
+// returned csv route
+Route::get('returned-import-export', [CsvController::class, 'csv.returnedImportExport']);
+Route::post('returned-import', [CsvController::class, 'returnedImport'])->name('csv.returned-import');
+Route::get('returned-export', [CsvController::class, 'returnedExport'])->name('csv.returned-export');
+// returns csv route
+Route::get('returns-import-export', [CsvController::class, 'csv.returnsImportExport']);
+Route::post('returns-import', [CsvController::class, 'returnsImport'])->name('csv.returns-import');
+Route::get('returns-export', [CsvController::class, 'returnsExport'])->name('csv.returns-export');
+
+
+
+//middleware routes
+Route::group(['middleware' => ['auth', 'appstrict']], function () {
+    Route::resource('/item', ItemController::class);
+    Route::resource('/vendor', VendorController::class);
+    Route::resource('/purchase', PurchaseController::class);
+    Route::resource('/user', UserController::class);
+    Route::resource('/zone', ZoneController::class);
+    Route::resource('/price', PriceController::class);
+    Route::resource('/approve', ApproveController::class);
+
+    Route::get('/stocks',[StockController::class,'index'])->name('stocks.index');
+
+         
+    
+     #purchase controller
+
+    Route::post('add-item',[HomeController::class,'purchase'])->name('item.add');
+    Route::get('remove-item/{id}',[HomeController::class,'remove'])->name('item.remove');
+    Route::get('item-complete',[HomeController::class,'complete'])->name('items.complete');
+
+});

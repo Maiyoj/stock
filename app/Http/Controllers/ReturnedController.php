@@ -20,6 +20,14 @@ class ReturnedController extends Controller
     {
 
         $this->middleware('auth');
+       
+        $this->middleware('permission:ereturns-list|ereturns-create|ereturns-edit|ereturns-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:ereturns-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:ereturns-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:ereturns-delete', ['only' => ['destroy']]);
+
+
+
     }
     /**
      * Display a listing of the resource.
@@ -28,7 +36,7 @@ class ReturnedController extends Controller
      */
     public function index()
     {
-        $returneds=Returned::all();
+        $returneds=Returned::here('user_id',Auth::user()->id)->get();
        
         return view('returned.index',compact('returneds'));
     }
@@ -42,7 +50,7 @@ class ReturnedController extends Controller
     {
         $items=Item::all();
         $zones=Zone::all();
-        $users=User::where('role_id',1)->get();
+        $users=User::all();
 
         return view('returned.create',compact('items','zones','users'));
     }
@@ -66,12 +74,10 @@ class ReturnedController extends Controller
         $returned->item_id=$request->item_id;
         $returned->quantity=$request->quantity;
         $returned->save();
-        $stock= Stock::where('item_id',$returned->item_id)->first();
-        $stock->quantity=$stock->quantity+$returned->quantity;
-        $stock->save();
-        $team_lead =  TeamLeadStock::where('item_id',$returned->item_id)->where('user_id',Auth::user()->id)->first();
-        $team_lead->quantity=$team_lead->quantity-$request->quantity;
-        $team_lead->save();
+        $teamleadstock= TeamLeadStock::where('item_id',$returned->item_id)->where('user_id',$request->user_id)->first();
+    
+    $teamleadstock->quantity=$teamleadstock->quantity+$returned->quantity;
+    $teamleadstock->save();
             return redirect()->route('returned.index')->with('success', 'Returns Added Sucessfully');
     }
 

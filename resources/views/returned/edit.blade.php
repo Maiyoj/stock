@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('front.index')
 
 @section('title')
 <title>Edit Returns</title>

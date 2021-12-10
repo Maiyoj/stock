@@ -1,4 +1,5 @@
 @extends('layouts.main')
+    
 
 @section('title')
 <title>Dashboard</title>
@@ -11,11 +12,11 @@
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">Dashboard</li>
                         </ol>
-                        @if (Auth::user()->role_id==0)
+                        
                         <div class="row">
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-primary text-white mb-4">
-                                    <div class="card-body">Vendors</div>
+                                    <div class="card-body"><h1>{{$vendors}}</h1>Vendors</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                         <a class="small text-white stretched-link" href="{{route('vendor.index')}}">View Details</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
@@ -24,7 +25,7 @@
                             </div>
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-warning text-white mb-4">
-                                    <div class="card-body">Purchases</div>
+                                    <div class="card-body"><h1>{{$purchases}}</h1>Purchases</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                         <a class="small text-white stretched-link" href="{{route('purchase.index')}}">View Details</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
@@ -33,7 +34,7 @@
                             </div>
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-success text-white mb-4">
-                                    <div class="card-body">Stocks</div>
+                                    <div class="card-body"><h1>{{$stock_items}}</h1>Stock Items</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                         <a class="small text-white stretched-link" href="{{route('stocks.index')}}">View Details</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
@@ -42,64 +43,24 @@
                             </div>
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-danger text-white mb-4">
-                                    <div class="card-body">Issuance</div>
+                                    <div class="card-body"><h1>{{$requests}}</h1> Requests</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="{{route('issuance.index')}}">View Details</a>
+                                        <a class="small text-white stretched-link" href="{{route('request.index')}}">View Details</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        @elseif  (Auth::user()->role_id==3)
+                    
 
-                        <div class="row">
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-primary text-white mb-4">
-                                    <div class="card-body">Vendors</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="{{route('vendor.index')}}">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-warning text-white mb-4">
-                                    <div class="card-body">Purchases</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="{{route('purchase.index')}}">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-success text-white mb-4">
-                                    <div class="card-body">Stocks</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="{{route('stocks.index')}}">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-danger text-white mb-4">
-                                    <div class="card-body">Issuance</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="{{route('issuance.index')}}">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        @endif
+                        
                         
                         
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                Recent Engineer Issuances
+                                Recent Engineer Request
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
@@ -108,11 +69,11 @@
                                             <th>ID</th>
                                             <th>User</th>
                                             <th>Zone</th>
-                                            <th>Item</th>
-                                            <th>Quantity</th>
+                                            <th>No. of Items</th>
                                             <th>Purpose</th>
+                                            <th>Status</th>
                                             <th>Date Added</th>
-                                          
+                                            <th colspan="2">Action</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -122,23 +83,26 @@
                                                 <th>Item</th>
                                                 <th>User</th>
                                                 <th>Zone</th>
-                                                <th>Quantity</th>
+                                                <th>No. of Items</th>
                                                 <th>Purpose</th>
+                                                <th>Status</th>
                                                 <th>Date Added</th>
                                             </tr>
-                                          
+                                            <th colspan="2">Action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        @forelse($stocks as $issuancee)
+                                        @forelse($stocks as $requestengineer)
                                         <tr>
-                                            <td>{{$issuancee->id}}</td>
-                                            <td>{{$issuancee->user->name}}</td>
-                                            <td>{{$issuancee->zone->zone}}</td>
-                                             <td>{{$issuancee->item->name}}</td>
-                                            <td>{{$issuancee->quantity}}</td>
-                                            <td>{{$issuancee->purpose}}</td>
-                                             <td>{{$issuancee->created_at}}</td>
+                                        <td>{{$requestengineer->id}}</td>
+                                            <td>{{$requestengineer->user->name}}</td>
+                                            <td>{{$requestengineer->zone->zone}}</td>
+                                            <td>{{$requestengineer->erequests_item->count()}}</td>
+                                            <td>{{$requestengineer->purpose}}</td>
+                                            <td class="{{$requestengineer->status=='pending' ? 'text-danger' :'text-success'}}">{{$requestengineer->status}}</td>
+                                             <td>{{$requestengineer->created_at}}</td>
+                                            <td><a href="{{route('requestengineer.show', $requestengineer->id)}}"><i class="fa fa-eye text-primary"> </i></td>
+                                            <td>
                                            
                                      </td>
                                             </tr>                                                           
@@ -155,4 +119,5 @@
                         </div>
                     </div>
                 </main>
+        
 @endsection  

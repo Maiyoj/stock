@@ -13,6 +13,7 @@ use App\Models\Requests;
 use App\Notifications\StockRequestNotification;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\Approval;
+use Illuminate\Support\Facades\Auth;
 
 class Requestscontroller extends Controller
 {
@@ -20,6 +21,23 @@ class Requestscontroller extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+
+
+        $this->middleware('permission:request-list|request-create|requst-edit|request-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:request-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:request-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:request-delete', ['only' => ['destroy']]);
+
+
+
+        /*$this->middleware('permission:req-list|req-create|requst-edit|req-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:req-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:req-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:req-delete', ['only' => ['destroy']]);*/
+
+
+
+
     }
     /**
      * Display a listing of the resource.
@@ -28,10 +46,10 @@ class Requestscontroller extends Controller
      */
     public function index()
     {
-        $requests=Requests::all();
-        return view('request.index', compact('requests'));
+        $users=User::where('id',Auth::user()->id)->get();
+        $requests= Requests::where('user_id',Auth::user()->id)->where('draft',1)->get();
+        return view('request.index',compact('requests'));
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -41,8 +59,7 @@ class Requestscontroller extends Controller
     {
         $items=Item::all();
         $zones=Zone::all();
-        $users=User::where('role_id',1)->get();
-
+        $users=User::where('id',Auth::user()->id)->get();
         return view('request.create',compact('items','zones','users'));
     }
 
@@ -66,9 +83,9 @@ class Requestscontroller extends Controller
         $requests->status ='pending';
         $requests->save();
 
-        $admin=User::where('role_id',0)->get();
+       #$admin=User::where('role_id',0)->get();
         Notification::send($admin,new Approval());
-        return redirect()->route('request.index')->with('success','Request sent successfully');
+        return redirect()->route('request.drafts')->with('success','Draft added successfully');
     }
 
 
@@ -80,7 +97,9 @@ class Requestscontroller extends Controller
      */
     public function show($id)
     {
-        //
+        $request=Requests::findOrFail($id);
+        $items=Item::all();
+        return view('request.show',compact('request','items'));
     }
 
     /**
@@ -94,7 +113,7 @@ class Requestscontroller extends Controller
         $request=Requests::findOrFail($id);
         $items=Item::all();
         $zones=Zone::all();
-        $users=User::where('role_id',1)->get();
+        $users=User::where('id',Auth::user()->id)->get();
         return view('request.edit',compact('request','users','zones','items'));
     }
 
@@ -136,4 +155,15 @@ class Requestscontroller extends Controller
 
         return redirect()->route('request.index')->with('success','Request deleted successfully');
     }
+
+    public function drafts(Request $request)
+    {
+       
+        $users=User::where('id',Auth::user()->id)->get();
+        $requests= Requests::where('user_id',Auth::user()->id)->where('draft',0)->get();
+        return view('request.drafts',compact('requests'));
+    }
+    
+
+
 }

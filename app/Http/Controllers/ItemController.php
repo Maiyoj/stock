@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Item;
-
+use App\Http\Controllers\DB;
 class ItemController extends Controller
 {
 
@@ -12,6 +12,12 @@ class ItemController extends Controller
     {
 
         $this->middleware('auth');
+
+      $this->middleware('permission:item-list|item-create|item-edit|item-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:item-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:item-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:item-delete', ['only' => ['destroy']]);
+
     }
     /**
      * Display a listing of the resource.
@@ -128,9 +134,18 @@ class ItemController extends Controller
     {
         $item=Item::findOrFail($id);
         $item->delete();
-        return redirect()->route('item.index')->with('success', 'Item deleted success');
+        return redirect()->route('item.index')->with('success', 'Item deleted successfully');
     }
 
   
 
+    public function deleteAll(Request $request)
+    { 
+        $id = $request->id;
+		foreach ($id as $item) 
+		{
+			Item::where('id', $item)->delete();
+		}
+		return redirect()->route('item.index')->with('success', 'Item deleted successfully');
+    }
 }

@@ -54,20 +54,20 @@
                                             <div class="col-md-8 mt-4">
                                                 <div class="form-floating mb-3 mb-md-0">
                                                     <input class="form-control" id="inputFirstName" type="text" name="name" placeholder="Enter your first name" />
-                                                    <label for="inputFirstName"> Vendor Name</label>
+                                                    <label for="inputFirstName"> Name</label>
                                                 </div>
                                             </div>
                                                
                                                     <div class="col-md-8 mt-4">
                                                         <div class="form-floating mb-3 mb-md-0">
                                                             <input class="form-control" id="inputFirstName" type="email" name="email" placeholder="name@example.com"  />
-                                                            <label for="inputFirstName"> Vendor Email</label>
+                                                            <label for="inputFirstName"> Email</label>
                                                         </div>
                                                     </div>
                                                         <div class="col-md-8 mt-4">
                                                             <div class="form-floating mb-3 mb-md-0">
                                                                 <input class="form-control" id="inputFirstName" type="number" name="number" placeholder="Enter your first name" />
-                                                                <label for="inputFirstName">Vendor Number</label>
+                                                                <label for="inputFirstName">Number</label>
                                                             </div>
                                                         </div>
                                                 
@@ -75,7 +75,7 @@
                                                             <div class="col-md-8 mt-4">
                                                                 <div class="form-floating mb-3 mb-md-0">
                                                                     <input class="form-control" id="inputFirstName" type="address" name="address" placeholder="Enter your first name" />
-                                                                    <label for="inputFirstName">vendor Address</label>
+                                                                    <label for="inputFirstName">Address</label>
                                                                 </div>
                                                             </div>
 

@@ -13,6 +13,8 @@ use App\Models\Returned;
 use App\Models\Returns;
 use App\Models\Inssuancee;
 
+use Illuminate\Support\Facades\Auth;
+
 
 class ReturnsController extends Controller
 {
@@ -20,6 +22,19 @@ class ReturnsController extends Controller
     {
 
         $this->middleware('auth');
+
+
+        $this->middleware('permission:returns-list|returns-create|returns-edit|returns-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:returns-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:returns-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:returns-delete', ['only' => ['destroy']]);
+
+
+        $this->middleware('permission:ret-list|ret-create|ret-edit|ret-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:ret-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:ret-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:ret-delete', ['only' => ['destroy']]);
+
     }
     /**
      * Display a listing of the resource.
@@ -28,7 +43,7 @@ class ReturnsController extends Controller
      */
     public function index()
     {
-        $returnss=Returns::all();
+        $returnss=Returns::where('user_id',Auth::user()->id)->get();
        
         return view('returns.index',compact('returnss'));
     }
@@ -42,7 +57,7 @@ class ReturnsController extends Controller
     {
         $items=Item::all();
         $zones=Zone::all();
-        $users=User::where('role_id',1)->get();
+        $users=User::all();
 
         return view('returns.create',compact('items','zones','users'));
     }
@@ -66,10 +81,18 @@ class ReturnsController extends Controller
     $returns->item_id=$request->item_id;
     $returns->quantity=$request->quantity;
     $returns->save();
-    $teamleadstock= TeamLeadStock::where('item_id',$returns->item_id)->where('user_id',$request->user_id)->first();
-    
-    $teamleadstock->quantity=$teamleadstock->quantity+$returns->quantity;
-    $teamleadstock->save();
+
+
+
+
+
+    $stock= Stock::where('item_id',$returns->item_id)->first();
+    $stock->quantity=$stock->quantity+$returns->quantity;
+    $stock->save();
+    $team_lead =  TeamLeadStock::where('item_id',$returns->item_id)->where('user_id',Auth::user()->id)->first();
+    $team_lead->quantity=$team_lead->quantity-$request->quantity;
+    $team_lead->save();
+   
     return redirect()->route('returns.index')->with('success', 'Returns Added Sucessfully');
 
     }

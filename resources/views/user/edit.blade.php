@@ -36,7 +36,7 @@
                                             
                                                 <div class="col-md-8 mt-4">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" value={{$user->name}} id="inputFirstName" type="text" name="name" placeholder="Enter first name" />
+                                                        <input class="form-control" value="{{$user->name}}" id="inputFirstName" type="text" name="name" placeholder="Enter first name" />
                                                         <label for="inputFirstName">Name</label>
                                                     </div>
                                                 </div>
@@ -46,15 +46,7 @@
                                                         <label for="inputFirstEmail">Email</label>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-8 mt-4">
-                                                    <div class="form-floating mb-3 mb-md-0">
-                                                        <select name="role_id" id="" class="form-control"> 
-                                                            <option value="1" {{$user->role_id==1 ? 'selected':''}}>Team Lead</option>
-                                                            <option value="2" {{$user->role_id==2 ? 'selected':''}}>Engineer</option>
-                                                        </select>
-                                                        <label for="inputFirstName">Role</label>
-                                                    </div>
-                                                </div>
+                                              
                                                 <div class="col-md-8 mt-4">
                                                     <div class="form-floating mb-3 mb-md-0">
                                                         <input class="form-control" id="inputFirstpassword" type="password" name="password" placeholder="Enter password" />
@@ -62,6 +54,11 @@
                                                     </div>
                                                 </div>
                                           
+
+                                                <div class="form-group">
+                                      <strong>Role:</strong>
+                                      {!! Form::select('roles[]', $roles, $userRole, array('class' => 'form-control','multiple')) !!}
+                                       </div>
                                             <div class="mt-4 mb-0">
                                                 <div class="d-grid"><button class="btn btn-primary btn-block"  type="submit">Update User</a></div>
                                             </div>

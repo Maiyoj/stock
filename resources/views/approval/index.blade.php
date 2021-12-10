@@ -1,6 +1,6 @@
 
 
-@extends('layouts.main')
+@extends('front.index')
 
 @section('title')
 <title>Request Approval</title>
@@ -40,8 +40,7 @@
                                             <th>ID</th>
                                             <th>User</th>
                                             <th>Zone</th>
-                                            <th>Item</th>
-                                            <th>Quantity</th>
+                                            <th>No. of Items</th>
                                             <th>Purpose</th>
                                             <th>Date Added</th>
                                             <th>Status</th>
@@ -55,7 +54,7 @@
                                                 <th>Item</th>
                                                 <th>User</th>
                                                 <th>Zone</th>
-                                                <th>Quantity</th>
+                                                <th>No. of Items</th>
                                                 <th>Purpose</th>
                                                 <th>Status</th>
                                                 <th>Date Added</th>
@@ -69,24 +68,20 @@
                                             <td>{{$requestengineer->id}}</td>
                                             <td>{{$requestengineer->user->name}}</td>
                                             <td>{{$requestengineer->zone->zone}}</td>
-                                            <td>{{$requestengineer->item->name}}</td>
-                                            <td>{{$requestengineer->quantity}}</td>
+                                            <td>{{$requestengineer->erequests_item->count()}}</td>
                                             <td>{{$requestengineer->purpose}}</td>
-                                            <td>{{$requestengineer->status}}</td>
-                                             <td>{{$requestengineer->created_at}}</td>
-                                             @if ($requestengineer->status=='pending')
-                                                <td><a href="{{route('requestengineer.approval', $requestengineer->id)}}"><i class="fa fa-check text-primary"> </i></td>
+                                            <td class="{{$requestengineer->status=='pending' ? 'text-danger' :'text-success'}}">{{$requestengineer->status}}</td>
+                                            <td>{{$requestengineer->created_at}}</td>
+                                            <td><a href="{{route('requestengineer.show', $requestengineer->id)}}"><i class="fa fa-eye text-primary"> </i></td>
+                                              
+                                                @if ($requestengineer->status=='pending')
+                                                <td><a href="{{route('requestengineer.approvee', $requestengineer->id)}}"><i class="fa fa-check text-primary"> </i></td>
                                                 <td><a href="{{route('requestengineer.rejected', $requestengineer->id)}}"><i class="fa fa-times text-danger"> </i></td>
                                              @endif
                                             
                                             </tr>                                                           
                                         @empty
-                                        
-
                                         @endforelse
-                                  
-                                        
-                                       
                                     </tbody>
                                 </table>
                             </div>

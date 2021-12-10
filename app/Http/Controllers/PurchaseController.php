@@ -8,6 +8,7 @@ use App\Models\Item;
 use App\Models\Vendor;
 use App\Models\Stock;
 use App\Models\Price;
+use Illuminate\Support\Facades\Session;
 
 class PurchaseController extends Controller
 {
@@ -15,6 +16,14 @@ class PurchaseController extends Controller
     {
 
         $this->middleware('auth');
+
+
+
+        
+      $this->middleware('permission:purchase-list|purchase-create|purchase-edit|purchase-delete', ['only' => ['index', 'show']]);
+      $this->middleware('permission:purchase-create', ['only' => ['create', 'store']]);
+      $this->middleware('permission:purchase-edit', ['only' => ['edit', 'update']]);
+      $this->middleware('permission:purchase-delete', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.
@@ -37,8 +46,6 @@ class PurchaseController extends Controller
     {
         $items=Item::all();
         $vendors=vendor::all();
-        
-
 
         return view('purchase.create',compact('vendors', 'items'));
     }
@@ -51,13 +58,6 @@ class PurchaseController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $request->validate([
-            'quantity'=>'numeric|required',
-            'PO_number'=>'required|string|unique:purchases',
-        ]);
-
-
         $purchase=new Purchase;
         $purchase->item_id=$request->item_id;
         $purchase->vendor_id=$request->vendor_id;
@@ -90,7 +90,9 @@ class PurchaseController extends Controller
      */
     public function show($id)
     {
-        //
+        $purchase=Purchase::findOrFail($id);
+        $items=Item::all();
+        return view('purchase.show',compact('purchase','items'));
     }
 
     /**

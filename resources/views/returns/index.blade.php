@@ -1,6 +1,6 @@
 
 
-@extends('layouts.main')
+@extends('front.index')
 
 @section('title')
 <title>Returns</title>
@@ -13,7 +13,20 @@
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active"> Returns</li>
                         </ol>
-                       
+                        <form action="{{ route('csv.returns-import') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="card-body" >
+                              <div class="text-left">
+                               <a class="btn btn-success"  href="{{ route('csv.returns-export') }}">Export data</a>
+                              </div>
+                               </div>
+                        </form>
+                        @can('returns-create')
+               <div class="d-flex flex-row-reverse bd-highlight">
+               <div class="p-2 bd-highlight"><a class="btn btn-primary" href="{{ route('request.create') }}">Add Item</a></div>
+               </div>
+              @endcan
+
                         
                         <div class="card mb-4">
                             <div class="card-header">
@@ -63,15 +76,17 @@
                                             <td>{{$returns->item->name}}</td>
                                             <td>{{$returns->quantity}}</td>
                                              <td>{{$returns->created_at}}</td>
-                                            <td><a href="{{route('returns.edit', $returns->id)}}"><i class="fa fa-edit text-primary"> </i></td>
+                                           <!-- <td><a href="{{route('returns.edit', $returns->id)}}"><i class="fa fa-edit text-primary"> </i></td>-->
                                             <td>
-                                            <form id= "delete" action="{{route('returns.destroy', $returns->id)}}" method="post">
-                                                 @csrf
-                                                @method('DELETE')    
-                                                <button type="submit" form="delete" style="border: none;background:color:transparent;"> 
-                                                    <i class="fa fa-trash text-danger"></i>
-                                                </button> 
-                                            </form>
+                                                @can('returns-delete')
+                                                <form action="{{url('returns/'.$returns->id)}}" method="post">
+                                                    @csrf
+                                                    @method('DELETE')  
+                                                    <button type="submit" onclick="return confirm('Confirm Delete?')"  style="border: none;background:color:transparent;">  
+                                                        <i class="fa fa-trash text-danger"></i></button> 
+                                                </form>
+                                                @endcan
+                                    
                                      </td>
                                             </tr>                                                           
                                         @empty

@@ -2,25 +2,34 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use PDF;
+use Carbon\Carbon;
+use App\Models\Item;
+use App\Models\User;
+use App\Models\Zone;
+use App\Models\Price;
+use App\Models\Stock;
+use App\Models\Vendor;
+use App\Models\Returns;
+use App\Models\Issuance;
+use App\Models\Purchase;
+use App\Models\Requests;
+use App\Models\Returned;
 use App\Models\Issuancee;
 use App\Models\ItemReports;
-use App\Models\Item;
-use App\Models\Vendor;
-use Carbon\Carbon;
-use App\Models\Price;
-use App\Models\Purchase;
-use App\Models\Zone;
-use App\Models\User;
-use App\Models\Issuance;
-use App\Models\Returns;
-use App\Models\Returned;
-use PDF;
-use App\Models\Requests;
-use App\Models\Stock;
+use App\Models\PurchaseItem;
+use App\Models\RequestItems;
+use Illuminate\Http\Request;
 use App\Models\TeamLeadStock;
 use App\Models\RequestEngineer;
+use App\Notifications\Approval;
+use App\Models\RequentEngineerItems;
+use App\Models\RequestEngineersItem;
+use App\Models\Comments;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Notification;
+
 class HomeController extends Controller
 {
     /**
@@ -30,8 +39,9 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
-    }
+       $this->middleware('auth');
+      
+}
 
     /**
      * Show the application dashboard.
@@ -40,14 +50,31 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if(Auth::user()->role_id==2)
+       //displaying of engineer reuested item
+        /*if(Auth::user()->role_id==2)
         {
-            $stocks=Issuancee::where('user_id',Auth::user()->id)->get();
+            $stocks=RequestEngineer::where('user_id',Auth::user()->id)->get();
             return view('stocks.engineer',compact('stocks'));
-        }
-        $stocks=Issuancee::all();
-        return view('admin.index',compact('stocks'));
+        }*/
+
+        if (Auth::user()->hasRole('Admin')){
+        //dispaly of items count on dashboard
+        $stocks=RequestEngineer::all();
+        $vendors=Vendor::count();
+        $purchases=Purchase::count();
+        $stock_items=Stock::count();
+        $requests=Requests::count();
+        return view('admin.index',compact('stocks','vendors','purchases','stock_items','requests'));
     }
+else{
+   $stocks=RequestEngineer::all();
+return view('home.index', compact('stocks'));
+}
+
+       
+   
+
+}
 
 
     
@@ -329,87 +356,411 @@ $returneds=Returned::whereBetween('created_at', [$from, $to])->get();
      return view('reports.returnedreport',compact('zones','_from','_to', 'users', 'items', 'returneds'));
     
  }
-
- public function approve($id)
+// approval begins here
+ public function approve( Request $request, $id)
  {
-    
+   $request->validate([
+      #'quantity'=>'numeric|required',
+      
+  ]);
     $request=Requests::findOrFail($id);
-    
-    $stock=Stock::where('item_id',$request->item_id)->first();
-    if($stock==null)
-    {
-      return redirect()->back()->with('error','You have no stock to issue');
-    }
-    $available_stock=$stock->quantity;
-    if($request->quantity>$available_stock)
-    {
-        return redirect()->back()->with('error','The available is too low for requested issuance');
-    }
+   $items=$request->request_item;
+ # $items=RequestItems::where('requests_id',$id)->get();
+ #dd($items);
+   foreach($items as $item)
+   {
+      $stock=Stock::where('item_id',$item->item_id)->first();
+      if($stock==null)
+  
+      {
+        return redirect()->back()->with('error','You have no '.$item->name.' stock to issue');
+      }
+      $available_stock=$stock->quantity;
+   
+  
+      if($item->quantity>$available_stock)
+      {
+          return redirect()->back()->with('error','The available is too low for requested issuance');
+      }
+     
 
+      $stock->quantity=$stock->quantity-$item->quantity;
+      $stock->save();
+      #dd($stock);
+   }
+   
     $request->status='approved';
     $request->save(); 
    
-    $stock->quantity=($stock->quantity)-$request->quantity;
-    $stock->save();
-    
-    $team_lead=TeamLeadStock::where('user_id',$request->user_id)->where('item_id',$request->item_id)->first();
-    if( $team_lead==null)  
+    foreach($items as  $item)
     {
-       $new_stock=new TeamLeadStock;
-       $new_stock->user_id=$request->user_id;
-       $new_stock->item_id=$request->item_id;
-       $new_stock->quantity=$request->quantity;
-       $new_stock->save();
+     $team_lead=TeamLeadStock::where('user_id',$request->user_id)->where('item_id',$item->item_id)->first();
+     if( $team_lead==null)  
+     
+     {
+        $new_stock=new TeamLeadStock;
+        $new_stock->user_id=$request->user_id;
+        $new_stock->item_id=$item->item_id;
+        $new_stock->quantity=$item->quantity;
+        $new_stock->save();
+  
+     } 
+     else
+    {
+     $team_lead->quantity=$team_lead->quantity+$item->quantity;
+     
+     $team_lead->save();
+    }
+  }
+    
 
-       return redirect()->back()->with('success','Request approved successfully');
-    } 
-    $team_lead->quantity=($team_lead->quantity)+$request->quantity;
-      $team_lead->save();
+
+  
+    
 
     return redirect()->back()->with('success','Request approved successfully');
  }
- public function reject($id)
+ public function reject( Request $request, $id)
  {
+
+   
     $request=Requests::findOrFail($id);
     $request->status='rejected';
     $request->save();
+
+   
+    
 
     return redirect()->back()->with('success','Request rejected successfully');
  }
 
  public function approval(Request $request, $id)
  {
-   $requestengineer = RequestEngineer::findOrFail($id);
-        $original_quantity=$requestengineer->quantity;
-        $stock=TeamLeadStock::where('user_id',Auth::user()->id)->where('item_id',$request->item_id)->first();
-        if($stock==null)
-        {
-          return redirect()->back()->with('error','You have no stock to issue');
-        }
-        $available_stock=$stock->quantity;
-        if($request->quantity>$available_stock)
-        {
-            return redirect()->back()->with('error','The available is too low for requested issuance');
-        }
-       
-        $requestengineer->status='approved';
-        $requestengineer->save();
+   $request->validate([
+      #'quantity'=>'numeric|required',
       
-        $stock->quantity=($stock->quantity+$original_quantity)-$request->quantity;
-        $stock->save();
+  ]);
+    $request=RequestEngineer::findOrFail($id);
+   $items=$request->erequests_item;
+
+   foreach($items as $item)
+   {
+      $stock=TeamLeadStock::where('user_id',$request->user_id)->where('item_id',$item->item_id)->first();
+      if( $stock==null)  
+      
+  
+      {
+        return redirect()->back()->with('error','You have no '.$item->name.' stock to issue');
+      }
+      $available_stock=$stock->quantity;
+   
+  
+      if($item->quantity>$available_stock)
+      {
+          return redirect()->back()->with('error','The available is too low for requested issuance');
+      }
+
+      $stock->quantity=$stock->quantity-$item->quantity;
+      $stock->save();
+      #dd($stock);
+   }
+   
+    $request->rstatus='Received';
+    $request->save();
         
-        return redirect()->back()->with('success','Request approved successfully');
+ return redirect()->back()->with('success','Items Received successfully');
  }
 
  public function rejected($id)
  {
-    $requestengineer=$requestngineer::findOrFail($id);
+    $requestengineer=RequestEngineer::findOrFail($id);
     $requestengineer->status='rejected';
     $requestengineer->save();
 
     return redirect()->back()->with('success','request rejected successfully');
  }
+ public function purchase(Request $request)
+ {
+    $id=$request->item_id;
+   $request->validate([
+      'quantity'=>'numeric|required|min:0|not_in:0',
+      'PO_number'=>'required|string|unique:purchases',
+  ]);
+  $items=Session::get('cart');
+  $price= Price::where('item_id',$request->item_id)->first();
+   if(!$items)
+   {
+      $items=[
+            $id=[
+               'item_id'=>$request->item_id,
+               'vendor_id'=>$request->vendor_id,
+               'PO_number'=>$request->PO_number,
+               'quantity'=>$request->quantity,
+               'price'=>$request->quantity*$price->price,
+            ]
+      ];
+    Session::put('cart',$items);
+   }
+   else{
+      if(isset($items[$id]))
+      {
+         return redirect()->back()->with('error','Item already added. Remove the item to add again.');
+      }
+      $items[$id]=[
+         'item_id'=>$request->item_id,
+         'vendor_id'=>$request->vendor_id,
+         'PO_number'=>$request->PO_number,
+         'quantity'=>$request->quantity,
+         'price'=>$request->quantity*$price->price,
+      ];
+      Session::put('cart',$items);
+   }
+   
+    return redirect()->back()->with('success','Item added successfully. ');
+ }
+ public function remove($id)
+ {
+    $items=Session::get('cart');
+    if(isset($items[$id]))
+    {
+       unset($items[$id]);
+       Session::put('cart',$items);
+    }
+    if(count($items)==0)
+    {
+        Session::forget('cart');
+    }
+    return redirect()->back()->with('success','Item removed successfully. ');
+ }
+ public function complete()
+ {
+   $items=Session::get('cart');
+   if(!$items)
+   {
+      return redirect()->back()->with('success','Please add items first. ');
+   }
+   $purchase= new Purchase();
+   $purchase->vendor_id=$items[0]['vendor_id'];
+   $purchase->PO_number=$items[0]['PO_number'];
+   $price=0;
+   foreach($items as $item)
+   {
+      $price=$price+$item['price'];
+   }
+   $purchase->price=$price;
+   $purchase->save();
 
+   foreach($items as $item)
+   {
+         $purchase_item=new PurchaseItem();
+         $purchase_item->purchase_id=$purchase->id;
+         $purchase_item->item_id=$item['item_id'];
+         $purchase_item->quantity=$item['quantity'];
+         $purchase_item->save();
+            $stock= Stock::where('item_id',$purchase_item->item_id)->first();
+            if($stock==null)
+            {
+               $new_stock=new Stock;
+               $new_stock->item_id=$purchase_item->item_id;
+               $new_stock->quantity= $purchase_item->quantity;
+               $new_stock->save();
+            }
+            else
+            {
+               $stock->quantity=$stock->quantity+$purchase_item->quantity;
+               $stock->save();
+            }
+      }
+      Session::forget('cart');
+      return redirect()->route('purchase.index')->with('success', 'Purchase added successfully');
+   }
+
+
+
+   #teamlead request
+   public function Request(Request $request)
+   {
+   $id=$request->item_id;
+     $request->validate([
+        'user_id'=>'required',
+        'zone_id'=>'required',
+        'item_id'=>'required',
+        'quantity'=>'numeric|required|min:0|not_in:0',
+    ]);
+    $items=Session::get('request');
+     if(!$items)
+     {
+        $items=[
+              $id=>[
+                 'item_id'=>$request->item_id,
+                 'user_id'=>$request->user_id,
+                 'quantity'=>$request->quantity,
+                 'zone_id'=>$request->zone_id,
+              ]
+        ];
+      Session::put('request',$items);
+     }
+     else{
+        if(isset($items[$id]))
+        {
+           return redirect()->back()->with('error','Item already added to the request. Remove the item to add again.');
+        }
+        $items[$id]=[
+         'item_id'=>$request->item_id,
+         'user_id'=>$request->user_id,
+         'quantity'=>$request->quantity,
+         'zone_id'=>$request->zone_id,
+        ];
+        Session::put('request',$items);
+     }
+      return redirect()->back()->with('success','Item added successfully. ');
+   }
+   public function removerequest($id)
+   {
+      $items=Session::get('request');
+         if(count($items)<2)
+         {
+            Session::forget('request');
+         }
+         else
+         {
+            unset($items[$id]);
+            Session::put('request',$items);
+         }
+      return redirect()->back()->with('success','Item removed successfully.');
+   }
+
+
+
+   public function completerequest()
+ {
+   $items=Session::get('request');
+   #dd($items);
+   if(!$items)
+   {
+      return redirect()->back()->with('success','Please add items first. ');
+   }
+
+   $requests =  new Requests;
+   $first_item = reset($items);
+   $requests->user_id=$first_item['user_id'];
+   $requests->zone_id=$first_item['zone_id'];
+   $requests->status ='pending';
+   $requests->save();
+   
+   foreach($items as $req=>$item)
+   {
+      
+         $request_item=new RequestItems();
+         $request_item->requests_id=$requests->id;
+         $request_item->item_id=$item['item_id'];
+         $request_item->quantity=$item['quantity'];
+         $request_item->save();
+   }
+   /*(Auth::user()->hasRole('Admin'))
+      $admin=User::where('hasRole',Admin)->get();
+      Notification::send($admin,new Approval());
+*/
+      Session::forget('request');
+      return redirect()->route('request.drafts')->with('success','Request sent successfully');
+   }
+
+
+
+#engineer request
+   public function e_request(Request $request)
+   {
+   $id=$request->item_id;
+     $request->validate([
+        'user_id'=>'required',
+        'zone_id'=>'required',
+        'item_id'=>'required',
+        'quantity'=>'numeric|required|min:0|not_in:0',
+        'purpose'=>'required|string'
+    ]);
+    $items=Session::get('e_request');
+     if(!$items)
+     {
+        $items=[
+              $id=[
+                 'item_id'=>$request->item_id,
+                 'user_id'=>$request->user_id,
+                 'quantity'=>$request->quantity,
+                 'zone_id'=>$request->zone_id,
+                 'purpose'=>$request->purpose
+              ]
+        ];
+      Session::put('e_request',$items);
+     }
+     else{
+        if(isset($items[$id]))
+        {
+           return redirect()->back()->with('error','Item already added to the request. Remove the item to add again.');
+        }
+        $items[$id]=[
+         'item_id'=>$request->item_id,
+         'user_id'=>$request->user_id,
+         'quantity'=>$request->quantity,
+         'zone_id'=>$request->zone_id,
+         'purpose'=>$request->purpose
+        ];
+        Session::put('e_request',$items);
+     }
+      return redirect()->back()->with('success','Item added successfully. ');
+   }
+   public function removee_request($id)
+   {
+      $items=Session::get('e_request');
+         if(count($items)<2)
+         {
+            Session::forget('e_request');
+         }
+         else
+         {
+            unset($items[$id]);
+            Session::put('e_request',$items);
+         }
+      return redirect()->back()->with('success','Item removed successfully.');
+   }
+
+
+
+
+  
+   public function completee_request()
+ {
+   $items=Session::get('e_request');
+   if(!$items)
+   {
+      return redirect()->back()->with('success','Please add items first. ');
+   }
+
+   $requests =  new RequestEngineer();
+   $requests->user_id=$items[0]['user_id'];
+   $requests->zone_id=$items[0]['zone_id'];
+   $requests->purpose=$items[0]['purpose'];
+   $requests->engineer_id= Auth::user()->id;
+   $requests->status ='pending';
+   $requests->save();
+   
+   foreach($items as $item)
+   {
+         $request_item=new RequestEngineersItem;
+         $request_item->request_engineer_id=$requests->id;
+         $request_item->item_id=$item['item_id'];
+         $request_item->quantity=$item['quantity'];
+         $request_item->save();
+   }
+      
+   $user=User::findOrFail($requests->user_id);
+
+  #$user=User::where('role_id',2)->get();
+  # Notification::send($user,new Approval());
+  /*$user = User::where('id',$request->user_id)->first();
+  $user->notify(new Approval());*/
+   Session::forget('e_request');
+   return redirect()->route('requests.drafts')->with('success','Draft  Added Successfully');
+   }
 }
 
 

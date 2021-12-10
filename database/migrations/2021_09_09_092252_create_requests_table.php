@@ -19,6 +19,7 @@ class CreateRequestsTable extends Migration
             $table->integer('zone_id');
             $table->integer('item_id');
             $table->integer('quantity');
+            $table->string('pmstatus')->default('waiting');
             $table->string('status')->default('pending');
             $table->timestamps();
         });

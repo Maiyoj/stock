@@ -21,6 +21,7 @@ class CreateRequestEngineersTable extends Migration
             $table->string('quantity');
             $table->string('purpose');
             $table->string('status')->default('pending');
+            $table->string('status')->default('Not received');
             $table->timestamps();
         });
     }

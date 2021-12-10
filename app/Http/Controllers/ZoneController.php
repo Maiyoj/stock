@@ -13,6 +13,12 @@ class ZoneController extends Controller
     {
 
         $this->middleware('auth');
+        $this->middleware('permission:zone-list|zone-create|zone-edit|zone-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:zone-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:zone-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:zone-delete', ['only' => ['destroy']]);
+
+
     }
     /**
      * Display a listing of the resource.
@@ -33,7 +39,7 @@ class ZoneController extends Controller
      */
     public function create()
     {
-        $users=User::where('role_id','!=',0)->get();
+        $users=User::all();
         return view('zone.create',compact('users'));
     
     }
@@ -83,7 +89,7 @@ class ZoneController extends Controller
      */
     public function edit($id)
     {
-        $users=User::where('role_id','!=',0)->get();
+        $users=User::findOrfail($id);
     
         $zone= Zone::findOrFail($id);
 

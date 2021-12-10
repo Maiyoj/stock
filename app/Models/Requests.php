@@ -34,4 +34,14 @@ class Requests extends Model
         return $this->belongsTo(Zone::class)->withTrashed();
 
     }
+    public function request_item()
+    {
+        return $this->hasMany(RequestItems::class);
+    }
+
+
+    public function comments()
+    {
+        return $this->hasMany(Comments::class);
+    }
 }

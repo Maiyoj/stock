@@ -17,7 +17,10 @@ class Item extends Model
     {
         return $this->hasMany(Vendor::class)->withTrashed();
     }
-
+    public function itemprice()
+    {
+        return $this->hasMany(Price::class);
+    }
 
     public function purchase()
     {
