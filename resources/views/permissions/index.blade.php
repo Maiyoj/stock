@@ -18,7 +18,7 @@
                                 Files
                              <form action="{{ route('csv.price-import') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
-    
+                               @can('permission-create')
                                 <div class="form-group mb-10" style="max-width: 400px; margin: 5 ;">
                                     
                                     <!-- <div class="custom-file text-right"   class="card mb-6">
@@ -27,6 +27,7 @@
                                     <a class="btn btn-primary" href="{{ route('permissions.create') }}">Add Permissions</a>
                             </div>
                         </div>
+                        @endcan
                          
                         <div class="card mb-4">
                             <div class="card-header">
@@ -46,7 +47,6 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>Name</th>
-                                            
                                             <th>Date Added</th>
 
                                             
@@ -56,7 +56,6 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>Name</th>
-                                            
                                             <th>Date Added</th>
                                             <th colspan="2">Action</th>
                                         </tr>
@@ -68,7 +67,11 @@
                                             <td>{{$permission->name}}</td>
                                             
                                              <td>{{$permission->created_at}}</td>
+
+                                             @can('permission-edit')
                                             <td><a href="{{route('permissions.edit', $permission->id)}}"><i class="fa fa-edit text-primary"> </i></td>
+                                                @endcan
+                                                @can('permission-delete')
                                             <td>
                                                 <form action="{{url('permissions/'.$permission->id)}}" method="post">
                                                     @csrf
@@ -76,15 +79,11 @@
                                                     <button type="submit" onclick="return confirm('Confirm Delete?')"  style="border: none;background:color:transparent;">  
                                                         <i class="fa fa-trash text-danger"></i></button> 
                                                 </form>
-                                     </td>
+                                               </td>
+                                               @endcan
                                             </tr>                                                           
                                         @empty
-                                        
-
                                         @endforelse
-                                  
-                                        
-                                       
                                     </tbody>
                                 </table>
                             </div>

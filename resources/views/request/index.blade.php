@@ -93,8 +93,9 @@
                                             <!-- <td>{{$request->status}}  -->
                                             <td class="{{$request->status=='pending' ? 'text-danger' :'text-success'}}">{{$request->status}}</td>
                                             <td>{{$request->created_at}}</td>
+                                            @can('request-show')
                                              <td><a href="{{route('request.show', $request->id)}}"><i class="fa fa-eye text-primary"> </i></td>
-                                        
+                                          @endcan
                                             <td>
                                                 @can('request-delete')
                                                 <form action="{{url('request/'.$request->id)}}" method="post">

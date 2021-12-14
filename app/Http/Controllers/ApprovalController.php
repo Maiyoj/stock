@@ -16,8 +16,13 @@ class ApprovalController extends Controller
 {
     public function __construct()
     {
-
-        $this->middleware('auth');
+    
+            $this->middleware('auth');
+            $this->middleware('permission:approval|approval-create|approval-edit|approval-delete', ['only' => ['index', 'show']]);
+            $this->middleware('permission:approval-create', ['only' => ['create', 'store']]);
+            $this->middleware('permission:approval-edit', ['only' => ['edit', 'update']]);
+             $this->middleware('permission:approval-delete', ['only' => ['destroy']]);
+        
     }
     /**
      * Display a listing of the resource.

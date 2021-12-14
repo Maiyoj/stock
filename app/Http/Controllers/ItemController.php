@@ -13,7 +13,7 @@ class ItemController extends Controller
 
         $this->middleware('auth');
 
-      $this->middleware('permission:item-list|item-create|item-edit|item-delete', ['only' => ['index', 'show']]);
+      $this->middleware('permission:item|item-create|item-edit|item-delete', ['only' => ['index', 'show']]);
         $this->middleware('permission:item-create', ['only' => ['create', 'store']]);
         $this->middleware('permission:item-edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:item-delete', ['only' => ['destroy']]);
@@ -139,6 +139,7 @@ class ItemController extends Controller
 
   
 
+
     public function deleteAll(Request $request)
     { 
         $id = $request->id;
@@ -148,4 +149,7 @@ class ItemController extends Controller
 		}
 		return redirect()->route('item.index')->with('success', 'Item deleted successfully');
     }
+
+
+
 }

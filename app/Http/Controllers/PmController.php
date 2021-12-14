@@ -10,6 +10,19 @@ use Illuminate\Support\Facades\Auth;
 
 class PmController extends Controller
 {
+  
+    public function __construct()
+    {
+
+        $this->middleware('auth');
+
+        $this->middleware('permission:pm|pm-create|pm-edit|pm-delete', ['only' => ['index', 'show']]);
+       
+    }
+
+
+
+
 public function index(){
 
 $requests=Requests::all();

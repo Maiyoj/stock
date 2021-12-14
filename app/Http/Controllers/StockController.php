@@ -17,8 +17,8 @@ class StockController extends Controller
 
 
         
-      $this->middleware('permission:teamleadstocks-list|teamleadstocks-create|teamleadstocks-edit|teamleadstock-delete', ['only' => ['index', 'show']]);
-      $this->middleware('permission:stocks-list|stocks-create|stocks-edit|stocks-delete', ['only' => ['index', 'show']]);
+      $this->middleware('permission:teamleadstock|teamleadstocks-create|teamleadstocks-edit|teamleadstock-delete', ['only' => ['index', 'show']]);
+      $this->middleware('permission:stocks|stocks-create|stocks-edit|stocks-delete', ['only' => ['index', 'show']]);
       #$this->middleware('permission:team-list|team-create|team-edit|team-delete', ['only' => ['index', 'show']]);
     }
     public function index()

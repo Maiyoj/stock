@@ -63,7 +63,7 @@
                                 </a>
                                 <div class="sb-sidenav-menu-heading">Inventory</div>
 
-                                @can('item-list')
+                                @can('item')
                                 <a class="nav-link collapsed" href="{{route('item.index')}}"  data-bs-target="#collapseLayouts1" aria-expanded="false" aria-controls="collapseLayouts">
                                     <div class="sb-nav-link-icon"><i class="fab fa-product-hunt"></i></div>
                                   Item
@@ -77,7 +77,7 @@
                                 </div>
                                 </a>
                                 @endcan 
-                                @can('vendor-list')
+                                @can('vendor')
                                 <a class="nav-link collapsed" href="{{route('vendor.index')}}"  data-bs-target="#collapseLayouts1" aria-expanded="false" aria-controls="collapseLayouts">
                                     <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                   Vendors
@@ -91,7 +91,7 @@
                                 </div>
                                  </a> 
                                 @endcan
-                                @can('price-list')
+                                @can('price')
                                 <a class="nav-link collapsed" href="{{route('price.index')}}"  data-bs-target="#collapseLayouts12" aria-expanded="false" aria-controls="collapseLayouts">
                                     <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                   Prices
@@ -105,7 +105,7 @@
                                 </div>
                                 </a>
                                 @endcan
-                                @can('purchase-list')
+                                @can('purchase')
                                 <a class="nav-link collapsed" href="{{route('purchase.index')}}"  data-bs-target="#collapseLayouts2" aria-expanded="false" aria-controls="collapseLayouts">
                                     <div class="sb-nav-link-icon"><i class="fas fa-shopping-cart"></i></div>
                                   Purchases
@@ -119,7 +119,7 @@
                                 </div>
                               </a>
                               @endcan
-                              @can('stocks-list')
+                              @can('stocks')
                               <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts3" aria-expanded="false" aria-controls="collapseLayouts">
                                     <div class="sb-nav-link-icon"><i class="fa fa-archive"></i></div>
                                   Stocks
@@ -134,7 +134,7 @@
                                 </div>
                                 @endcan
      
-                                @can('zone-list')
+                                @can('zone')
                                 <a class="nav-link collapsed" href="{{route('zone.index')}}"  data-bs-target="#collapseLayouts13" aria-expanded="false" aria-controls="collapseLayouts">
                                     <div class="sb-nav-link-icon"><i class="fa fa-truck"></i></div>
                                   Zones
@@ -149,10 +149,10 @@
                                 </div>
                                 @endcan
                                 
-                                 @can('approve-list')
+                                 @can('approve')
                                 <a class="nav-link collapsed" href="{{route('approve.index')}}" data-bs-target="#collapseLayouts48" aria-expanded="false" aria-controls="collapseLayouts">
                                     <div class="sb-nav-link-icon"><i class="fa fa-file"></i></div>
-                                    Requests
+                                Approve
                                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                 </a>
                                 <div class="collapse" id="collapseLayouts48" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
@@ -167,7 +167,7 @@
                                 
                                 <div class="sb-sidenav-menu-heading">Action</div>
 
-                                 @can('ereturns-list')
+                                 @can('returns')
                                  <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts8" aria-expanded="false" aria-controls="collapseLayouts">
                                     <div class="sb-nav-link-icon"><i class="fa fa-window-restore"></i></div>
                                   Teamlead Returns
@@ -182,7 +182,7 @@
                                 @endcan
 
 
-                                @can('pm-list')
+                                @can('pm')
                                  <a class="nav-link collapsed" href="{{route('pm.index')}}"  data-bs-target="#collapseLayouts8" aria-expanded="false" aria-controls="collapseLayouts">
                                     <div class="sb-nav-link-icon"><i class="fa fa-window-restore"></i></div>
                                   Pm Approval
@@ -221,7 +221,7 @@
                                 
                                 </nav>
                                 </div> -->
-                                @can('user-list')
+                                @can('user')
                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts6" aria-expanded="false" aria-controls="collapseLayouts">
                                     <div class="sb-nav-link-icon"><i class="fa fa-users"></i></div>
                                   User Setting
@@ -229,11 +229,17 @@
                                 </a>
                                 <div class="collapse" id="collapseLayouts6" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                     <nav class="sb-sidenav-menu-nested nav">
+                                    @can('user')
                                         <a class="nav-link" href="{{route('user.index')}}">Users</a> 
+                                        @endcan
                                          <!-- <a class="nav-link" href="{{route('user.create')}}">Add User</a> -->
+                                         @can('permission')
                                         <a class="nav-link" href="{{route('permissions.index')}}">Permissions</a>
+                                        @endcan
                                         <!-- <a class="nav-link" href="{{route('permissions.create')}}">Add permissions</a> -->
+                                        @can('role')
                                         <a class="nav-link" href="{{route('roles.index')}}">Roles</a>
+                                        @endcan
                                         <!-- <a class="nav-link" href="{{route('roles.create')}}">Add Roles</a> -->
                                 </nav>
                                 </div>
@@ -241,7 +247,7 @@
                                 
                                  
                                 <div class="sb-sidenav-menu-heading">Teamlead Menu</div> 
-                                @can('teamleadstocks-list')
+                                @can('teamleadstock')
                                 <a class="nav-link collapsed" href="{{route('teamleadstocks.index')}}"  data-bs-target="#collapseLayouts3" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fa fa-archive"></i></div>
                                Teamlead Stocks
@@ -255,7 +261,7 @@
                             </div>
                             @endcan
 
-                            @can('request-list')
+                            @can('request')
                             <a class="nav-link collapsed" href="{{route('request.index')}}"  data-bs-target="#collapseLayouts47" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fa fa-file"></i></div>
                                 Request
@@ -270,8 +276,7 @@
                             </nav>
                             </div>
                             @endcan
-
-                            @can('returns-list')
+                        @can('returns-list')
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts8" aria-expanded="false" aria-controls="collapseLayouts">
                          <div class="sb-nav-link-icon"><i class="fa fa-file"></i></div>
                                         Teamlead Returns
@@ -284,25 +289,21 @@
                          </nav>
                         </div>
                          @endcan
-
-
-
-
-                            @can('ereturns-list')
-                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts8" aria-expanded="false" aria-controls="collapseLayouts">
+                            @can('ereturns')
+                                <a class="nav-link collapsed" href="{{route('returned.index')}}"  data-bs-target="#collapseLayouts8" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fa fa-file"></i></div>
                                            Engineer-returns
                                              <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                          </a>
                                          <div class="collapse" id="collapseLayouts8" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                              <nav class="sb-sidenav-menu-nested nav">
-                                                 <a class="nav-link" href="{{route('returned.index')}}">View Returns</a>
-                                                 <a class="nav-link" href="{{route('returned.create')}}">Add Returns</a>
+                                                 {{-- <a class="nav-link" href="">View Returns</a>
+                                                 <a class="nav-link" href="{{route('returned.create')}}">Add Returns</a> --}}
                                          </nav>
                                      </div>   
                                      @endcan
-                                     @can('approval-list')
-                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts89" aria-expanded="false" aria-controls="collapseLayouts">
+                                @can('approval')
+                                <a class="nav-link collapsed"  href="{{route('approval.index')}}" data-bs-target="#collapseLayouts89" aria-expanded="false" aria-controls="collapseLayouts">
                                         <div class="sb-nav-link-icon"><i class="fa fa-file"></i></div>
                                                    Approve Request
                                                      <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
@@ -310,15 +311,15 @@
                                              <div class="collapse" id="collapseLayouts89" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                                      <nav class="sb-sidenav-menu-nested nav">
                                                          
-                                                         <a class="nav-link" href="{{route('approval.index')}}">View request</a>
-                                                         <a class="nav-link" href="{{route('approval.index')}}">Approve Requests</a>
+                                                         {{-- <a class="nav-link">View request</a>
+                                                         <a class="nav-link" href="{{route('approval.index')}}">Approve Requests</a> --}}
 
                                                  </nav>
                                                </div>
                                                @endcan
 
                           <div class="sb-sidenav-menu-heading">Engineer Menu</div> 
-                         @can('requestengineer-list')
+                         @can('requestengineer')
                       <a class="nav-link collapsed" href="{{route('requestengineer.index')}}"  data-bs-target="#collapseLayouts41" aria-expanded="false" aria-controls="collapseLayouts">
                             <div class="sb-nav-link-icon"><i class="fa fa-file"></i></div>
                           Request
@@ -332,16 +333,16 @@
                         </div> 
                         @endcan
 
-                        @can('ereturns-list')
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts8" aria-expanded="false" aria-controls="collapseLayouts">
+                        @can('ereturns')
+                        <a class="nav-link collapsed" href="{{route('returned.index')}}" data-bs-target="#collapseLayouts8" aria-expanded="false" aria-controls="collapseLayouts">
                          <div class="sb-nav-link-icon"><i class="fa fa-file"></i></div>
                                        Returns
                           <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                      </a>
                          <div class="collapse" id="collapseLayouts8" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                          <nav class="sb-sidenav-menu-nested nav">
-                                             <a class="nav-link" href="{{route('returns.index')}}">View Returns</a>
-                                             <a class="nav-link" href="{{route('returns.create')}}">Add Returns</a>
+                                             {{-- <a class="nav-link" href="">View Returns</a>
+                                             <a class="nav-link" href="{{route('returns.create')}}">Add Returns</a> --}}
                          </nav>
                         </div>
                          @endcan
@@ -380,6 +381,7 @@
         <script src="assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="js/datatables-simple-demo.js"></script>
+        <script src="{{asset('js/delete.js')}}"></script>
     
     </body>
 </html>

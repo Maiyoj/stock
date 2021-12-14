@@ -1,6 +1,6 @@
 
 
-@extends('front.index')
+@extends('layouts.main')
 
 @section('title')
 <title>Issuances Approval</title>
@@ -138,10 +138,11 @@
                                             @if ($request->status=='pending')
                                                 <td><a href="{{route('request.approve', $request->id)}}"><i class="fa fa-check text-primary" class="btn btn-primary"> </i></td>
                                                 {{-- <td><a href="#"><i class="fa fa-times text-danger"  data-bs-toggle="modal" data-bs-target="#exampleModal"> </i></td>   --}}
-                                                      <td><a href="#"><i class="btn-btn-primary text-danger"  type="submit"  data-bs-toggle="modal" data-bs-target="#exampleModal">Submit Comment</i></td>  
+                                                      <td><a href="#"><i class="btn-btn-primary text-danger"  type="submit"  data-bs-toggle="modal" data-bs-target="#exampleModal">Reject</i></td>  
                                             @endif
                                             </tr>                                                           
                                         @empty
+                                       
                                         @endforelse
                                   
                                         

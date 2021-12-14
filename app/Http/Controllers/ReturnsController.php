@@ -24,16 +24,13 @@ class ReturnsController extends Controller
         $this->middleware('auth');
 
 
-        $this->middleware('permission:returns-list|returns-create|returns-edit|returns-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:returns|returns-create|returns-edit|returns-delete', ['only' => ['index', 'show']]);
         $this->middleware('permission:returns-create', ['only' => ['create', 'store']]);
         $this->middleware('permission:returns-edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:returns-delete', ['only' => ['destroy']]);
 
 
-        $this->middleware('permission:ret-list|ret-create|ret-edit|ret-delete', ['only' => ['index', 'show']]);
-        $this->middleware('permission:ret-create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:ret-edit', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:ret-delete', ['only' => ['destroy']]);
+      
 
     }
     /**

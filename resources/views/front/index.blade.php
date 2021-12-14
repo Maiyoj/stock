@@ -57,7 +57,7 @@
                                     Dashboard
                                 </a>
                             
-                                @can('teamleadstocks-list')
+                                @can('teamleadstock')
                                 <a class="nav-link collapsed" href="{{route('teamleadstocks.index')}}"  data-bs-target="#collapseLayouts3" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fa fa-archive"></i></div>
                                Teamlead Stocks
@@ -71,7 +71,7 @@
                             </div>
                             @endcan
 
-                            @can('request-list')
+                            @can('request')
                             <a class="nav-link collapsed" href=""  data-bs-toggle="collapse" data data-bs-target="#collapseLayouts47" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fa fa-file"></i></div>
                                 Request
@@ -79,15 +79,13 @@
                             </a>
                             <div class="collapse" id="collapseLayouts47" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                    
                                      <a class="nav-link" href="{{route('request.drafts')}}">Drafts</a>
-                                     <a class="nav-link" href="{{route('request.index')}}">Request</a> 
-                                
+                                     <a class="nav-link" href="{{route('request.index')}}">Request</a>
                             </nav>
                             </div>
                             @endcan
 
-                            @can('returns-list')
+                            @can('returns')
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts8" aria-expanded="false" aria-controls="collapseLayouts">
                          <div class="sb-nav-link-icon"><i class="fa fa-file"></i></div>
                                         Teamlead Returns
@@ -101,24 +99,21 @@
                         </div>
                          @endcan
 
-
-
-
-                            @can('ereturns-list')
-                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts8" aria-expanded="false" aria-controls="collapseLayouts">
+                            @can('ereturns')
+                                <a class="nav-link collapsed" href="{{route('returned.index')}}" data-bs-target="#collapseLayouts8" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fa fa-file"></i></div>
                                            Engineer-returns
                                              <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                          </a>
                                          <div class="collapse" id="collapseLayouts8" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                              <nav class="sb-sidenav-menu-nested nav">
-                                                 <a class="nav-link" href="{{route('returned.index')}}">View Returns</a>
-                                                 <a class="nav-link" href="{{route('returned.create')}}">Add Returns</a>
+                                                 {{-- <a class="nav-link" href="">View Returns</a>
+                                                 <a class="nav-link" href="{{route('returned.create')}}">Add Returns</a> --}}
                                          </nav>
                                      </div>   
                                      @endcan
-                                     @can('approval-list')
-                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts89" aria-expanded="false" aria-controls="collapseLayouts">
+                                     @can('approval')
+                                <a class="nav-link collapsed" href="{{route('approval.index')}}" data-bs-target="#collapseLayouts89" aria-expanded="false" aria-controls="collapseLayouts">
                                         <div class="sb-nav-link-icon"><i class="fa fa-file"></i></div>
                                                    Approve Request
                                                      <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
@@ -126,15 +121,15 @@
                                              <div class="collapse" id="collapseLayouts89" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                                      <nav class="sb-sidenav-menu-nested nav">
                                                          
-                                                         <a class="nav-link" href="{{route('approval.index')}}">View request</a>
-                                                         <a class="nav-link" href="{{route('approval.index')}}">Approve Requests</a>
+                                                         {{-- <a class="nav-link" href="">View request</a>
+                                                         <a class="nav-link" href="{{route('approval.index')}}">Approve Requests</a> --}}
 
                                                  </nav>
                                                </div>
                                                @endcan
 
                          <div class="sb-sidenav-menu-heading">Engineer Menu</div>
-                         @can('requestengineer-list')
+                         @can('requestengineer')
                       <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"  data-bs-target="#collapseLayouts41" aria-expanded="false" aria-controls="collapseLayouts">
                             <div class="sb-nav-link-icon"><i class="fa fa-file"></i></div>
                           Request
@@ -148,22 +143,20 @@
                         </div> 
                         @endcan
 
-                        @can('ereturns-list')
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts8" aria-expanded="false" aria-controls="collapseLayouts">
+                        @can('ereturns')
+                        <a class="nav-link collapsed" href="{{route('returned.index')}}"  data-bs-target="#collapseLayouts8" aria-expanded="false" aria-controls="collapseLayouts">
                          <div class="sb-nav-link-icon"><i class="fa fa-file"></i></div>
                                        Returns
                           <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                      </a>
                          <div class="collapse" id="collapseLayouts8" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                          <nav class="sb-sidenav-menu-nested nav">
-                                             <a class="nav-link" href="{{route('returns.index')}}">View Returns</a>
-                                             <a class="nav-link" href="{{route('returns.create')}}">Add Returns</a>
+                                             {{-- <a class="nav-link" href="">View Returns</a>
+                                             <a class="nav-link" href="{{route('returns.create')}}">Add Returns</a> --}}
                          </nav>
                         </div>
                          @endcan
-
-
-                         @can('pm-list')
+                         @can('pm')
                                  <a class="nav-link collapsed" href="{{route('pm.index')}}"  data-bs-target="#collapseLayouts8" aria-expanded="false" aria-controls="collapseLayouts">
                                     <div class="sb-nav-link-icon"><i class="fa fa-window-restore"></i></div>
                                   Pm Approval

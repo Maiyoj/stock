@@ -31,10 +31,11 @@
                         </form>
                         </div>
                        </div>
+                       @can('role-create')
                     <div class="d-flex flex-row-reverse bd-highlight">
                   <div class="p-2 bd-highlight"><a class="btn btn-primary" href="{{ route('roles.create') }}">Add Role</a></div>
                   </div>
-
+                  @endcan
 
                         <div class="card mb-4">
                             <div class="card-header">
@@ -75,8 +76,13 @@
                                             <td>{{$role->name}}</td>
                                            
                                              <td>{{$role->created_at}}</td>
+                                             @can('role-show')
                                              <td><a href="{{route('roles.show', $role->id)}}"><i class="fa fa-eye text-primary"> </i></td>
+                                                @endcan
+                                                @can('role-edit')
                                             <td><a href="{{route('roles.edit', $role->id)}}"><i class="fa fa-edit text-primary"> </i></td>
+                                                @endcan
+                                                @can('role-delete')
                                             <td>
                                                 <form action="{{url('roles/'.$role->id)}}" method="post">
                                                     @csrf
@@ -84,6 +90,8 @@
                                                     <button type="submit" onclick="return confirm('Confirm Delete?')"  style="border: none;background:color:transparent;">  
                                                         <i class="fa fa-trash text-danger"></i></button> 
                                                 </form>
+                                            </td>
+                                            @endcan
                                             </tr>     
                                             
                                             

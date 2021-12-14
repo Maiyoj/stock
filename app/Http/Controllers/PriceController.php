@@ -17,7 +17,7 @@ class PriceController extends Controller
 
         $this->middleware('auth');
 
-        $this->middleware('permission:price-list|price-create|price-edit|price-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:price|price-create|price-edit|price-delete', ['only' => ['index', 'show']]);
         $this->middleware('permission:price-create', ['only' => ['create', 'store']]);
         $this->middleware('permission:price-edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:price-delete', ['only' => ['destroy']]);

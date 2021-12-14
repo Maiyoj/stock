@@ -23,7 +23,7 @@ class RequestEngineercontroller extends Controller
     {
         $this->middleware('auth');
 
-    $this->middleware('permission:requestengineer-list|requestengineer-create|requestengineer-edit|requestengineer-delete', ['only' => ['index', 'show']]);
+    $this->middleware('permission:requestengineer|requestengineer-create|requestengineer-edit|requestengineer-delete', ['only' => ['index', 'show']]);
     $this->middleware('permission:requestengineer-create', ['only' => ['create', 'store']]);
     $this->middleware('permission:requestengineer-edit', ['only' => ['edit', 'update']]);
     $this->middleware('permission:requestengineer-delete', ['only' => ['destroy']]);

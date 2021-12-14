@@ -26,6 +26,7 @@
                                 <input type="file" name="file" class="custom-file-input" id="customFile" >
                                 <button class="btn btn-primary">Import data</button>
                                 <a class="btn btn-success" href="{{ route('csv.file-export') }}">Export data</a>
+                                <a href="#" class="btn btn-danger"  id="deleteAllSelectedRecord" >Delete Selected</a>
                         </div>
                        </div>
                             
@@ -59,6 +60,8 @@
                                 <table id="datatablesSimple">
                                      <thead>
                                         <tr>
+                                            <tr></tr>
+                                            <th><input type="checkbox" id="chkCheckAll"></th>
                                              <th>ID</th>
                                              <th>Type</th>
                                             <th>name</th>
@@ -72,6 +75,8 @@
                                     </thead>
                                     <tfoot>
                                         <tr>
+                                            <tr></tr>
+                                            <th><input type="checkbox" id="chkCheckAll"></th>
                                             <th>ID</th>
                                             <th>Type</th>
                                            <th>name</th>
@@ -86,6 +91,8 @@
                                     <tbody>
                                         @forelse($items as $item)
                                         <tr>
+                                            <tr id="sid{{$item->id}}"></tr>
+                                            <td><input type="checkbox" name="ids" class="checkBoxClass" value="{{$item->id}}"></td>
                                            <td> {{$item->id}}</td>
                                             <td>{{$item->type}}</td>
                                             <td>{{$item->name}}</td>
@@ -122,7 +129,43 @@
                             </div>
                         </div>
                     </div>
-                </main>
+                    <script>
+                $(function(e)
+                 {
+            $("#chkCheckAll").click(function(){
+             $(".checkBoxClass").prop('checked', $(this).prop('checked'))
+            });
+   $("#deleteAllSelectedRecord").click(function(e){
+   
+    e.preventDefault();
+    var allids = [];  
+      $("input:checkbox[name=ids]:checked").each(function(){
+       allids.push($(this).val());
+      });
+      $.ajax({
+   
+       url:"{{route('item.delete')}}",
+       type:"DELETE",
+       data:{
+           _token:$("input[name=_token]").val(),
+        ids:allids
+       },
+       success:function(response){
+           $.each(allids, function(key,val){
+            $("#sids"+val).remove();  
+            location.reload()
+            
+           })
+       }
+      });
+   
+   })
+   
+   
+       });
+
+</script>
+</main>
 @endsection  
 
 

@@ -21,7 +21,7 @@ class ReturnedController extends Controller
 
         $this->middleware('auth');
        
-        $this->middleware('permission:ereturns-list|ereturns-create|ereturns-edit|ereturns-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:ereturns|ereturns-create|ereturns-edit|ereturns-delete', ['only' => ['index', 'show']]);
         $this->middleware('permission:ereturns-create', ['only' => ['create', 'store']]);
         $this->middleware('permission:ereturns-edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:ereturns-delete', ['only' => ['destroy']]);
