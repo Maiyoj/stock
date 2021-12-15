@@ -85,7 +85,7 @@ Route::get('/admin', [App\Http\Controllers\HomeController::class, 'index'])->nam
 Route::get('/home', [App\Http\Controllers\FrontController::class, 'index'])->name('home.index');
 
 
-//directs to user layout
+//directs to user layoutt
 Route::get('/home', [App\Http\Controllers\FrontController::class, 'index'])->name('home.index');
 Route::get('/pm', [App\Http\Controllers\PmController::class, 'index'])->name('pm.index');
 //pm approval
