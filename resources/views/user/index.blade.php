@@ -31,7 +31,9 @@
                         </div>
 
                   <div class="d-flex flex-row-reverse bd-highlight">
+                      @can('user-create')
                   <div class="p-2 bd-highlight"><a class="btn btn-primary" href="{{ route('user.create') }}">Add User</a></div>
+                  @endcan
                   </div>
 
                         <div class="card mb-4">
@@ -81,7 +83,10 @@
                                         @endforeach
                                     @endif
                                 </td>
+                                         @can('user-edit')
                                             <td><a href="{{route('user.edit', $user->id)}}"><i class="fa fa-edit text-primary"> </i></td>
+                                                @endcan
+                                                @can('user-delete')
                                             <td>
                                                 <form action="{{url('user/'.$user->id)}}" method="post">
                                                     @csrf
@@ -90,6 +95,8 @@
                                                         <i class="fa fa-trash text-danger"></i></button> 
                                                         
                                                 </form>
+                                            </td>
+                                            @endcan
                                   
                                             </tr>                                                           
                                         @empty

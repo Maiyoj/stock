@@ -101,6 +101,26 @@
                                             </tbody>
                                         </table>
                                     </div>
+
+                                    <div class="col-md-4">
+                                        <h4>Comments</h4>
+                                    <table id="datatablesSimple">
+                                        <thead>
+                                            <tr>
+                                            <th>Comments</th>
+                                            </tr>
+                                        </thead>
+                                       
+                                    @forelse($comments as $comment)
+                                </tr>  
+                                <td>{{$comment->comment}}</td>
+                                
+                            </tr>
+                                @empty
+                                @endforelse
+                            </tbody>
+                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>

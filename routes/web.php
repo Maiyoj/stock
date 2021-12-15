@@ -207,3 +207,7 @@ Route::group(['middleware' => ['auth', 'appstrict']], function () {
     Route::get('item-complete',[HomeController::class,'complete'])->name('items.complete');
 
 });
+
+//delete of more than one items
+
+Route::delete('/selected-items', [ItemController::class, 'deleteAll'])->name('item.delete');

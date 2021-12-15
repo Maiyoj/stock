@@ -23,7 +23,7 @@
                         </form>
                         @can('ereturns-create')
                <div class="d-flex flex-row-reverse bd-highlight">
-               <div class="p-2 bd-highlight"><a class="btn btn-primary" href="{{ route('request.create') }}">Add Item</a></div>
+               <div class="p-2 bd-highlight"><a class="btn btn-primary" href="{{ route('returned.create') }}">Add Item</a></div>
                </div>
               @endcan
 
@@ -76,6 +76,7 @@
                                             <td>{{$returned->item->name}}</td>
                                             <td>{{$returned->quantity}}</td>
                                              <td>{{$returned->created_at}}</td>
+                                            
                                             <!--<td><a href="{{route('returned.edit', $returned->id)}}"><i class="fa fa-edit text-primary"> </i></td>-->
                                             <td>
                                                 @can('ereturns-delete')

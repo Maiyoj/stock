@@ -82,8 +82,9 @@
                                             <td>{{$purchase->PO_number}}</td>
                                             <td>{{$purchase->price}}</td>
                                              <td>{{$purchase->created_at}}</td>
-                                             
+                                             @can('purchase-show')  
                                             <td><a href="{{route('purchase.show', $purchase->id)}}"><i class="fa fa-eye text-primary"> </i></td>
+                                            @endcan
                                             <td>
                                             {{-- <form id= "delete" action="{{route('purchase.destroy', $purchase->id)}}" method="post">
                                                  @csrf

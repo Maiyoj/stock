@@ -72,15 +72,16 @@
                                             <td>{{$requestengineer->purpose}}</td>
                                             <td class="{{$requestengineer->status=='pending' ? 'text-danger' :'text-success'}}">{{$requestengineer->status}}</td>
                                             <td>{{$requestengineer->created_at}}</td>
+                                            @can('approval-show')
                                             <td><a href="{{route('requestengineer.show', $requestengineer->id)}}"><i class="fa fa-eye text-primary"> </i></td>
-                                              
+                                                @endcan
                                                 @if ($requestengineer->status=='pending')
                                                 {{-- <td><a href="{{route('requestengineer.approvee', $requestengineer->id)}}"><i class="fa fa-check text-primary"> </i></td> --}}
                                                     <td><a href="{{route('requestengineer.approvee', $requestengineer->id)}}"><i class="btn-btn-primary text-danger"  type="submit">Approve</i></td>  
                                                     <td><a href="#"><i class="btn-btn-primary text-danger"  type="submit"  data-bs-toggle="modal" data-bs-target="#exampleModal">Reject</i></td>  
                                                 {{-- <td><a href="{{route('requestengineer.rejected', $requestengineer->id)}}"><i class="fa fa-times text-danger"> </i></td> --}}
                                              @endif
-                                            
+
                                             </tr>                                                           
                                         @empty
                                         @endforelse

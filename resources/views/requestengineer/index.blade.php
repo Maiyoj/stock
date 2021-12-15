@@ -95,7 +95,10 @@
                                             <td class="{{$requestengineer->status=='pending' ? 'text-danger' :'text-success'}}">{{$requestengineer->status}}</td>
                                             <td class="{{$requestengineer->rstatus=='Not Received' ? 'text-danger' :'text-success'}}">{{$requestengineer->rstatus}}</td>
                                              <td>{{$requestengineer->created_at}}</td>
+                                             @can('requestengineer-show')
                                             <td><a href="{{route('requestengineer.show', $requestengineer->id)}}"><i class="fa fa-eye text-primary"> </i></td>
+                                            @endcan
+                                            @can('requestengineer-delete')
                                             <td>
                                                 <form action="{{url('requestengineer/'.$requestengineer->id)}}" method="post">
                                                     @csrf
@@ -104,6 +107,7 @@
                                                         <i class="fa fa-trash text-danger"></i></button> 
                                                 </form>
                                               </td>
+                                              @endcan
                                           @if ($requestengineer->rstatus=='Not Received')
                                           {{-- <td><a href="{{route('requestengineer.approval', $requestengineer->id)}}"><i class="fa fa-check text-danger"></i></td> --}}
                                           <td><a href="{{route('requestengineer.approval', $requestengineer->id)}}"><i class="btn-btn-primary text-danger"  type="submit"  data-bs-toggle="modal" data-bs-target="#exampleModal">Receive</i></td>  

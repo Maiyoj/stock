@@ -13,11 +13,6 @@
                             <li class="breadcrumb-item active"> Prices</li>
                         </ol>
 
-                    
-
-
-
-
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fab fa-product-hunt"></i>
@@ -91,24 +86,17 @@
                                             @endcan
                                             <td>
                                                 @can('price-delete')
-                                                    
-                                               
                                                 <form action="{{url('price/'.$price->id)}}" method="post">
                                                 @endcan
                                                     @csrf
                                                     @method('DELETE')  
                                                     <button type="submit" onclick="return confirm('Confirm Delete?')"  style="border: none;background:color:transparent;">  
-                                                        <i class="fa fa-trash text-danger"></i></button> 
+                                                    <i class="fa fa-trash text-danger"></i></button> 
                                                 </form>
-                                     </td>
+                                             </td>
                                             </tr>                                                           
                                         @empty
-                                        
-
                                         @endforelse
-                                  
-                                        
-                                       
                                     </tbody>
                                 </table>
                             </div>
