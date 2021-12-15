@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Requests;
 use App\Models\RequestEngineer;
 use App\Models\User;
+use App\Models\Comments;
 use Illuminate\Support\Facades\Auth;
 
 class PmController extends Controller
@@ -42,11 +43,19 @@ return view('pm.index', compact('requests'));
     }
 
 
-    public function reject(){
+    public function reject(Request $request, $id){
 
-        $requests=Requests::all();
-        $requests->pmstatus='rejected';
-        $requests->save();
+
+        $comment= new Comments;
+        $comment->comments=$request->comments;
+        $comment->save();
+        
+         $request=Requests::findOrFail($id);
+         $request->pmstatus='rejected';
+         $request->save();
+     
+        
+        
         return redirect()->back()->with('success','Request Rejected successfully');
     }
 

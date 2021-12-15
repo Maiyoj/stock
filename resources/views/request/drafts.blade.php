@@ -106,7 +106,7 @@
                                                 @endcan
                                            </td>
                                            @if ($request->draft=='0')
-                                           <td><a href="{{route('pm.drafts', $request->id)}}"><i class="fa fa-check text-danger"></i></td>
+                                           <td><a href="{{route('pm.drafts', $request->id)}}"><i class="btn-btn-primary text-primary">Publish</i></td>
                                           @endif
                                             </tr>                                                           
                                         @empty

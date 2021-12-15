@@ -105,7 +105,7 @@
                                                 </form>
                                               </td>
                                           @if ($requestengineer->draft=='0')
-                                          <td><a href="{{route('pm.draft', $requestengineer->id)}}"><i class="fa fa-check text-danger"></i></td>
+                                          <td><a href="{{route('pm.draft', $requestengineer->id)}}"><i class="btn-btn-primary text-primary">Publish</i></td>
                                          @endif
                                         </tr>                                                           
                                         @empty
