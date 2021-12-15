@@ -9,7 +9,7 @@ use App\Models\User;
 use App\Models\Item;
 use App\Models\Approve;
 use App\Models\Requests;
-class Approvecontroller extends Controller
+class ApproveController extends Controller
 {
 
 
