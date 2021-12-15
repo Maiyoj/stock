@@ -341,8 +341,8 @@
                                      </a>
                          <div class="collapse" id="collapseLayouts8" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                          <nav class="sb-sidenav-menu-nested nav">
-                                             {{-- <a class="nav-link" href="">View Returns</a>
-                                             <a class="nav-link" href="{{route('returns.create')}}">Add Returns</a> --}}
+                                              <a class="nav-link" href="">View Returns</a>
+                                             <a class="nav-link" href="{{route('returns.create')}}">Add Returns</a> 
                          </nav>
                         </div>
                          @endcan --}}
