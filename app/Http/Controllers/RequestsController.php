@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Notification;
 use App\Notifications\Approval;
 use Illuminate\Support\Facades\Auth;
 
-class Requestscontroller extends Controller
+class RequestsController extends Controller
 {
 
     public function __construct()

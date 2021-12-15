@@ -167,7 +167,7 @@
                                 
                                 <div class="sb-sidenav-menu-heading">Action</div>
 
-                                 @can('returns')
+                                 {{-- @can('returns')
                                  <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts8" aria-expanded="false" aria-controls="collapseLayouts">
                                     <div class="sb-nav-link-icon"><i class="fa fa-window-restore"></i></div>
                                   Teamlead Returns
@@ -179,7 +179,7 @@
                                     </nav>
                                 </div>
 
-                                @endcan
+                                @endcan --}}
 
 
                                 @can('pm')
@@ -276,7 +276,7 @@
                             </nav>
                             </div>
                             @endcan
-                        @can('returns-list')
+                        {{-- @can('returns-list')
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts8" aria-expanded="false" aria-controls="collapseLayouts">
                          <div class="sb-nav-link-icon"><i class="fa fa-file"></i></div>
                                         Teamlead Returns
@@ -288,7 +288,7 @@
                                              <a class="nav-link" href="{{route('returns.create')}}">Add Returns</a>
                          </nav>
                         </div>
-                         @endcan
+                         @endcan --}}
                             @can('ereturns')
                                 <a class="nav-link collapsed" href="{{route('returned.index')}}"  data-bs-target="#collapseLayouts8" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fa fa-file"></i></div>
@@ -333,7 +333,7 @@
                         </div> 
                         @endcan
 
-                        @can('ereturns')
+                        {{-- @can('ereturns')
                         <a class="nav-link collapsed" href="{{route('returned.index')}}" data-bs-target="#collapseLayouts8" aria-expanded="false" aria-controls="collapseLayouts">
                          <div class="sb-nav-link-icon"><i class="fa fa-file"></i></div>
                                        Returns
@@ -345,7 +345,7 @@
                                              <a class="nav-link" href="{{route('returns.create')}}">Add Returns</a> --}}
                          </nav>
                         </div>
-                         @endcan
+                         @endcan --}}
 
 
                      </div>
