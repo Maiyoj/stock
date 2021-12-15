@@ -129,12 +129,13 @@
 
                                             <td><a href="{{route('request.show', $request->id)}}"><i class="fa fa-eye text-primary"></i></td>
                                     
-                                            @if ($request->status=='pending')
+                                            @if ($request->pmstatus=='waiting')
                                                 <td><a href="{{route('pm.approve', $request->id)}}"><i class="fa fa-check text-primary"> </i></td>
-                                                <td><a href="{{route('pm.reject', $request->id)}}"><i class="fa fa-times text-danger"> </i></td>
+                                                {{-- <td><a href="{{route('pm.reject', $request->id)}}"><i class="fa fa-times text-danger"> </i></td> --}}
+                                                <td><a href="#"><i class="btn-btn-primary text-danger"  type="submit"  data-bs-toggle="modal" data-bs-target="#exampleModal">Reject</i></td>
                                             @endif
                                             </tr>                                                           
-                                        @empty
+                                           @empty
                                         
 
                                         @endforelse
@@ -146,5 +147,47 @@
                             </div>
                         </div>
                     </div>
+
+
+
+
+                    {{-- Comments form --}}
+                    
+ <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"> Enter Comments</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+            <form action="{{route('pm.reject',  $request->id)}}" method="HEAD">  
+                @csrf
+             
+                <div class="row mb-3">
+                <div class="col-md-8">
+
+                @if ($errors->any())
+                @foreach($errors->all() as $error)
+                <div class="alert alert-danger">
+                    {{$error}}
+            </div>
+
+                @endforeach
+
+                @endif
+                <div class="form-floating mb-3 mb-md-0">
+            <textarea rows = "5" cols = "50" name = "comments"></textarea>
+                </div>
+                </div>
+           <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Save changes</button> 
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
                 </main>
 @endsection  
