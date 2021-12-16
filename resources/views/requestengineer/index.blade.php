@@ -78,7 +78,7 @@
                                                 <th>No. of Items</th>
                                                 <th>Purpose</th>
                                                 <th>Status</th>
-                                                <th> Received Status</th>
+                                                <th>Received Status</th>
                                                 <th>Date Added</th>
                                             </tr>
                                             <th colspan="2">Action</th>
@@ -110,8 +110,8 @@
                                               @endcan
                                           @if ($requestengineer->rstatus=='Not Received')
                                           {{-- <td><a href="{{route('requestengineer.approval', $requestengineer->id)}}"><i class="fa fa-check text-danger"></i></td> --}}
-                                          <td><a href="{{route('requestengineer.approval', $requestengineer->id)}}"><i class="btn-btn-primary text-danger"  type="submit"  data-bs-toggle="modal" data-bs-target="#exampleModal">Receive</i></td>  
-
+                                          <td><a href="{{route('requestengineer.approval', $requestengineer->id)}}"><i class="btn-btn-primary text-danger">Receive</i></td> 
+                                         
                                          @endif
                                         </tr>                                                           
                                         @empty
