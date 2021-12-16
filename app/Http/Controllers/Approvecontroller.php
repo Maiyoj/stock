@@ -3,15 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Issuance;
-use App\Models\Zone;
-use App\Models\User;
-use App\Models\Item;
-use App\Models\Approve;
-use App\Models\Requests;
+
 class ApproveController extends Controller
 {
-
 
 
     public function __construct()
@@ -39,9 +33,7 @@ class ApproveController extends Controller
      */
     public function create()
     {
-        $approves=Approve::all();
-
-        return view('approve.create', compact('approves')); 
+        
     }
 
     /**
@@ -63,7 +55,7 @@ class ApproveController extends Controller
      */
     public function show($id)
     {
-        
+        //
     }
 
     /**
@@ -74,7 +66,7 @@ class ApproveController extends Controller
      */
     public function edit($id)
     {
-        
+        //
     }
 
     /**
@@ -100,3 +92,5 @@ class ApproveController extends Controller
         //
     }
 }
+
+

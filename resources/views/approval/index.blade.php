@@ -101,7 +101,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-
+            {{-- <form class="form-group" action="requestengineer.rejected/{{$requestengineer->id}}" method="post" id="requestengineer.rejected/{{$requestengineer->id}}"> --}}
             <form action="{{route('requestengineer.rejected',  $requestengineer->id)}}" method="HEAD">  
                 @csrf
              
