@@ -93,7 +93,7 @@
                                             <td>{{$requestengineer->erequests_item->count()}}</td>
                                             <td>{{$requestengineer->purpose}}</td>
                                             <td class="{{$requestengineer->status=='pending' ? 'text-danger' :'text-success'}}">{{$requestengineer->status}}</td>
-                                            <td class="{{$requestengineer->rstatus=='Not Received' ? 'text-danger' :'text-success'}}">{{$requestengineer->rstatus}}</td>
+                                            <td class="{{$requestengineer->rstatus=='Not received' ? 'text-danger' :'text-success'}}">{{$requestengineer->rstatus}}</td>
                                              <td>{{$requestengineer->created_at}}</td>
                                              @can('requestengineer-show')
                                             <td><a href="{{route('requestengineer.show', $requestengineer->id)}}"><i class="fa fa-eye text-primary"> </i></td>
@@ -108,11 +108,11 @@
                                                 </form>
                                               </td>
                                               @endcan
-                                          @if ($requestengineer->rstatus=='Not Received')
+                                          @if ($requestengineer->rstatus=='Not received')
                                           {{-- <td><a href="{{route('requestengineer.approval', $requestengineer->id)}}"><i class="fa fa-check text-danger"></i></td> --}}
                                           <td><a href="{{route('requestengineer.approval', $requestengineer->id)}}"><i class="btn-btn-primary text-danger">Receive</i></td> 
-                                         
                                          @endif
+                                         
                                         </tr>                                                           
                                         @empty
                                         @endforelse

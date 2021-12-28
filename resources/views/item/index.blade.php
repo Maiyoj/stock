@@ -7,7 +7,10 @@
 @section('content') 
 <div id="layoutSidenav_content">
                 <main>
-                    
+                    <script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"></script>
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Items</h1>
                         <ol class="breadcrumb mb-4">
@@ -17,9 +20,9 @@
                         <div class="card-header">
                             <i class="fab fa-product-hunt"></i>
                             Files
-                        <form action="{{ route('csv.file-import') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('csv.file-import') }}" method="post" enctype="multipart/form-data">
                             @csrf
-
+                            @method('POST')
                             <div class="form-group mb-10" style="max-width: 400px; margin: 5 ;">
                                 
                                 <div class="custom-file text-right"   class="card mb-6">
@@ -35,9 +38,7 @@
                        </div>
 
                   <!-- Add Item -->
-                 
                   @can('item-create')
-
                   <div class="d-flex flex-row-reverse bd-highlight">
                   <div class="p-2 bd-highlight"><a class="btn btn-primary" href="{{ route('item.create') }}">Add Item</a></div>
                   </div>
@@ -46,7 +47,7 @@
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fab fa-product-hunt"></i>
-                                Items
+                                Items 
                             </div>
                             <div class="card-body">
 
@@ -90,8 +91,8 @@
                                     </tfoot>
                                     <tbody>
                                         @forelse($items as $item)
-                                        <tr>
-                                            <tr id="sid{{$item->id}}"></tr>
+                                         <tr id="sid{{$item->id}}"></tr>
+                                           
                                             <td><input type="checkbox" name="ids" class="checkBoxClass" value="{{$item->id}}"></td>
                                            <td> {{$item->id}}</td>
                                             <td>{{$item->type}}</td>
@@ -131,38 +132,33 @@
                     </div>
                     <script>
                 $(function(e)
-                 {
-            $("#chkCheckAll").click(function(){
-             $(".checkBoxClass").prop('checked', $(this).prop('checked'))
+            {
+            $("chkCheckAll").click(function()
+            {
+               $(".checkBoxClass").prop('checked', $(this).prop('checked'));
             });
-   $("#deleteAllSelectedRecord").click(function(e){
-   
-    e.preventDefault();
-    var allids = [];  
-      $("input:checkbox[name=ids]:checked").each(function(){
-       allids.push($(this).val());
-      });
-      $.ajax({
-   
-       url:"{{route('item.delete')}}",
-       type:"DELETE",
-       data:{
-           _token:$("input[name=_token]").val(),
-        ids:allids
-       },
-       success:function(response){
-           $.each(allids, function(key,val){
-            $("#sids"+val).remove();  
-            location.reload()
-            
-           })
-       }
-      });
-   
-   })
-   
-   
-       });
+            $("#deleteAllSelectedRecord").click(function(e){
+                e.preventDefault();
+                var allids = [];
+                $("input:checkbox[name=ids]:checked").each(function(){
+                    allids.push($(this).val());
+                });
+                $.ajax({
+                   url:"{{route('item.delete')}}",
+                   type:"DELETE"
+                   data{
+                       _token:$("input[name=_token]").val(),
+                       ids:allids
+                   },
+                   success:function(response){
+                       $.each(allids,function(key,val){
+                           $("#sid"+val).remove();
+                       })
+                   }
+                });
+             )}
+
+            });
 
 </script>
 </main>

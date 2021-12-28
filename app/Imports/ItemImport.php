@@ -16,12 +16,18 @@ class ItemImport implements ToModel
     public function model(array $row)
     {
         return new Item([
-            'type'     => $row[0],
-            'name'    => $row[1],
-            'description'    => $row[2],
-            'units'    => $row[3],
-            'sku'    => $row[4],
-            'dateadded'    => $row[5],
+            'id'     => $row[0],
+            'type'    => $row[1],
+            'name'    => $row[2],
+            'description' => $row[3],
+            'units'    => $row[4],
+            'sku'    => $row[5],
+            'updated_at'    => $row[6],
+            'created_at'    => $row[7],
+            
+          
+
+    
 
 
 

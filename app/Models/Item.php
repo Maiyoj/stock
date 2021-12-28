@@ -9,7 +9,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Item extends Model
 {
     #added the soft deletes
-    
+    protected $fillable = ['id','type', 'name','description','units', 'sku','updated_at','created_at'];
+
 
     use HasFactory, SoftDeletes ;
 

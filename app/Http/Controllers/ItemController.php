@@ -142,12 +142,10 @@ class ItemController extends Controller
 
     public function deleteAll(Request $request)
     { 
-        $id = $request->id;
-		foreach ($id as $item) 
-		{
-			Item::where('id', $item)->delete();
-		}
-		return redirect()->route('item.index')->with('success', 'Item deleted successfully');
+        $ids = $request->ids;
+		Item::whereIn('id', $ids)->delete();
+        return response()->json(['success'=>"students have been deleted!"]);
+		# redirect()->route('item.index')->with('success', 'Item deleted successfully');
     }
 
 

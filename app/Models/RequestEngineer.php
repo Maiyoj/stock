@@ -42,4 +42,9 @@ public function returns()
  {
      return $this->hasMany(RequestEngineersItem::class);
  }
+
+ public function engineercomment()
+ {
+     return $this->hasMany(EngineerComment::class);
+ }
 }

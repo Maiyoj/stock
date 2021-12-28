@@ -49,7 +49,7 @@ Route::get('/', function () {
 Route::resource('/permissions', PermissionController::class);
 Route::resource('/roles', RolesController::class);
 Route::resource('/vendor', VendorController::class);
-Route::resource('/item', VendorController::class);
+Route::resource('/item', ItemController::class);
 Route::resource('/purchase', PurchaseController::class);
 Route::resource('/user', UserController::class);
 Route::resource('/zone', ZoneController::class);

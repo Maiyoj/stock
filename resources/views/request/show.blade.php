@@ -97,6 +97,45 @@
                                             </tbody>
                                         </table>
                                     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                                    <div class="col-md-4">
+                                        <h4>Comment</h4>
+                                        <table class="table table-striped">
+                                            <thead>
+                                              <tr>
+                                                <th scope="col">#</th>
+                                                <th>Comment</th>
+                                               
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                
+                                                
+                                              
+                                              
+                                                @foreach($comment as  $cmt)
+                                               
+                                                        <tr>
+                                                            <th scope="row">{{$cmt->id}}</th>
+                                                            <td>{{$cmt->comments}}</td>
+                                                            
+                                                        </tr>
+                                  
+                                              @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
