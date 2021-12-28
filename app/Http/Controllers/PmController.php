@@ -45,9 +45,10 @@ return view('pm.index', compact('requests'));
 
     public function reject(Request $request, $id){
 
-
+        $requests=Requests::findOrFail($id);
         $comment= new Comments;
         $comment->comments=$request->comments;
+        $comment->requests_id=$requests->id;
         $comment->save();
         
          $request=Requests::findOrFail($id);

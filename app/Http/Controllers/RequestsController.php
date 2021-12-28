@@ -8,6 +8,7 @@ use App\Models\Zone;
 use App\Models\User;
 use App\Models\Item;
 use App\Models\Stock;
+use App\Models\Comments;
 use App\Models\TeamLeadStock;
 use App\Models\Requests;
 use App\Notifications\StockRequestNotification;
@@ -88,7 +89,10 @@ class RequestsController extends Controller
     {
         $request=Requests::findOrFail($id);
         $items=Item::all();
-        return view('request.show',compact('request','items'));
+        $comment=Comments::where('requests_id',$request->id)->get();;
+       
+      
+        return view('request.show',compact('request','items', 'comment'));
     }
 
     /**

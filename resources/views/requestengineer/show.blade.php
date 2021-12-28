@@ -111,7 +111,7 @@
                                             </tr>
                                         </thead>
                                        
-                                    @forelse($comments as $comment)
+                                    @forelse($comment as $comment)
                                 </tr>  
                                 <td>{{$comment->comment}}</td>
                                 

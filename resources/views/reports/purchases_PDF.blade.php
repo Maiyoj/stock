@@ -44,15 +44,14 @@
     </thead>
     
     <tbody>
-        @forelse($purchases as $purchase)
-        <tr>
-            <td>{{$purchase->id}}</td>
-            <td>{{$purchase->item->name}}</td>
-            <td>{{$purchase->vendor->name}}</td>
-            <td>{{$purchase->PO_number}}</td>
-            <td>{{$purchase->quantity}}</td>
-            <td>{{$purchase->price}}</td>
-             <td>{{$purchase->created_at}}</td>
+      @forelse($purchases as $purchase)
+      <tr>
+          <td>{{$purchase->id}}</td>
+          <td>{{$purchase->purchase_items->count()}}</td>
+          <td>{{$purchase->vendor->name}}</td>
+          <td>{{$purchase->PO_number}}</td>
+          <td>{{$purchase->price}}</td>
+           <td>{{$purchase->created_at}}</td>
            
      </td>
     

@@ -118,7 +118,7 @@
 
                 @endif
                 <div class="form-floating mb-3 mb-md-0">
-            <textarea rows = "5" cols = "50" name = "comments"></textarea>
+            <textarea rows = "5" cols = "50" name = "comment"></textarea>
                 </div>
                 </div>
            <div class="modal-footer">

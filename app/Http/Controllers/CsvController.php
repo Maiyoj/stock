@@ -24,6 +24,8 @@ use App\Imports\ReturnedImport;
 use App\Exports\ReturnedExport;
 use App\Imports\ReturnsImport;
 use App\Exports\ReturnsExport;
+use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 
 class CsvController extends Controller
 {
@@ -98,8 +100,14 @@ public function priceImport(Request $request)
 * @return \Illuminate\Support\Collection
 */
 public function priceExport() 
+
 {
-    return Excel::download(new PriceExport, 'Vendor-collection.xlsx');
+    $prices= DB::table('prices')
+    ->join('items', 'items.id', '=', 'item_id')
+    ->join('vendors', 'vendors.id', '=','vendor_id')
+    ->select('items.name', 'vendors.name AS vendorname', 'price')
+    ->get();
+    return Excel::download(new PriceExport, 'Price-collection.xlsx');
 }    
 
 #end of vendor csv controller
@@ -108,6 +116,9 @@ public function priceExport()
 
 public function purchaseImportExport()
 {
+
+   
+
    return view('purchase-import');
 }
 
@@ -125,6 +136,15 @@ public function purchaseImport(Request $request)
 */
 public function purchaseExport() 
 {
+
+
+    $purchases= DB::table('purchases')
+    ->join('vendors', 'vendors.id', '=','vendor_id')
+    ->join('purchase_items', 'purchase_items.item_id', '=','item_id')
+    ->join('items', 'items.id', '=','purchase_items.item_id')
+    ->select( 'vendors.name AS vendorname', 'PO_number','price', 'quantity', 'purchase_items.item_id', 'items.name AS itemname')
+    ->get();
+   
     return Excel::download(new PurchaseExport, 'Purchase-collection.xlsx');
 }    
 

@@ -26,6 +26,7 @@ use App\Notifications\Approval;
 use App\Models\RequentEngineerItems;
 use App\Models\RequestEngineersItem;
 use App\Models\Comments;
+use App\Models\EngineerComment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Notification;
@@ -422,9 +423,10 @@ $returneds=Returned::whereBetween('created_at', [$from, $to])->get();
  }
  public function reject( Request $request, $id)
  {
-
+   $requests=Requests::findOrFail($id);
    $comment= new Comments;
    $comment->comments=$request->comments;
+   $comment->requests_id=$requests->id;
    $comment->save();
    
     $request=Requests::findOrFail($id);
@@ -465,7 +467,7 @@ $returneds=Returned::whereBetween('created_at', [$from, $to])->get();
 
       $stock->quantity=$stock->quantity-$item->quantity;
       $stock->save();
-      #dd($stock);
+
    }
    
     $request->rstatus='Received';
@@ -476,9 +478,10 @@ $returneds=Returned::whereBetween('created_at', [$from, $to])->get();
 
  public function rejected(Request $request, $id)
  {
-
-   $comment= new Comments;
-   $comment->comments=$request->comments;
+   $requestengineer=RequestEngineer::findOrFail($id);
+   $comment= new EngineerComment;
+   $comment->request_engineer_id=$requestengineer->id;
+   $comment->comment=$request->comment;
    $comment->save();
 
     $requestengineer=RequestEngineer::findOrFail($id);
@@ -528,13 +531,23 @@ $returneds=Returned::whereBetween('created_at', [$from, $to])->get();
  }
  public function remove($id)
  {
+
+
+
+
+
+
+
+
+
+   //
     $items=Session::get('cart');
     if(isset($items[$id]))
     {
        unset($items[$id]);
        Session::put('cart',$items);
     }
-    if(count($items)==0)
+    if(count($items)<2)
     {
         Session::forget('cart');
     }

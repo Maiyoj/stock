@@ -65,23 +65,20 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Item</th>
+                                            <th>No of Items</th>
                                             <th>Vendor</th>
                                             <th>PO Number</th>
-                                            <th>Quantity</th>
                                             <th>Price</th>
-                                            <th>Date Added</th>
-
-                                            
+                                            <th>Date Added</th> 
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Item</th>
+                                            <th>No of Items</th>
                                             <th>Vendor</th>
                                             <th>PO Number</th>
-                                            <th>Quantity</th>
                                             <th>Price</th>
                                             <th>Date Added</th>
                                             <th colspan="2">Action</th>
@@ -91,17 +88,20 @@
                                         @forelse($purchases as $purchase)
                                         <tr>
                                             <td>{{$purchase->id}}</td>
-                                            <td>{{$purchase->item->name}}</td>
+                                            <td>{{$purchase->purchase_items->count()}}</td>
                                             <td>{{$purchase->vendor->name}}</td>
                                             <td>{{$purchase->PO_number}}</td>
-                                            <td>{{$purchase->quantity}}</td>
                                             <td>{{$purchase->price}}</td>
                                              <td>{{$purchase->created_at}}</td>
-                                           
-                                     </td>
-                                     <td>
-                                        <a href="{{route('reports.purchasereport',$purchase->id)}}" class="text-primary"><i class="fa fa-eye fa-2x"></i> </a>
-                                     </td>
+                                             
+                                            {{-- <form id= "delete" action="{{route('purchase.destroy', $purchase->id)}}" method="post">
+                                                 @csrf
+                                                @method('DELETE')    
+                                                <button type="submit" form="delete" style="border: none;background:color:transparent;"> 
+                                                    <i class="fa fa-trash text-danger"></i>
+                                                </button> 
+                                            </form> --}}
+                                              </td>
                                             </tr>                                                           
                                         @empty
                                         
