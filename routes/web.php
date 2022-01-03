@@ -216,3 +216,4 @@ Route::delete('/price-deleteall', [PriceController::class, 'deleteAll'])->name('
 Route::delete('/purchase-deleteall', [PurchaseController::class, 'deleteAll'])->name('purchase.delete');
 Route::delete('/zone-deleteall', [ZoneController::class, 'deleteAll'])->name('zone.delete');
 Route::delete('/user-deleteall',[UserController::class, 'deleteAll'])->name('user.delete');
+Route::delete('/approval-deleteall',[ApprovalController::class, 'deleteAll'])->name('approval.delete');
