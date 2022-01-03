@@ -4,11 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Requests;
-
 class ApproveController extends Controller
 {
-
-
+    
     public function __construct()
     {
 
@@ -34,7 +32,7 @@ class ApproveController extends Controller
      */
     public function create()
     {
-        
+        //
     }
 
     /**
@@ -92,15 +90,4 @@ class ApproveController extends Controller
     {
         //
     }
-
-
-    public function deleteAll(Request $request)
-    { 
-        $ids = $request->ids;
-		Approve::whereIn('id', $ids)->delete();
-        return response()->json(['success'=>"Items have been deleted!"]);
-		 redirect()->route('item.index')->with('success', 'Item deleted successfully');
-    }
 }
-
-
