@@ -146,4 +146,15 @@ class PriceController extends Controller
         $price->delete();
         return redirect()->route('price.index')->with('success', ' Price Deleted Successfully');
     }
+
+
+    
+    public function deleteAll(Request $request)
+    { 
+        $ids = $request->ids;
+		Price::whereIn('id', $ids)->delete();
+        return response()->json(['success'=>"Items have been deleted!"]);
+		 redirect()->route('item.index')->with('success', 'Item deleted successfully');
+    }
+
 }

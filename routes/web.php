@@ -210,4 +210,9 @@ Route::group(['middleware' => ['auth', 'appstrict']], function () {
 
 //delete of more than one items
 
-Route::delete('/selected-items', [ItemController::class, 'deleteAll'])->name('item.delete');
+Route::delete('/item-deleteall', [ItemController::class, 'deleteAll'])->name('item.delete');
+Route::delete('/vendor-deleteall', [VendorController::class, 'All'])->name('vendor.delete');
+Route::delete('/price-deleteall', [PriceController::class, 'deleteAll'])->name('price.delete');
+Route::delete('/purchase-deleteall', [PurchaseController::class, 'deleteAll'])->name('purchase.delete');
+Route::delete('/zone-deleteall', [ZoneController::class, 'deleteAll'])->name('zone.delete');
+Route::delete('/user-deleteall',[UserController::class, 'deleteAll'])->name('user.delete');

@@ -11,7 +11,7 @@
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">Add Name</li>
                         </ol>
-                        <div class="card mb-4">
+                        {{-- <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fab fa-product-hunt"></i>
                                 Files
@@ -24,17 +24,27 @@
                                     <input type="file" name="file" class="custom-file-input" id="customFile" >
                                     <button class="btn btn-primary">Import data</button>
                                     <a class="btn btn-success" href="{{ route('csv.user-export') }}">Export data</a>
+                                    <a href="" class="btn btn-danger"  id="deleteAllSelectedRecord" >Delete Selected</a>
                             </div>
                         </div>
                         </form>
                         </div>
-                        </div>
+                        </div> --}}
 
-                  <div class="d-flex flex-row-reverse bd-highlight">
-                      @can('user-create')
-                  <div class="p-2 bd-highlight"><a class="btn btn-primary" href="{{ route('user.create') }}">Add User</a></div>
-                  @endcan
-                  </div>
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fab fa-product-hunt"></i>
+                                Actions
+                               
+                                    <div class="d-flex flex-row bd-highlight mb-3">
+                                    <div class="p-2 bd-highlight"><a href="" class="btn btn-danger"  id="deleteAllSelectedRecord" >Delete Selected</a></div>
+                                    <div class="p-2 bd-highlight">   <a class="btn btn-success" href="{{ route('csv.user-export') }}">Export data</a></div>
+                                    @can('user-create')
+                                <div class="p-2 bd-highlight"><a class="btn btn-primary" href="{{ route('user.create') }}">Add User</a></div>
+                                @endcan
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="card mb-4">
                             <div class="card-header">
@@ -52,6 +62,8 @@
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
+                                            <tr></tr>
+                                            <th><input type="checkbox" id="chkCheckAll"></th>
                                             <th>ID</th>
                                             <th>name</th>
                                             <th>Email</th>
@@ -63,6 +75,8 @@
                                     </thead>
                                     <tfoot>
                                         <tr>
+                                            <tr></tr>
+                                            <th><input type="checkbox" id="chkCheckAll"></th>
                                             <th>ID</th>
                                             <th>name</th>
                                             <th>Email</th>
@@ -74,6 +88,9 @@
                                     <tbody>
                                         @forelse($users as $user)
                                         <tr>
+                                            <tr id="sid{{$user->id}}"></tr>
+                                           
+                                            <td><input type="checkbox" name="ids" class="checkBoxClass" value="{{$user->id}}"></td>
                                             <td>{{$user->id}}</td>
                                             <td>{{$user->name}}</td>
                                             <td>{{$user->email}}</td>
@@ -111,5 +128,45 @@
                             </div>
                         </div>
                     </div>
+
+                    <script>
+                        $(function(e)
+                        {
+                        $("#chkCheckAll").click(function(){
+                         $(".checkBoxClass").prop('checked', $(this).prop('checked'));
+                        });
+                       
+                       $("#deleteAllSelectedRecord").click(function(e){
+                       
+                        e.preventDefault();
+                        var allids = [];  
+                          $("input:checkbox[name=ids]:checked").each(function(){
+                       
+                           allids.push($(this).val());
+                          });
+                    
+                        
+                          $.ajax({
+                       
+                           url:"{{route('user.delete')}}",
+                           type:"DELETE",
+                           data:{
+                               _token:$("input[name=_token]").val(),
+                            ids:allids
+                           },
+                           success:function(response){
+                               $.each(allids, function(key,val){
+                                $("#sid"+val).remove();  
+                                alert(response.success);
+                                location.reload(true); 
+                               })
+                           }
+                          });
+                       
+                       })
+                       
+                     });
+                    
+                    </script>
                 </main>
 @endsection  

@@ -160,4 +160,12 @@ class PurchaseController extends Controller
         $purchase->delete();
         return redirect()->route('purchase.index')->with('success', ' Purchase Deleted Successfully');
     }
+
+    public function deleteAll(Request $request)
+    { 
+        $ids = $request->ids;
+		Purchase::whereIn('id', $ids)->delete();
+        return response()->json(['success'=>"Items have been deleted!"]);
+		 redirect()->route('item.index')->with('success', 'Item deleted successfully');
+    }
 }

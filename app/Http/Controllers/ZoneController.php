@@ -136,4 +136,15 @@ class ZoneController extends Controller
         $zone->delete();
         return redirect()->route('zone.index')->with('success', ' Zone Deleted Successfully');
     }
+
+     
+    public function deleteAll(Request $request)
+    { 
+        $ids = $request->ids;
+		Zone::whereIn('id', $ids)->delete();
+        return response()->json(['success'=>"Items have been deleted!"]);
+		 redirect()->route('item.index')->with('success', 'Item deleted successfully');
+    }
+
 }
+
