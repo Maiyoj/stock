@@ -13,7 +13,7 @@
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">Add Vendor</li>
                         </ol>
-                        <div class="card mb-4">
+                        {{-- <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fab fa-product-hunt"></i>
                                 Files
@@ -26,19 +26,32 @@
                                     <input type="file" name="file" class="custom-file-input" id="customFile" >
                                     <button class="btn btn-primary">Import data</button>
                                     <a class="btn btn-success" href="{{ route('csv.vendor-export') }}">Export data</a>
+                                    <a href="" class="btn btn-danger"  id="deleteAllSelectedRecord" >Delete Selected</a>
                             </div>
                         </div>    
                         </form>
                         </div>
-                        </div>
+                        </div> --}}
 
                  
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fab fa-product-hunt"></i>
+                                Actions
+                               
+                                    <div class="d-flex flex-row bd-highlight mb-3">
+                                    <div class="p-2 bd-highlight"><a href="" class="btn btn-danger"  id="deleteAllSelectedRecord" >Delete Selected</a></div>
+                                    <div class="p-2 bd-highlight"> <a class="btn btn-success" href="{{ route('csv.vendor-export') }}">Export data</a></div>
+                                    @can('vendor-create')
+                                <div class="p-2 bd-highlight"><a class="btn btn-primary" href="{{ route('vendor.create') }}">Add Vendor</a></div>
+                                @endcan
+                                </div>
+    
+    
+                            </div>
+                        </div>
            <!-- Add Vendor-->
-           @can('vendor-create')
-                    <div class="d-flex flex-row-reverse bd-highlight"> 
-                    <div class="p-2 bd-highlight"><a class="btn btn-primary"  href="{{ route('vendor.create') }}">Add Vendor</a></div>
-                    </div>
-                    @endcan
+    
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fab fa-product-hunt"></i>
@@ -55,6 +68,8 @@
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
+                                            <tr></tr>
+                                            <th><input type="checkbox" id="chkCheckAll"></th>
                                             <th>ID</th>
                                             <th>Title</th>
                                             <th>Name</th>
@@ -69,7 +84,8 @@
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                        
+                                            <tr></tr>
+                                            <th><input type="checkbox" id="chkCheckAll"></th>
                                             <th>ID</th>
                                             <th>Title</th>
                                             <th>Email</th>
@@ -84,6 +100,8 @@
                                     <tbody>
                                         @forelse($vendors as $vendor)
                                         <tr>
+                                            <tr id="sid{{$vendor->id}}"></tr>
+                                            <td><input type="checkbox" name="ids" class="checkBoxClass" value="{{$vendor->id}}"></td>
                                             <td>{{$vendor->id}}</td>
                                             <td>{{$vendor->title}}</td>
                                             <td>{{$vendor->name}}</td>
@@ -118,5 +136,55 @@
                             </div>
                         </div>
                     </div>
+
+                    <script>
+                        $(function(e)
+   {
+       $("#chkCheckAll").click(function(){
+           $(".checkBoxClass").prop('checked', $(this).prop('checked'));
+   
+       });
+   
+   $("#deleteAllSelectedRecord").click(function(e){
+   
+    e.preventDefault();
+    var allids = [];  
+      $("input:checkbox[name=ids]:checked").each(function(){
+   
+       allids.push($(this).val());
+      });
+
+    
+      $.ajax({
+   
+       url:"{{route('vendor.delete')}}",
+       type:"DELETE",
+       data:{
+           _token:$("input[name=_token]").val(),
+        ids:allids
+       },
+       success:function(response){
+           $.each(allids, function(key,val){
+            $("#sid"+val).remove();  
+            alert(response.success);
+            location.reload(true); 
+
+           
+           })
+       }
+      });
+   
+   })
+   
+   
+       });
+   
+        
+                    
+                    </script>
+
+
+
+
                 </main>
 @endsection  

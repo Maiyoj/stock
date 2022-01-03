@@ -13,7 +13,7 @@
                             <li class="breadcrumb-item active"> Prices</li>
                         </ol>
 
-                        <div class="card mb-4">
+                        {{-- <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fab fa-product-hunt"></i>
                                 Files
@@ -26,17 +26,30 @@
                                     <input type="file" name="file" class="custom-file-input" id="customFile" >
                                     <button class="btn btn-primary">Import data</button>
                                     <a class="btn btn-success" href="{{ route('csv.price-export') }}">Export data</a>
+                                    <a href="" class="btn btn-danger"  id="deleteAllSelectedRecord" >Delete Selected</a>
+                            </div>
+                        </div> 
+                        </div>--}}
+
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fab fa-product-hunt"></i>
+                                Actions
+                               
+                                    <div class="d-flex flex-row bd-highlight mb-3">
+                                    <div class="p-2 bd-highlight"><a href="" class="btn btn-danger"  id="deleteAllSelectedRecord" >Delete Selected</a></div>
+                                    <div class="p-2 bd-highlight">  <a class="btn btn-success" href="{{ route('csv.price-export') }}">Export data</a></div>
+                                    @can('price-create')
+                                <div class="p-2 bd-highlight"><a class="btn btn-primary" href="{{ route('price.create') }}">Add Price</a></div>
+                                @endcan
+                                </div>
+    
+    
                             </div>
                         </div>
-                     </div>
-                     @can('price-create')
+                   
                          <!-- Add price-->
-                  <div class="d-flex flex-row-reverse bd-highlight">      
-                  <div class="p-2 bd-highlight"><a class="btn btn-primary" href="{{ route('price.create') }}">Add Price</a></div>
-                  </div>
-                  @endcan
-
-
+            
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fab fa-product-hunt"></i>
@@ -53,6 +66,8 @@
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
+                                            <tr></tr>
+                                            <th><input type="checkbox" id="chkCheckAll"></th>
                                             <th>ID</th>
                                             <th>Vendor</th>
                                             <th>Item</th>
@@ -64,6 +79,8 @@
                                     </thead>
                                     <tfoot>
                                         <tr>
+                                            <tr></tr>
+                                            <th><input type="checkbox" id="chkCheckAll"></th>
                                             <th>ID</th>
                                             <th>Vendor</th>
                                             <th>Item</th>
@@ -75,6 +92,8 @@
                                     <tbody>
                                         @forelse($prices as $price)
                                         <tr>
+                                            <tr id="sid{{$price->id}}"></tr>
+                                            <td><input type="checkbox" name="ids" class="checkBoxClass" value="{{$price->id}}"></td>
                                             <td>{{$price->id}}</td>
                                             <td>{{$price->vendor->name}}</td>
                                             <td>{{$price->item->name}}</td>
@@ -102,5 +121,48 @@
                             </div>
                         </div>
                     </div>
+
+
+
+
+                    <script>
+                        $(function(e)
+                        {
+                           $("#chkCheckAll").click(function(){
+                               $(".checkBoxClass").prop('checked', $(this).prop('checked'));
+                           });
+                       
+                       $("#deleteAllSelectedRecord").click(function(e){
+                       
+                        e.preventDefault();
+                        var allids = [];  
+                          $("input:checkbox[name=ids]:checked").each(function(){
+                       
+                           allids.push($(this).val());
+                          });
+                    
+                        
+                          $.ajax({
+                       
+                           url:"{{route('price.delete')}}",
+                           type:"DELETE",
+                           data:{
+                               _token:$("input[name=_token]").val(),
+                            ids:allids
+                           },
+                           success:function(response){
+                               $.each(allids, function(key,val){
+                                $("#sid"+val).remove();  
+                                alert(response.success);
+                                location.reload(true); 
+                               })
+                           }
+                          });
+                       
+                       })
+                       
+                     });
+                    
+                    </script>
                 </main>
 @endsection  

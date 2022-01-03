@@ -15,7 +15,7 @@
                         </ol>
 
 
-                        <div class="card mb-4">
+                        {{-- <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fab fa-product-hunt"></i>
                                 Files
@@ -39,8 +39,23 @@
                     @endcan
                      </div>
                       </div>
-                   
+                    --}}
 
+
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="fab fa-product-hunt"></i>
+                            Actions
+                           
+                                <div class="d-flex flex-row bd-highlight mb-3">
+                                {{--<div class="p-2 bd-highlight"><a href="" class="btn btn-danger"  id="deleteAllSelectedRecord" >Delete Selected</a></div> --}}
+                                <div class="p-2 bd-highlight"><a class="btn btn-success" href="{{ route('csv.requestengineer-export') }}">Export data</a></div>
+                                @can('requestengineer-create')
+                            <div class="p-2 bd-highlight"><a class="btn btn-primary" href="{{ route('requestengineer.create') }}">Add Request</a></div>
+                            @endcan
+                            </div>
+                        </div>
+                    </div>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fab fa-product-hunt"></i>

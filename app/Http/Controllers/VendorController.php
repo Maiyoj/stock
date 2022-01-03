@@ -138,4 +138,12 @@ class VendorController extends Controller
         return redirect()->route('vendor.index')->with('success', 'Vendor deleted success');
     
     }
+
+    public function All(Request $request)
+    { 
+        $ids = $request->ids;
+		Vendor::whereIn('id', $ids)->delete();
+        return response()->json(['success'=>"Items have been deleted!"]);
+		# redirect()->route('item.index')->with('success', 'Item deleted successfully');
+    }
 }

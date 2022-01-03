@@ -144,7 +144,7 @@ class ItemController extends Controller
     { 
         $ids = $request->ids;
 		Item::whereIn('id', $ids)->delete();
-        return response()->json(['success'=>"students have been deleted!"]);
+        return response()->json(['success'=>"Items have been deleted!"]);
 		# redirect()->route('item.index')->with('success', 'Item deleted successfully');
     }
 

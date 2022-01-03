@@ -167,4 +167,11 @@ class UserController extends Controller
 
         return redirect()->route('user.index')->with('success','User delete successfully');
     }
+    public function deleteAll(Request $request)
+    { 
+        $ids = $request->ids;
+		User::whereIn('id', $ids)->delete();
+        return response()->json(['success'=>"Items have been deleted!"]);
+		 redirect()->route('item.index')->with('success', 'Item deleted successfully');
+    }
 }
