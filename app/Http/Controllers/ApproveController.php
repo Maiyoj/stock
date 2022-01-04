@@ -22,7 +22,7 @@ class ApproveController extends Controller
     public function index()
     {
         $request=Requests::all();
-        return view('approve.index', compact('requests'));
+        return view('approve.index', compact('request'));
     }
 
     /**
