@@ -123,7 +123,7 @@
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        @forelse($requests as $request)
+                                        @forelse($request as $request)
                                         <tr>
                                             <td>{{$request->id}}</td>
                                             <td>{{$request->user->name}}</td>
