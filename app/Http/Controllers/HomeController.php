@@ -30,7 +30,6 @@ use App\Models\EngineerComment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Notification;
-
 class HomeController extends Controller
 {
     /**
@@ -423,10 +422,10 @@ $returneds=Returned::whereBetween('created_at', [$from, $to])->get();
  }
  public function reject( Request $request, $id)
  {
-   $requests=Requests::findOrFail($id);
+   $request=Requests::findOrFail($id);
    $comment= new Comments;
    $comment->comments=$request->comments;
-   $comment->requests_id=$requests->id;
+   $comment->requests_id=$request->id;
    $comment->save();
    
     $request=Requests::findOrFail($id);
