@@ -86,9 +86,13 @@
 
 
                                             <div class="mt-4 mb-0">
-                                                <div class="d-grid"><button class="btn btn-primary btn-block"  type="submit">Add Item</a></div>
+                                                <div class="d-grid"><button class="btn btn-primary btn-block"  type="submit"> Submit</a></div>
                                             </div>
                                         </form>
+                                        <div class="d-flex flex-row-reverse bd-highlight">
+                                            <div class="p-2 bd-highlight"> <a class="btn btn-primary" href="/admin">Go Back</a></div>
+                                
+                                          </div>
                                     </div>
                         </div>
                     </div>

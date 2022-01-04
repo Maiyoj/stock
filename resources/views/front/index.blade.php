@@ -59,7 +59,7 @@
                             
                                 @can('teamleadstock')
                                 <a class="nav-link collapsed" href="{{route('teamleadstocks.index')}}"  data-bs-target="#collapseLayouts3" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fa fa-archive"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-box"></i></div>
                                Teamlead Stocks
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
@@ -73,7 +73,7 @@
 
                             @can('request')
                             <a class="nav-link collapsed" href=""  data-bs-toggle="collapse" data data-bs-target="#collapseLayouts47" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fa fa-file"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-paper-plane"></i></div>
                                 Request
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
@@ -87,7 +87,7 @@
 
                             @can('returns')
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts8" aria-expanded="false" aria-controls="collapseLayouts">
-                         <div class="sb-nav-link-icon"><i class="fa fa-file"></i></div>
+                         <div class="sb-nav-link-icon"><i class="fas fa-undo-alt"></i></div>
                                         Teamlead Returns
                           <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                      </a>
@@ -101,7 +101,7 @@
 
                             @can('ereturns')
                                 <a class="nav-link collapsed" href="{{route('returned.index')}}" data-bs-target="#collapseLayouts8" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fa fa-file"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-undo-alt"></i></div>
                                            Engineer-returns
                                              <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                          </a>
@@ -114,7 +114,7 @@
                                      @endcan
                                      @can('approval')
                                 <a class="nav-link collapsed" href="{{route('approval.index')}}" data-bs-target="#collapseLayouts89" aria-expanded="false" aria-controls="collapseLayouts">
-                                        <div class="sb-nav-link-icon"><i class="fa fa-file"></i></div>
+                                        <div class="sb-nav-link-icon"><i class="fas fa-check-circle"></i></div>
                                                    Approve Request
                                                      <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                                  </a>
@@ -131,7 +131,7 @@
                          <div class="sb-sidenav-menu-heading">Engineer Menu</div>
                          @can('requestengineer')
                       <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"  data-bs-target="#collapseLayouts41" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fa fa-file"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-paper-plane"></i></div>
                           Request
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
@@ -147,7 +147,7 @@
                         <a class="nav-link collapsed" href="{{route('returned.index')}}"  data-bs-target="#collapseLayouts8" aria-expanded="false" aria-controls="collapseLayouts">
                          <div class="sb-nav-link-icon"><i class="fa fa-file"></i></div>
                                        Returns
-                          <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                          <div class="sb-sidenav-collapse-arrow"><i class="fas fa-undo-alt"></i></div>
                                      </a>
                          <div class="collapse" id="collapseLayouts8" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                          <nav class="sb-sidenav-menu-nested nav">
@@ -158,7 +158,7 @@
                          @endcan
                          @can('pm')
                                  <a class="nav-link collapsed" href="{{route('pm.index')}}"  data-bs-target="#collapseLayouts8" aria-expanded="false" aria-controls="collapseLayouts">
-                                    <div class="sb-nav-link-icon"><i class="fa fa-window-restore"></i></div>
+                                    <div class="sb-nav-link-icon"><i class="fas fa-check-double"></i></div>
                                   Pm Approval
                                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                 </a>
