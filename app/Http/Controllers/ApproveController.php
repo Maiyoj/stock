@@ -10,7 +10,7 @@ class ApproveController extends Controller
     public function __construct()
     {
 
-        $this->middleware('apermissionuth');
+        $this->middleware('auth');
         $this->middleware(':approve|approve-create|approve-edit|approve-delete', ['only' => ['index', 'show']]);
     }
     /**

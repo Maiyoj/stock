@@ -43,9 +43,7 @@ class ApprovalController extends Controller
      */
     public function create()
     {
-        $approvals=Approval::all();
-
-        return view('approval.create', compact('approvals')); 
+        
     }
 
     /**
