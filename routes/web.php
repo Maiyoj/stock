@@ -186,7 +186,7 @@ Route::get('returns-export', [CsvController::class, 'returnsExport'])->name('csv
 
 
 
-//middleware routes
+/*middleware routes
 Route::group(['middleware' => ['auth', 'appstrict']], function () {
     Route::resource('/item', ItemController::class);
     Route::resource('/vendor', VendorController::class);
@@ -194,7 +194,7 @@ Route::group(['middleware' => ['auth', 'appstrict']], function () {
     Route::resource('/user', UserController::class);
     Route::resource('/zone', ZoneController::class);
     Route::resource('/price', PriceController::class);
-    Route::resource('/approve', ApproveController::class);
+  
 
     Route::get('/stocks',[StockController::class,'index'])->name('stocks.index');
 
@@ -207,7 +207,7 @@ Route::group(['middleware' => ['auth', 'appstrict']], function () {
     Route::get('item-complete',[HomeController::class,'complete'])->name('items.complete');
 
 });
-
+*/
 //delete of more than one items
 
 Route::delete('/item-deleteall', [ItemController::class, 'deleteAll'])->name('item.delete');
