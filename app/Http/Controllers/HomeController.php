@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use PDF;
+use Spatie\Permission\Models\Role;
+
 use Carbon\Carbon;
 use App\Models\Item;
 use App\Models\User;
@@ -422,10 +424,10 @@ $returneds=Returned::whereBetween('created_at', [$from, $to])->get();
  }
  public function reject( Request $request, $id)
  {
-   $request=Requests::findOrFail($id);
+   $requests=Requests::findOrFail($id);
    $comment= new Comments;
    $comment->comments=$request->comments;
-   $comment->requests_id=$request->id;
+   $comment->requests_id=$requests->id;
    $comment->save();
    
     $request=Requests::findOrFail($id);
