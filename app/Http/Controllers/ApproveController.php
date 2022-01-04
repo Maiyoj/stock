@@ -11,7 +11,8 @@ class ApproveController extends Controller
     {
 
         $this->middleware('auth');
-        $this->middleware(':approve|approve-create|approve-edit|approve-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:approve|approve-create|approve-edit|approve-delete', ['only' => ['index', 'show']]);
+
     }
     /**
      * Display a listing of the resource.
