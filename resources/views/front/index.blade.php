@@ -17,10 +17,12 @@
     <body class="sb-nav-fixed">
         
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+           
             <!-- Navbar Brand-->
             <a class="navbar-brand ps-3" background-color="white" href="/home">
                 <img alt="image" src="{{ asset('BTN/BTN.png') }}"    width="150" height="50"  />
                 </a>
+                
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -30,6 +32,7 @@
                     <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
                 </div> -->
             </form>
+            
             <!-- Navbar-->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li class="nav-item dropdown">
@@ -46,6 +49,7 @@
                 </li>
             </ul>
         </nav>
+        
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
@@ -56,7 +60,7 @@
                                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                     Dashboard
                                 </a>
-                            
+                                
                                 @can('teamleadstock')
                                 <a class="nav-link collapsed" href="{{route('teamleadstocks.index')}}"  data-bs-target="#collapseLayouts3" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-box"></i></div>
@@ -85,7 +89,7 @@
                             </div>
                             @endcan
 
-                            @can('returns')
+                            {{-- @can('returns')
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts8" aria-expanded="false" aria-controls="collapseLayouts">
                          <div class="sb-nav-link-icon"><i class="fas fa-undo-alt"></i></div>
                                         Teamlead Returns
@@ -97,9 +101,9 @@
                                              <a class="nav-link" href="{{route('returns.create')}}">Add Returns</a>
                          </nav>
                         </div>
-                         @endcan
+                         @endcan --}}
 
-                            @can('ereturns')
+                            {{-- @can('ereturns')
                                 <a class="nav-link collapsed" href="{{route('returned.index')}}" data-bs-target="#collapseLayouts8" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-undo-alt"></i></div>
                                            Engineer-returns
@@ -107,11 +111,12 @@
                                          </a>
                                          <div class="collapse" id="collapseLayouts8" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                              <nav class="sb-sidenav-menu-nested nav">
-                                                 {{-- <a class="nav-link" href="">View Returns</a>
-                                                 <a class="nav-link" href="{{route('returned.create')}}">Add Returns</a> --}}
+                                                  <a class="nav-link" href="">View Returns</a>
+                                                 <a class="nav-link" href="{{route('returned.create')}}">Add Returns</a> 
                                          </nav>
                                      </div>   
-                                     @endcan
+                                     @endcan --}}
+                                     
                                      @can('approval')
                                 <a class="nav-link collapsed" href="{{route('approval.index')}}" data-bs-target="#collapseLayouts89" aria-expanded="false" aria-controls="collapseLayouts">
                                         <div class="sb-nav-link-icon"><i class="fas fa-check-circle"></i></div>
@@ -143,7 +148,7 @@
                         </div> 
                         @endcan
 
-                        @can('ereturns')
+                        {{-- @can('ereturns')
                         <a class="nav-link collapsed" href="{{route('returned.index')}}"  data-bs-target="#collapseLayouts8" aria-expanded="false" aria-controls="collapseLayouts">
                          <div class="sb-nav-link-icon"><i class="fa fa-file"></i></div>
                                        Returns
@@ -151,11 +156,11 @@
                                      </a>
                          <div class="collapse" id="collapseLayouts8" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                          <nav class="sb-sidenav-menu-nested nav">
-                                             {{-- <a class="nav-link" href="">View Returns</a>
-                                             <a class="nav-link" href="{{route('returns.create')}}">Add Returns</a> --}}
+                                             <a class="nav-link" href="">View Returns</a>
+                                             <a class="nav-link" href="{{route('returns.create')}}">Add Returns</a> 
                          </nav>
                         </div>
-                         @endcan
+                         @endcan --}}
                          @can('pm')
                                  <a class="nav-link collapsed" href="{{route('pm.index')}}"  data-bs-target="#collapseLayouts8" aria-expanded="false" aria-controls="collapseLayouts">
                                     <div class="sb-nav-link-icon"><i class="fas fa-check-double"></i></div>

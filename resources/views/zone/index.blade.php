@@ -35,7 +35,18 @@
     <div class="card-header">
         <i class="fab fa-product-hunt"></i>
         Actions
-       
+    
+        
+        <div class="btn-group dropend">
+            <button type="button" class="btn btn-secondary dropdown-toggle btn-sm position:right"  style=""data-bs-toggle="dropdown" aria-expanded="false">
+              More
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Export to PDF</a></li>
+              <li><a class="dropdown-item" href="#">Import Excel</a></li>
+              <li><a class="dropdown-item" href="#">Menu item</a></li>
+            </ul>
+          </div> 
             <div class="d-flex flex-row bd-highlight mb-3">
             <div class="p-2 bd-highlight"><a href="" class="btn btn-danger"  id="deleteAllSelectedRecord" >Delete Selected</a></div>
             <div class="p-2 bd-highlight">  <a class="btn btn-success" href="{{ route('csv.zone-export') }}">Export data</a></div>
@@ -114,6 +125,11 @@
                                        
                                     </tbody>
                                 </table>
+
+                                <div class="d-flex flex-row-reverse bd-highlight">
+                                    <div class="p-2 bd-highlight"> <a class="btn btn-primary" href="/admin">Go Back</a></div>
+                        
+                                  </div>
                             </div>
                         </div>
                     </div>

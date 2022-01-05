@@ -82,17 +82,18 @@
                                             <label for="inputFirstName">SKU</label>
                                         </div>
                                     </div>
-                              
-
-
-                                            <div class="mt-4 mb-0">
-                                                <div class="d-grid"><button class="btn btn-primary btn-block"  type="submit"> Submit</a></div>
+                                            {{-- <div class="mt-4 mb-0">
+                                                <div class="d-grid"><button class="btn btn-primary btn-block"  type="submit">Add Item</a></div>
+                                            </div> --}}
+                                            <div class="col-md-8 mt-4">
+                                             <div class="d-grid gap-2 col-4 mx-auto">
+                                            <div class="col">
+                                            <button type="submit" class="btn btn-success">Save</button>
+                                            <a class="btn btn-danger" href="/admin">Cancel</a>
+                                            </div>
+                                            </div>
                                             </div>
                                         </form>
-                                        <div class="d-flex flex-row-reverse bd-highlight">
-                                            <div class="p-2 bd-highlight"> <a class="btn btn-primary" href="/admin">Go Back</a></div>
-                                
-                                          </div>
                                     </div>
                         </div>
                     </div>
