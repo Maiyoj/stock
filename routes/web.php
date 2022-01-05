@@ -26,6 +26,7 @@ use App\Http\Controllers\RolesController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PmController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\PdfController;
 
 
 
@@ -217,3 +218,9 @@ Route::delete('/price-deleteall', [PriceController::class, 'deleteAll'])->name('
 Route::delete('/purchase-deleteall', [PurchaseController::class, 'deleteAll'])->name('purchase.delete');
 Route::delete('/zone-deleteall', [ZoneController::class, 'deleteAll'])->name('zone.delete');
 Route::delete('/user-deleteall',[UserController::class, 'deleteAll'])->name('user.delete');
+
+
+//pdf reports
+
+Route::get('export-pdf', [  PdfController::class, 'index'])->name('export-pdf');
+Route::get('export-pdf', [  PdfController::class, 'purchase'])->name('purchase-pdf');

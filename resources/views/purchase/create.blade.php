@@ -127,7 +127,8 @@
                                                 No items added
                                             @endif
                                         </div>
-                                    </div>
+                                   
+                                </form>
                                 </form>
                             </div>
                         </div>

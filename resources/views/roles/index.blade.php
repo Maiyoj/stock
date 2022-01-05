@@ -13,29 +13,30 @@
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">Roles</li>
                         </ol>
-                     <div class="card mb-4">
-                        <div class="card-header">
-                            <i class="fab fa-product-hunt"></i>
-                            Files
-                        <form action="{{ route('csv.file-import') }}" method="POST" enctype="multipart/form-data">
-                            @csrf
-
-                            <div class="form-group mb-10" style="max-width: 400px; margin: 5 ;">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fab fa-product-hunt"></i>
+                                Actions
+                                <div class="btn-group dropend">
+                                    <button type="button" class="btn btn-secondary dropdown-toggle btn-sm position:right"  style=""data-bs-toggle="dropdown" aria-expanded="false">
+                                      More
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                      <li><a class="dropdown-item" href="#">Export to PDF</a></li>
+                                      <li><a class="dropdown-item" href="#">Import Excel</a></li>
+                                      <li><a class="dropdown-item" href="#">Menu item</a></li>
+                                    </ul>
+                                  </div> 
+                                </div>
+                                    <div class="d-flex flex-row bd-highlight mb-3">
+                                    <div class="p-2 bd-highlight"><a href="" class="btn btn-danger"  id="deleteAllSelectedRecord" >Delete Selected</a></div>
+                                    <div class="p-2 bd-highlight">   <a class="btn btn-success" href="{{ route('csv.user-export') }}">Export data</a></div>
+                                    @can('roles-create')
+                                <div class="p-2 bd-highlight"><a class="btn btn-primary" href="{{ route('roles.create') }}">Add Roles</a></div>
+                                @endcan
                                 
-                                <div class="custom-file text-right"   class="card mb-6">
-                                <input type="file" name="file" class="custom-file-input" id="customFile" >
-                                <button class="btn btn-primary">Import data</button>
-                                <a class="btn btn-success" href="{{ route('csv.file-export') }}">Export data</a>
+                            </div>
                         </div>
-                       </div>    
-                        </form>
-                        </div>
-                       </div>
-                       @can('role-create')
-                    <div class="d-flex flex-row-reverse bd-highlight">
-                  <div class="p-2 bd-highlight"><a class="btn btn-primary" href="{{ route('roles.create') }}">Add Role</a></div>
-                  </div>
-                  @endcan
 
                         <div class="card mb-4">
                             <div class="card-header">
@@ -106,6 +107,9 @@
                                     </tbody>
                                    
                                 </table>
+                                <div class="d-flex flex-row-reverse bd-highlight">
+                                    <div class="p-2 bd-highlight"> <a class="btn btn-primary" href="/admin">Go Back</a></div>
+                                  </div>
                             </div>
                         </div>
                     </div>

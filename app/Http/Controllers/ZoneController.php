@@ -89,7 +89,7 @@ class ZoneController extends Controller
      */
     public function edit($id)
     {
-        $users=User::findOrfail($id);
+        $users=User::all();
     
         $zone= Zone::findOrFail($id);
 

@@ -50,7 +50,16 @@
                         <br/>
                         @endforeach
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <div class="col-md-8 mt-4">
+                        <div class="d-grid gap-2 col-4 mx-auto">
+                       <div class="col">
+                       <button type="submit" class="btn btn-primary">Save</button>
+                       <a class="btn btn-danger" href="/admin">Cancel</a>
+                       </div>
+                       </div>
+                       </div>
+                        </form>
+                    </div>
                                         </form>
                                     </div>
                         </div>
