@@ -683,6 +683,9 @@ $returneds=Returned::whereBetween('created_at', [$from, $to])->get();
       $admin=User::where('hasRole',Admin)->get();
       Notification::send($admin,new Approval());
 */
+      /*$user=User::findOrFail($requests->user_id);
+      $user = User::where('id',$requests->user_id)->first();
+      $user->notify(new Approval());*/
       Session::forget('request');
       return redirect()->route('request.drafts')->with('success','Request sent successfully');
    }
@@ -778,8 +781,8 @@ $returneds=Returned::whereBetween('created_at', [$from, $to])->get();
 
   #$user=User::where('role_id',2)->get();
   # Notification::send($user,new Approval());
-  /*$user = User::where('id',$request->user_id)->first();
-  $user->notify(new Approval());*/
+  $user = User::where('id',$requests->user_id)->first();
+  $user->notify(new Approval());
    Session::forget('e_request');
    return redirect()->route('requests.drafts')->with('success','Draft  Added Successfully');
    }

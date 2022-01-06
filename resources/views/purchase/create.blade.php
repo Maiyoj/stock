@@ -87,6 +87,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        
                                         <div class="col-md-6">
                                             <h4>Items</h4>
                                             @if (Session::has('cart'))
@@ -121,13 +122,18 @@
                                                             <th>Total Price: </th>
                                                             <th>{{$totalprice}}</th>
                                                         </tr>
+                                                    
                                                 </tbody>
                                             </table>
+                                         
                                             @else
-                                                No items added
+                                                Please Add Items
                                             @endif
+                                            <div class="d-flex flex-row-reverse bd-highlight">
+                                                <div class="p-2 bd-highlight"> <a class="btn btn-primary" href="/admin">Cancel</a></div>
+                                            </div>
                                         </div>
-                                   
+                
                                 </form>
                                 </form>
                             </div>

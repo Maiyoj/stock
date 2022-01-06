@@ -64,8 +64,7 @@
                                             <div class="col-md-8 mt-4">
                                                 <div class="d-grid gap-2 col-4 mx-auto">
                                                <div class="col">
-                                               {{-- <button type="submit" class="btn btn-success">Save</button> --}}
-                                               <a class="btn btn-primary" href="/admin">Back</a>
+                                             
                                                </div>
                                                </div>
                                                </div>
@@ -104,7 +103,11 @@
                                                         
                                                     </tr>
                                             </tbody>
+                                           
                                         </table>
+                                        <div class="d-flex flex-row-reverse bd-highlight">
+                                            <div class="p-2 bd-highlight"> <a class="btn btn-primary" href="/admin">Go Back</a></div>
+                                          </div>
                                     </div>
                                 </div>
                             </div>
