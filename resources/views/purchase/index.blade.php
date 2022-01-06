@@ -7,9 +7,9 @@
 <div id="layoutSidenav_content">
 <main>
  <div class="container-fluid px-4">
-<h1 class="mt-4">Purchase</h1>
+<h1 class="mt-4"></h1>
 <ol class="breadcrumb mb-4">
- <li class="breadcrumb-item active"> Purchase</li>
+ <li class="breadcrumb-item active"></li>
  </ol>
 {{-- <div class="card mb-4">
  <div class="card-header">
@@ -51,7 +51,7 @@
           
           <i class="fas fa-bars"></i> </button>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#">Export to PDF</a></li>
+          <li><a class="dropdown-item" href="{{route('purchase-pdf')}}">Export to PDF</a></li>
           <li><a class="dropdown-item" href="#">Import Excel</a></li>
         </ul>
       </div> 

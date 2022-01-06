@@ -222,5 +222,9 @@ Route::delete('/user-deleteall',[UserController::class, 'deleteAll'])->name('use
 
 //pdf reports
 
-Route::get('export-pdf', [  PdfController::class, 'index'])->name('export-pdf');
-Route::get('export-pdf', [  PdfController::class, 'purchase'])->name('purchase-pdf');
+
+Route::get('/purchase-pdf', [  PdfController::class, 'purchase'])->name('purchase-pdf');
+Route::get('/items-pdf', [PdfController::class, 'index'])->name('items-pdf');
+Route::get('/vendor-pdf', [PdfController::class, 'vendor'])->name('vendor-pdf');
+Route::get('/price-pdf', [PdfController::class, 'price'])->name('price-pdf');
+

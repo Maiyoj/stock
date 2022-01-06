@@ -12,9 +12,9 @@
   integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
   crossorigin="anonymous"></script>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Items</h1>
+                        <h1 class="mt-4"></h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Add Items</li>
+                            <li class="breadcrumb-item active"></li>
                         </ol>
                      {{-- <div class="card mb-4">
                         <div class="card-header">
@@ -51,11 +51,7 @@
                                 @can('item-create')
                             <div class="p-2 bd-highlight"><a class="btn btn-primary" href="{{ route('item.create') }}">Add Item</a></div>
                             {{-- <div class="p-2 bd-highlight"><a class="btn btn-primary" href="{{ route('purchase-pdf') }}">Export PDF</a></div> --}}
-
                             @endcan
-
-    
-
                         </div>
                     </div>
                         <div class="card mb-4">
@@ -65,7 +61,7 @@
                                       
                                       <i class="fas fa-bars"></i> </button>
                                     <ul class="dropdown-menu">
-                                      <li><a class="dropdown-item" href="#">Export to PDF</a></li>
+                                      <li><a class="dropdown-item" href="{{ route('items-pdf')}}">Export to PDF</a></li>
                                       <li><a class="dropdown-item" href="#">Import Excel</a></li>
                                     </ul>
                                   </div> 

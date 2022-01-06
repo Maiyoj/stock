@@ -9,9 +9,9 @@
 <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Stock</h1>
+                        <h1 class="mt-4"></h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active"> Stock</li>
+                            <li class="breadcrumb-item active"></li>
                         </ol>
                        
                         
@@ -57,9 +57,7 @@
                                         @endforelse
                                     </tbody>
                                 </table>
-                                <div class="d-flex flex-row-reverse bd-highlight">
-                                    <div class="p-2 bd-highlight"> <a class="btn btn-primary" href="/admin">Go Back</a></div>
-                                </div>
+                             
                             </div>
                         </div>
                     </div>

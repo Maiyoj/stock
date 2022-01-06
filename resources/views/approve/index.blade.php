@@ -13,9 +13,9 @@
   integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
   crossorigin="anonymous"></script>
                     <div class="container-fluid px-4">
-                      <h1 class="mt-4"> Issuances Approval</h1>
+                      <h1 class="mt-4"></h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active"> Issuances Approval</li>
+                            <li class="breadcrumb-item active"></li>
                         </ol>
                        
                         
