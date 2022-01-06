@@ -130,14 +130,12 @@
                                      </td>
                                             </tr>                                                           
                                         @empty
-                                        
-
                                         @endforelse
-                                  
-                                        
-                                       
                                     </tbody>
                                 </table>
+                                <div class="d-flex flex-row-reverse bd-highlight">
+                                    <div class="p-2 bd-highlight"> <a class="btn btn-primary" href="/admin">Go Back</a></div>
+                                  </div>
                             </div>
                         </div>
                     </div>
