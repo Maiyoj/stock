@@ -9,9 +9,9 @@
 <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                      <h1 class="mt-4">Request</h1>
+                      <h1 class="mt-4"></h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active"> Request</li>
+                            <li class="breadcrumb-item active"></li>
                         </ol>
 
 
@@ -69,12 +69,9 @@
                             @if(session('success'))
                             <div class="alert alert-success">
                                 {{session('success')}}
-                            
                             </div>
                             @endif
-                                <table id="datatablesSimple"  >
-                             
-                                            
+                                <table id="datatablesSimple"  >   
                                     <thead>
                                         <tr>
                                             <th>ID</th>
