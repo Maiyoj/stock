@@ -31,7 +31,7 @@ class ApprovalController extends Controller
      */
     public function index()
     {
-        $requestengineer=RequestEngineer::all();
+        $requestengineer=RequestEngineer::where('draft',1)->get();
 
         return view('approval.index', compact('requestengineer'));
     }

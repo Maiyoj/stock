@@ -21,7 +21,7 @@ class ApproveController extends Controller
      */
     public function index()
     {
-        $request=Requests::all();
+        $request=Requests::where('draft',1)->get();
         return view('approve.index', compact('request'));
     }
 
