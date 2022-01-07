@@ -61,6 +61,113 @@
                                     Dashboard
                                 </a>
                                 
+
+
+
+
+
+                                
+                                @can('item')
+                                <a class="nav-link collapsed" href="{{route('item.index')}}"  data-bs-target="#collapseLayouts1" aria-expanded="false" aria-controls="collapseLayouts">
+                                    <div class="sb-nav-link-icon"><i class="fab fa-product-hunt"></i></div>
+                                  Item
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse" id="collapseLayouts1" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                      <!-- <a class="nav-link" href="">View Item</a> -->
+                                      <!-- <a class="nav-link" href="{{route('item.create')}}">Add Item</a> -->
+                                    </nav>
+                                </div>
+                                </a>
+                                @endcan 
+                                @can('vendor')
+                                <a class="nav-link collapsed" href="{{route('vendor.index')}}"  data-bs-target="#collapseLayouts1" aria-expanded="false" aria-controls="collapseLayouts">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-store"></i></i></div>
+                                  Vendors
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse" id="collapseLayouts1" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                    <!-- <a class="nav-link" href="">View Vendors</a> -->
+                                     <!-- <a class="nav-link" href="{{route('vendor.create')}}">Add vendors</a> -->
+                                    </nav>
+                                </div>
+                                 </a> 
+                                @endcan
+                                @can('price')
+                                <a class="nav-link collapsed" href="{{route('price.index')}}"  data-bs-target="#collapseLayouts12" aria-expanded="false" aria-controls="collapseLayouts">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-hand-holding-usd"></i></i></div>
+                                  Prices
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse" id="collapseLayouts12" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <!-- <a class="nav-link" href="">View prices</a> -->
+                                       <!-- <a class="nav-link" href="{{route('price.create')}}">Add prices</a> -->
+                                    </nav>
+                                </div>
+                                </a>
+                                @endcan
+                                @can('purchase')
+                                <a class="nav-link collapsed" href="{{route('purchase.index')}}"  data-bs-target="#collapseLayouts2" aria-expanded="false" aria-controls="collapseLayouts">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-shopping-cart"></i></div>
+                                  Purchases
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse" id="collapseLayouts2" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <!-- <a class="nav-link" href="">View Purchases</a>
+                                        <a class="nav-link" href="{{route('purchase.create')}}">Add Puchases</a> -->
+                                    </nav>
+                                </div>
+                              </a>
+                              @endcan
+                              @can('stocks')
+                              <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts3" aria-expanded="false" aria-controls="collapseLayouts">
+                                    <div class="sb-nav-link-icon"><i class="fa fa-archive"></i></div>
+                                  Stocks
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse" id="collapseLayouts3" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <a class="nav-link" href="{{route('stocks.index')}}">View Stock</a>
+                                        <!--<a class="nav-link" href="layout-sidenav-light.html">Issuance</a>
+                                        <a class="nav-link" href="layout-sidenav-light.html">Issue Stock</a>-->
+                                    </nav>
+                                </div>
+                                @endcan
+     
+                                @can('zone')
+                                <a class="nav-link collapsed" href="{{route('zone.index')}}"  data-bs-target="#collapseLayouts13" aria-expanded="false" aria-controls="collapseLayouts">
+                                    <div class="sb-nav-link-icon"><i class="fa fa-truck"></i></div>
+                                  Zones
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse" id="collapseLayouts13" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <!-- <a class="nav-link" href="">View Zones</a>
+                                        <a class="nav-link" href="">Add Zones</a> -->
+                                       
+                                 </nav>
+                                </div>
+                                @endcan
+                                
+                                 @can('approve')
+                                <a class="nav-link collapsed" href="{{route('approve.index')}}" data-bs-target="#collapseLayouts48" aria-expanded="false" aria-controls="collapseLayouts">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-check-square"></i></i></div>
+                                Approve
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse" id="collapseLayouts48" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <a class="nav-link" href="">Approve Requests</a>
+                                        <!-- <a class="nav-link" href="{{route('approve.index')}}">View All Requests</a> -->
+                                    </nav>
+                                </div>
+                                  @endcan
+                        
+                                
                                 @can('teamleadstock')
                                 <a class="nav-link collapsed" href="{{route('teamleadstocks.index')}}"  data-bs-target="#collapseLayouts3" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-box"></i></div>

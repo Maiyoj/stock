@@ -165,7 +165,7 @@
                         
                                 
                                 
-                                <div class="sb-sidenav-menu-heading">Action</div>
+                                {{-- <div class="sb-sidenav-menu-heading">Action</div> --}}
 
                                  {{-- @can('returns')
                                  <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts8" aria-expanded="false" aria-controls="collapseLayouts">

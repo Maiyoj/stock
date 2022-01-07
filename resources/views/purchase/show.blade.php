@@ -72,6 +72,15 @@
                                     </div> 
                                     <div class="col-md-4">
                                         <h4>Purchase Items</h4>
+                                        <div class="btn-group dropend">
+                                            <button type="button" class=" dropdown-toggle btn-sm position:right"  style=""data-bs-toggle="dropdown" aria-expanded="false">
+                                              
+                                              <i class="fas fa-bars"></i> </button>
+                                            <ul class="dropdown-menu">
+                                              <li><a class="dropdown-item" href="{{route('purchase-pdf')}}">Export to PDF</a></li>
+                                              <li><a class="dropdown-item" href="#">Import Excel</a></li>
+                                            </ul>
+                                          </div> 
                                         <table class="table table-striped">
                                             <thead>
                                               <tr>
