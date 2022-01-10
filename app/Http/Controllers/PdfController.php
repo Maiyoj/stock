@@ -9,6 +9,8 @@ use App\Models\Purchase;
 use App\Models\Item;
 use App\Models\Vendor;
 use App\Models\Price;
+use App\Models\Zone;
+
 class PdfController extends Controller
 {
     
@@ -37,11 +39,10 @@ class PdfController extends Controller
         
     }
 
-    public function purchase($id)
+    public function purchase()
     {
-        $purchase=Purchase::findOrFail($id);
+        $purchase=Purchase::all();
         
-        $items=Item::all();
           // share data to view
            view()->share('pdf/purchase',$purchase);
             $pdf = PDF::loadView('pdf/purchase', ['purchase' => $purchase]);
@@ -57,6 +58,26 @@ class PdfController extends Controller
             $pdf = PDF::loadView('pdf/price', ['price' => $price]);
             return $pdf->download('pdf.price');
         
+    }
+
+    public function zone(){
+            $zones = Zone::all();
+
+             
+          // share data to view
+           view()->share('pdf/zone',$zones);
+           $pdf = PDF::loadView('pdf/zone', ['zones' => $zones]);
+           return $pdf->download('pdf.zone');
+    }
+   
+    public function request(){
+          
+        $requests = Requests::all();
+   // share data to view
+   view()->share('pdf/request',$requests);
+   $pdf = PDF::loadView('pdf/request', ['requests' => $requests]);
+   return $pdf->download('pdf.request');
+
     }
 
 

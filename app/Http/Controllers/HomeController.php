@@ -678,14 +678,15 @@ $returneds=Returned::whereBetween('created_at', [$from, $to])->get();
          $request_item->item_id=$item['item_id'];
          $request_item->quantity=$item['quantity'];
          $request_item->save();
-   }
-   /*(Auth::user()->hasRole('Admin'))
+   }/*
+   (Auth::user()->hasRole('Admin'))
       $admin=User::where('hasRole',Admin)->get();
       Notification::send($admin,new Approval());
-*/
-      /*$user=User::findOrFail($requests->user_id);
+      */
+      $user=User::findOrFail($requests->user_id);
       $user = User::where('id',$requests->user_id)->first();
-      $user->notify(new Approval());*/
+      $user->notify(new Approval());
+   
       Session::forget('request');
       return redirect()->route('request.drafts')->with('success','Request sent successfully');
    }
