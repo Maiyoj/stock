@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ZoneController;
 use App\Http\Controllers\StockController;
@@ -227,4 +228,12 @@ Route::get('/purchase-pdf', [  PdfController::class, 'purchase'])->name('purchas
 Route::get('/items-pdf', [PdfController::class, 'index'])->name('items-pdf');
 Route::get('/vendor-pdf', [PdfController::class, 'vendor'])->name('vendor-pdf');
 Route::get('/price-pdf', [PdfController::class, 'price'])->name('price-pdf');
+Route::get('/zone-pdf', [PdfController::class, 'zone'])->name('zone-pdf');
+
+//admin views
+
+Route::get('/adm-request', [AdminController::class, 'request'])->name('adm.request');
+Route::get('/adm-stock', [AdminController::class, 'stock'])->name('adm.stock');
+Route::get('/adm-re', [AdminController::class, 're'])->name('adm.re');
+Route::get('/adm-pm', [AdminController::class, 'pm'])->name('adm.pm');
 
