@@ -73,7 +73,7 @@ class RequestsController extends Controller
         $requests->status ='pending';
         $requests->save();
 
-       #$admin=User::where('role_id',0)->get();
+       $admin=User::where('role_id',0)->get();
         Notification::send($admin,new Approval());
         return redirect()->route('request.drafts')->with('success','Draft added successfully');
     }

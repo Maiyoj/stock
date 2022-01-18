@@ -51,8 +51,8 @@
           
           <i class="fas fa-bars"></i> </button>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="{{route('purchase-pdf')}}">Export to PDF</a></li>
-          <li><a class="dropdown-item" href="#">Import Excel</a></li>
+          <li><a class="dropdown-item" href="{{route('purchases-pdf')}}">Export to PDF</a></li>
+          <li><a class="dropdown-item" href="{{ route('csv.purchase-export') }}">Import Excel</a></li>
         </ul>
       </div> 
 </div>
@@ -76,6 +76,7 @@
                                             <th>PO Number</th>
                                             <th>Price</th>
                                             <th>Date Added</th> 
+                                            <th>Delivery Note</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -89,6 +90,7 @@
                                             <th>PO Number</th>
                                             <th>Price</th>
                                             <th>Date Added</th>
+                                            <th>Delivery Note</th>
                                             <th colspan="2">Action</th>
                                         </tr>
                                     </tfoot>
@@ -103,8 +105,14 @@
                                             <td>{{$purchase->PO_number}}</td>
                                             <td>{{$purchase->price}}</td>
                                              <td>{{$purchase->created_at}}</td>
+                                             <td>
+                                                 @if($purchase->delivery_note!=null)
+                                                    <a href="{{route('delivery_note',$purchase->id)}}" target="_blank"><i class="fa fa-download"></i>Download</a>
+                                                 @endif
+                                             </td>
                                              @can('purchase-show')  
                                             <td><a href="{{route('purchase.show', $purchase->id)}}"><i class="fa fa-eye text-primary"> </i></td>
+                                            <td><a href="{{route('purchase.edit', $purchase->id)}}"><i class="fa fa-edit text-primary"> </i></td>
                                             @endcan
                                             <td>
                                             {{-- <form id= "delete" action="{{route('purchase.destroy', $purchase->id)}}" method="post">
