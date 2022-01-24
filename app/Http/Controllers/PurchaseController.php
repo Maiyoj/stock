@@ -16,10 +16,6 @@ class PurchaseController extends Controller
     {
 
         $this->middleware('auth');
-
-
-
-        
       $this->middleware('permission:purchase-list|purchase-create|purchase-edit|purchase-delete', ['only' => ['index', 'show']]);
       $this->middleware('permission:purchase-create', ['only' => ['create', 'store']]);
       $this->middleware('permission:purchase-edit', ['only' => ['edit', 'update']]);
@@ -167,5 +163,15 @@ class PurchaseController extends Controller
 		Purchase::whereIn('id', $ids)->delete();
         return response()->json(['success'=>"Items have been deleted!"]);
 		 redirect()->route('item.index')->with('success', 'Item deleted successfully');
+    }
+    public function deliveryNote($id)
+    {
+        $purchase = Purchase::findOrFail($id);
+        $file = public_path()."/purchases_files/".$purchase->delivery_note;
+        $headers = [
+            'Content-Type' => 'application/pdf',
+         ];
+
+        return response()->download($file, 'Delivery Note.pdf', $headers);
     }
 }
