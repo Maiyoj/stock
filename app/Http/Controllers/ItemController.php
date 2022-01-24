@@ -52,18 +52,32 @@ class ItemController extends Controller
     {
         $request->validate([
             
-            'name'=>'required|string|unique:items'
+            'name'=>'required|string'
         ]);
 
-
-        $item=new Item;
-        $item->type=$request->type;
-        $item->name=$request->name;
-        $item->description=$request->description;
-        $item->units=$request->units;
-        $item->threshold=$request->threshold;
-        $item->sku=$request->sku;
-        $item->save();
+        $item = Item::withTrashed()-> where('name',$request->name)->first();
+        if($item)
+        {
+            $item->type=$request->type;
+            $item->name=$request->name;
+            $item->description=$request->description;
+            $item->units=$request->units;
+            $item->threshold=$request->threshold;
+            $item->sku=$request->sku;
+            $item->save();
+        
+        }
+        else{
+            $item=new Item;
+            $item->type=$request->type;
+            $item->name=$request->name;
+            $item->description=$request->description;
+            $item->units=$request->units;
+            $item->threshold=$request->threshold;
+            $item->sku=$request->sku;
+            $item->save();
+        }
+      
 
         return redirect()->route('item.index')->with('success', 'Item added sucessfully');
 

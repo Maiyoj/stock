@@ -29,7 +29,7 @@
 <body>
     <div id="layoutSidenav_content">
         <main>
-            <h2>Purchases Details</h2>
+            <h2>Purchases Table</h2>
          <table id="datatablesSimple" class="table">
             <thead>
                 <tr>
@@ -42,7 +42,7 @@
                 </tr>
             </thead>
             <tbody>
-     
+                @forelse($purchases as $purchase)
                 <tr>
                     <td>{{$purchase->id}}</td>
                     <td>{{$purchase->purchase_items->count()}}</td>
@@ -51,45 +51,10 @@
                     <td>{{$purchase->price}}</td>
                     <td>{{$purchase->created_at}}</td>
                 </tr>                                                           
-            </tbody>
-        </table>
-    </div>
-    <div id="layoutSidenav_content">
-        <main>
-            <h2>Purchases Items</h2>
-         <table id="datatablesSimple" class="table">
-            <thead>
-                <tr>
-                    <th style="width:25%">#</th>
-                    <th style="width:25%">Item Name</th>
-                    <th style="width:25%">Price</th>
-                    <th style="width:25%">Quantity</th> 
-                </tr>
-            </thead>
-            <tbody>
-                @php
-                    $id = 1;
-                @endphp
-                @foreach ($purchase->purchase_items as $item)
-                    @foreach ($items as $itm)
-                        @if ($item->item_id ==$itm->id)
-                        <tr>
-                            <td>{{$id}}</td>
-                            <td>{{$itm->name}}</td>
-                            <td>{{$item->quantity}}</td>
-                            <td>{{$itm->itemprice[0]->price}}</td>
-                        </tr>
-                        @php
-                            $id++;
-                        @endphp
-                        @endif
-                       
-                    @endforeach
-                @endforeach
-                    <tr>
-                        <th>Total Price: </th>
-                        <th>{{$purchase->price}}</th>
-                    </tr>
+                @empty
+                
+
+                @endforelse
             </tbody>
         </table>
     </div>
