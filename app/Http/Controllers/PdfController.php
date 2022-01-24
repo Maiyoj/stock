@@ -7,7 +7,9 @@ use App\Models\Item;
 use App\Models\Price;
 use App\Models\Vendor;
 use App\Models\Purchase;
+ new
 use App\Models\Requests;
+pleasework
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 class PdfController extends Controller
