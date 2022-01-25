@@ -76,6 +76,7 @@
                                             <th>PO Number</th>
                                             <th>Price</th>
                                             <th>Date Added</th> 
+                                            <th>Delivery Note</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -89,6 +90,7 @@
                                             <th>PO Number</th>
                                             <th>Price</th>
                                             <th>Date Added</th>
+                                            <th>Delivery Note</th>
                                             <th colspan="2">Action</th>
                                         </tr>
                                     </tfoot>
@@ -103,6 +105,11 @@
                                             <td>{{$purchase->PO_number}}</td>
                                             <td>{{$purchase->price}}</td>
                                              <td>{{$purchase->created_at}}</td>
+                                             <td>
+                                                 @if($purchase->delivery_note!=null)
+                                                    <a href="{{route('delivery_note',$purchase->id)}}" target="_blank"><i class="fa fa-download"></i>Download</a>
+                                                 @endif
+                                             </td>
                                              @can('purchase-show')  
                                             <td><a href="{{route('purchase.show', $purchase->id)}}"><i class="fa fa-eye text-primary"> </i></td>
                                             @endcan
