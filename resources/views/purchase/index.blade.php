@@ -51,8 +51,8 @@
           
           <i class="fas fa-bars"></i> </button>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="{{route('purchase-pdf')}}">Export to PDF</a></li>
-          <li><a class="dropdown-item" href="#">Import Excel</a></li>
+          <li><a class="dropdown-item" href="{{route('purchases-pdf')}}">Export to PDF</a></li>
+          <li><a class="dropdown-item" href="{{ route('csv.purchase-export') }}">Import Excel</a></li>
         </ul>
       </div> 
 </div>
@@ -112,6 +112,7 @@
                                              </td>
                                              @can('purchase-show')  
                                             <td><a href="{{route('purchase.show', $purchase->id)}}"><i class="fa fa-eye text-primary"> </i></td>
+                                            <td><a href="{{route('purchase.edit', $purchase->id)}}"><i class="fa fa-edit text-primary"> </i></td>
                                             @endcan
                                             <td>
                                             {{-- <form id= "delete" action="{{route('purchase.destroy', $purchase->id)}}" method="post">
