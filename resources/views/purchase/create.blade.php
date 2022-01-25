@@ -103,7 +103,7 @@
                                         <div class="col-md-6">
                                             <h4>Items</h4>
                                             @if (Session::has('cart'))
-                                            <table class="table table-striped">
+                                            <table id="datatablesSimple">
                                                 <thead>
                                                   <tr>
                                                     <th scope="col">#</th>

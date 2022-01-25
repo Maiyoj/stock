@@ -18,6 +18,8 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReturnsController;
 use App\Http\Controllers\ApprovalController;
+
+use App\Http\Controllers\EditController;
 use App\Http\Controllers\IssuanceController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\RequestsController;
@@ -134,7 +136,10 @@ Route::post('add-e_request',[HomeController::class,'e_request'])->name('e_reques
 Route::get('remove-e_request/{id}',[HomeController::class,'removee_request'])->name('e_request.remove');
 Route::get('e_request-complete',[HomeController::class,'completee_request'])->name('e_request.complete');
 
-
+//Edit purchase
+Route::get('purchase-item/{id}',[HomeController::class,'purchaseitemremove'])->name('purchase-item.remove');
+Route::post('purchase-item-add/{id}',[HomeController::class,'purchaseitemadd'])->name('purchase-item.add');
+Route::post('purchase-update/{id}',[HomeController::class,'purchaseupdate'])->name('purchase-items.update');
 
 //csv and excel controller
 Route::get('file-import-export', [CsvController::class, 'csv.fileImportExport']);
@@ -153,9 +158,11 @@ Route::post('price-import', [CsvController::class, 'priceImport'])->name('csv.pr
 Route::get('price-export', [CsvController::class, 'priceExport'])->name('csv.price-export');
 
 //purchases csv route
-Route::get('purchase-import-export', [CsvController::class, 'csv.purchaseImportExport']);
-Route::post('purchase-import', [CsvController::class, 'purchaseImport'])->name('csv.purchase-import');
+Route::get('purchase-import-export', [CsvController::class, 'purchaseImport']);
+Route::post('purchase-import', [CsvController::class, 'purchaseImportStore'])->name('csv.purchase-import');
 Route::get('purchase-export', [CsvController::class, 'purchaseExport'])->name('csv.purchase-export');
+
+
 
 //zones csv route
 Route::get('zone-import-export', [CsvController::class, 'csv.zoneImportExport']);
@@ -224,10 +231,30 @@ Route::delete('/user-deleteall',[UserController::class, 'deleteAll'])->name('use
 //pdf reports
 
 
-Route::get('/purchase-pdf', [  PdfController::class, 'purchase'])->name('purchase-pdf');
+Route::get('/purchase-pdf/{id}', [  PdfController::class, 'purchase'])->name('purchase-pdf');
+Route::get('/purchases-pdf', [  PdfController::class, 'purchases'])->name('purchases-pdf');
 Route::get('/items-pdf', [PdfController::class, 'index'])->name('items-pdf');
 Route::get('/vendor-pdf', [PdfController::class, 'vendor'])->name('vendor-pdf');
 Route::get('/price-pdf', [PdfController::class, 'price'])->name('price-pdf');
+Route::get('/requests-pdf', [  PdfController::class, 'requests'])->name('requests-pdf');
+
+Route::get('/delivery-note/{id}',[PurchaseController::class,'deliveryNote'])->name('delivery_note');
+
+Route::resource('/engineer_reports',EngineerReportController::class);
+
+Route::get('/request_item_edit/{id}',[EditController::class,'editrequestitem'])->name('request_item.edit');
+Route::post('/request_item_update/{id}',[EditController::class,'updaterequestitem'])->name('request_item.update');
+Route::post('/request_item_delete/{id}',[EditController::class,'deleterequestitem'])->name('request_item.delete');
+Route::post('/request_item_add/{id}',[EditController::class,'addrequestitem'])->name('request_item.add');
+Route::post('/request-update/{id}',[EditController::class,'updaterequestitems'])->name('request_items.update');
+
+Route::get('/request_edit_edit/{id}',[EditController::class,'editrequest'])->name('request_edit.edit');
+Route::post('/request_edit_update/{id}',[EditController::class,'updaterequest'])->name('request_edit.update');
+Route::post('/request_edit_delete/{id}',[EditController::class,'deleterequest'])->name('request_edit.delete');
+Route::post('/request_edit_add/{id}',[EditController::class,'addrequest'])->name('request_edit.add');
+Route::post('/request-update/{id}',[EditController::class,'updaterequestteam'])->name('request_edits.update');
+
+
 
 Route::get('/delivery-note/{id}',[PurchaseController::class,'deliveryNote'])->name('delivery_note');
 
