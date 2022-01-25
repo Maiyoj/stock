@@ -9,6 +9,9 @@ use App\Models\Vendor;
 use App\Models\Purchase;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
+
+use App\Models\Zone;
+
 class PdfController extends Controller
 {
     
@@ -48,10 +51,10 @@ class PdfController extends Controller
             return $pdf->download('purchases.pdf');
     }
     public function purchase($id)
+    public function purchase()
     {
-        $purchase=Purchase::findOrFail($id);
+        $purchase=Purchase::all();
         
-        $items=Item::all();
           // share data to view
            view()->share('pdf/purchase',$purchase);
             $pdf = PDF::loadView('pdf/purchase',['purchase'=>$purchase,'items'=>$items]);
@@ -66,6 +69,26 @@ class PdfController extends Controller
             $pdf = PDF::loadView('pdf/price', ['price' => $price]);
             return $pdf->download('pdf.price');
         
+    }
+
+    public function zone(){
+            $zones = Zone::all();
+
+             
+          // share data to view
+           view()->share('pdf/zone',$zones);
+           $pdf = PDF::loadView('pdf/zone', ['zones' => $zones]);
+           return $pdf->download('pdf.zone');
+    }
+   
+    public function request(){
+          
+        $requests = Requests::all();
+   // share data to view
+   view()->share('pdf/request',$requests);
+   $pdf = PDF::loadView('pdf/request', ['requests' => $requests]);
+   return $pdf->download('pdf.request');
+
     }
 
 

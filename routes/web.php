@@ -7,6 +7,7 @@ use App\Http\Controllers\CsvController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ZoneController;
 use App\Http\Controllers\PriceController;
@@ -234,6 +235,14 @@ Route::get('/purchases-pdf', [  PdfController::class, 'purchases'])->name('purch
 Route::get('/items-pdf', [PdfController::class, 'index'])->name('items-pdf');
 Route::get('/vendor-pdf', [PdfController::class, 'vendor'])->name('vendor-pdf');
 Route::get('/price-pdf', [PdfController::class, 'price'])->name('price-pdf');
+Route::get('/zone-pdf', [PdfController::class, 'zone'])->name('zone-pdf');
+
+//admin views
+
+Route::get('/adm-request', [AdminController::class, 'request'])->name('adm.request');
+Route::get('/adm-stock', [AdminController::class, 'stock'])->name('adm.stock');
+Route::get('/adm-re', [AdminController::class, 're'])->name('adm.re');
+Route::get('/adm-pm', [AdminController::class, 'pm'])->name('adm.pm');
 
 Route::get('/delivery-note/{id}',[PurchaseController::class,'deliveryNote'])->name('delivery_note');
 
