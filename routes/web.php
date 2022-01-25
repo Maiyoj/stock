@@ -19,6 +19,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReturnsController;
 use App\Http\Controllers\ApprovalController;
 
+
 use App\Http\Controllers\EditController;
 
 use App\Http\Controllers\IssuanceController;
@@ -256,6 +257,8 @@ Route::post('/request_edit_add/{id}',[EditController::class,'addrequest'])->name
 Route::post('/request-update/{id}',[EditController::class,'updaterequestteam'])->name('request_edits.update');
 
 
+
+Route::get('/delivery-note/{id}',[PurchaseController::class,'deliveryNote'])->name('delivery_note');
 
 Route::get('/delivery-note/{id}',[PurchaseController::class,'deliveryNote'])->name('delivery_note');
 
