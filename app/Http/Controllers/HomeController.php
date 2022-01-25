@@ -497,7 +497,19 @@ $returneds=Returned::whereBetween('created_at', [$from, $to])->get();
    $request->validate([
       'quantity'=>'numeric|required|min:0|not_in:0',
       'PO_number'=>'required|string|unique:purchases',
+      'date' => 'required|date'
   ]);
+  $delivery_note = Session::get('note');
+  if(!$delivery_note)
+  {
+     $request->validate([
+         'delivery_note'=>'mimes:pdf'
+     ]);
+     $file = $request->delivery_note;
+     $file_name = time().'.'.$file->getClientOriginalExtension();
+     $file->move(public_path('purchases_files'),$file_name);
+     Session::put('note',$file_name);
+  }
   $items=Session::get('cart');
   $price= Price::where('item_id',$request->item_id)->first();
    if(!$items)
@@ -509,6 +521,7 @@ $returneds=Returned::whereBetween('created_at', [$from, $to])->get();
                'PO_number'=>$request->PO_number,
                'quantity'=>$request->quantity,
                'price'=>$request->quantity*$price->price,
+               'date' => $request->date
             ]
       ];
     Session::put('cart',$items);
@@ -524,6 +537,7 @@ $returneds=Returned::whereBetween('created_at', [$from, $to])->get();
          'PO_number'=>$request->PO_number,
          'quantity'=>$request->quantity,
          'price'=>$request->quantity*$price->price,
+         'date' => $request->date
       ];
       Session::put('cart',$items);
    }
@@ -532,15 +546,6 @@ $returneds=Returned::whereBetween('created_at', [$from, $to])->get();
  }
  public function remove($id)
  {
-
-
-
-
-
-
-
-
-
    //
     $items=Session::get('cart');
     if(isset($items[$id]))
@@ -557,6 +562,7 @@ $returneds=Returned::whereBetween('created_at', [$from, $to])->get();
  public function complete()
  {
    $items=Session::get('cart');
+
    if(!$items)
    {
       return redirect()->back()->with('success','Please add items first. ');
@@ -570,6 +576,8 @@ $returneds=Returned::whereBetween('created_at', [$from, $to])->get();
       $price=$price+$item['price'];
    }
    $purchase->price=$price;
+   $purchase->date = $items[0]['date'];
+   $purchase->delivery_note = Session::get('note');
    $purchase->save();
 
    foreach($items as $item)
@@ -594,6 +602,7 @@ $returneds=Returned::whereBetween('created_at', [$from, $to])->get();
             }
       }
       Session::forget('cart');
+      Session::forget('note');
       return redirect()->route('purchase.index')->with('success', 'Purchase added successfully');
    }
 

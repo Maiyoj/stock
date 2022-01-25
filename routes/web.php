@@ -2,31 +2,32 @@
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\VendorController;
-use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\PmController;
+use App\Http\Controllers\CsvController;
+use App\Http\Controllers\PdfController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ZoneController;
-use App\Http\Controllers\StockController;
-use App\Http\Controllers\IssuancesController;
-use App\Http\Controllers\IssuanceeController;
-use App\Http\Controllers\EngineerIssuanceeController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ReturnedController;
 use App\Http\Controllers\PriceController;
-use App\Http\Controllers\ReturnsController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\IssuanceController;
-use App\Http\Controllers\ApproveController;
-use App\Http\Controllers\RequestsController;
-use App\Http\Controllers\RequestEngineercontroller;
-use App\Http\Controllers\ApprovalController;
-use App\Http\Controllers\CsvController;
 use App\Http\Controllers\RolesController;
-use App\Http\Controllers\PermissionController;
-use App\Http\Controllers\PmController;
+use App\Http\Controllers\StockController;
+use App\Http\Controllers\VendorController;
+use App\Http\Controllers\ApproveController;
 use App\Http\Controllers\CommentController;
-use App\Http\Controllers\PdfController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReturnsController;
+use App\Http\Controllers\ApprovalController;
+use App\Http\Controllers\IssuanceController;
+use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\RequestsController;
+use App\Http\Controllers\ReturnedController;
+use App\Http\Controllers\IssuanceeController;
+use App\Http\Controllers\IssuancesController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\EngineerReportController;
+use App\Http\Controllers\RequestEngineercontroller;
+use App\Http\Controllers\EngineerIssuanceeController;
 
 
 
@@ -52,7 +53,7 @@ Route::resource('/permissions', PermissionController::class);
 Route::resource('/roles', RolesController::class);
 Route::resource('/vendor', VendorController::class);
 Route::resource('/item', ItemController::class);
-Route::resource('/purchase', PurchaseController::class);
+Route::resource('/purchase', PurchaseController::class)->except('deliveryNote');
 Route::resource('/user', UserController::class);
 Route::resource('/zone', ZoneController::class);
 Route::resource('/issuance',IssuancesController::class);
@@ -228,3 +229,6 @@ Route::get('/items-pdf', [PdfController::class, 'index'])->name('items-pdf');
 Route::get('/vendor-pdf', [PdfController::class, 'vendor'])->name('vendor-pdf');
 Route::get('/price-pdf', [PdfController::class, 'price'])->name('price-pdf');
 
+Route::get('/delivery-note/{id}',[PurchaseController::class,'deliveryNote'])->name('delivery_note');
+
+Route::resource('/engineer_reports',EngineerReportController::class);
