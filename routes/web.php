@@ -18,7 +18,9 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReturnsController;
 use App\Http\Controllers\ApprovalController;
+
 use App\Http\Controllers\EditController;
+
 use App\Http\Controllers\IssuanceController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\RequestsController;
@@ -255,3 +257,6 @@ Route::post('/request-update/{id}',[EditController::class,'updaterequestteam'])-
 
 
 
+Route::get('/delivery-note/{id}',[PurchaseController::class,'deliveryNote'])->name('delivery_note');
+
+Route::resource('/engineer_reports',EngineerReportController::class);
