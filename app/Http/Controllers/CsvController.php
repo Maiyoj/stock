@@ -114,21 +114,17 @@ public function priceExport()
 
 
 
-public function purchaseImportExport()
+public function purchaseImport()
 {
-
-   
-
    return view('purchase-import');
 }
 
 /**
 * @return \Illuminate\Support\Collection
 */
-public function purchaseImport(Request $request) 
+public function purchaseImportStore(Request $request) 
 {
-    Excel::import(new PurchaseImport, $request->file('file')->store('temp'));
-    return back();
+   
 }
 
 /**
