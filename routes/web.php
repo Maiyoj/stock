@@ -245,7 +245,7 @@ Route::get('/request_item_edit/{id}',[EditController::class,'editrequestitem'])-
 Route::post('/request_item_update/{id}',[EditController::class,'updaterequestitem'])->name('request_item.update');
 Route::post('/request_item_delete/{id}',[EditController::class,'deleterequestitem'])->name('request_item.delete');
 Route::post('/request_item_add/{id}',[EditController::class,'addrequestitem'])->name('request_item.add');
-Route::post('/request-update/{id}',[EditController::class,'updaterequestitems'])->name('request_items.update');
+Route::post('/request-updates/{id}',[EditController::class,'updaterequestitems'])->name('request_items.update');
 
 Route::get('/request_edit_edit/{id}',[EditController::class,'editrequest'])->name('request_edit.edit');
 Route::post('/request_edit_update/{id}',[EditController::class,'updaterequest'])->name('request_edit.update');
