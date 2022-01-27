@@ -19,7 +19,7 @@
                                 Purchase
                             </div>
                             <div class="card-body">
-                                <form action="{{route('item.add')}}" method="post" id="add-item">  
+                                <form action="{{route('item.add')}}" method="post" id="add-item" enctype="multipart/form-data">  
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-6">
@@ -73,6 +73,18 @@
                                                         <label for="inputFirstName">PO Number</label>
                                                     </div>
                                                 </div>
+                                                <div class="col-md-12 mt-4" style="display: {{Session::has('cart') ? 'none' : ''}}">
+                                                    <div class="form-floating mb-3 mb-md-0">
+                                                        <input class="form-control" value="{{Session::has('cart') ? Session::get('cart')[0]['date'] : ''}}" id="date" type="{{Session::has('cart') ? 'hidden' : 'date'}}" name="date" placeholder="Enter date" />
+                                                        <label for="inputFirstName">Date</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 mt-4" style="display: {{Session::has('cart') ? 'none' : ''}}">
+                                                    <div class="form-floating mb-3 mb-md-0">
+                                                        <input class="form-control" value="" id="note" type="{{Session::has('cart') ? 'hidden' : 'file'}}" name="delivery_note" placeholder="Attach delivery note" />
+                                                        <label for="inputFirstName">Delivery Note</label>
+                                                    </div>
+                                                </div>
                                                 <div class="col-md-12 mt-4">
                                                     <div class="form-floating mb-3 mb-md-0">
                                                         <input class="form-control" value="" id="inputFirstName" type="text" name="quantity" placeholder="Enter your first name" />
@@ -91,7 +103,7 @@
                                         <div class="col-md-6">
                                             <h4>Items</h4>
                                             @if (Session::has('cart'))
-                                            <table class="table table-striped">
+                                            <table id="datatablesSimple">
                                                 <thead>
                                                   <tr>
                                                     <th scope="col">#</th>
