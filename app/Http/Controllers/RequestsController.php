@@ -26,7 +26,7 @@ class RequestsController extends Controller
 
         $this->middleware('permission:request|request-create|requst-edit|request-delete', ['only' => ['index', 'show']]);
         $this->middleware('permission:request-create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:request-edit', ['only' => ['edit', 'update']]);
+        // $this->middleware('permission:request-edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:request-delete', ['only' => ['destroy']]);
     }
     /**
@@ -49,7 +49,7 @@ class RequestsController extends Controller
     {
         $items=Item::all();
         $zones=Zone::all();
-        $users=User::where('id',Auth::user()->id)->get();
+        $users=User::all();
         return view('request.create',compact('items','zones','users'));
     }
 
@@ -73,7 +73,7 @@ class RequestsController extends Controller
         $requests->status ='pending';
         $requests->save();
 
-       #$admin=User::where('role_id',0)->get();
+       $admin=User::where('role_id',0)->get();
         Notification::send($admin,new Approval());
         return redirect()->route('request.drafts')->with('success','Draft added successfully');
     }

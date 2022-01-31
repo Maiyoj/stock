@@ -59,7 +59,7 @@
                                       
                                       <i class="fas fa-bars"></i> </button>
                                     <ul class="dropdown-menu">
-                                      <li><a class="dropdown-item" href="#">Export to PDF</a></li>
+                                      <li><a class="dropdown-item" href="{{route('requests-pdf')}}">Export to PDF</a></li>
                                       <li><a class="dropdown-item" href="#">Import Excel</a></li>
                                     </ul>
                                   </div> 

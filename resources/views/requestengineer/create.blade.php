@@ -113,7 +113,7 @@
                                     <div class="col-md-4">
                                         <h4>Items</h4>
                                         @if (Session::has('e_request'))
-                                        <table class="table table-striped">
+                                        <table id="datatablesSimple">
                                             <thead>
                                               <tr>
                                                 <th scope="col">#</th>

@@ -497,7 +497,19 @@ $returneds=Returned::whereBetween('created_at', [$from, $to])->get();
    $request->validate([
       'quantity'=>'numeric|required|min:0|not_in:0',
       'PO_number'=>'required|string|unique:purchases',
+      'date' => 'required|date'
   ]);
+  $delivery_note = Session::get('note');
+  if(!$delivery_note)
+  {
+     $request->validate([
+         'delivery_note'=>'mimes:pdf'
+     ]);
+     $file = $request->delivery_note;
+     $file_name = time().'.'.$file->getClientOriginalExtension();
+     $file->move(public_path('purchases_files'),$file_name);
+     Session::put('note',$file_name);
+  }
   $items=Session::get('cart');
   $price= Price::where('item_id',$request->item_id)->first();
    if(!$items)
@@ -509,6 +521,7 @@ $returneds=Returned::whereBetween('created_at', [$from, $to])->get();
                'PO_number'=>$request->PO_number,
                'quantity'=>$request->quantity,
                'price'=>$request->quantity*$price->price,
+               'date' => $request->date
             ]
       ];
     Session::put('cart',$items);
@@ -524,6 +537,7 @@ $returneds=Returned::whereBetween('created_at', [$from, $to])->get();
          'PO_number'=>$request->PO_number,
          'quantity'=>$request->quantity,
          'price'=>$request->quantity*$price->price,
+         'date' => $request->date
       ];
       Session::put('cart',$items);
    }
@@ -532,15 +546,6 @@ $returneds=Returned::whereBetween('created_at', [$from, $to])->get();
  }
  public function remove($id)
  {
-
-
-
-
-
-
-
-
-
    //
     $items=Session::get('cart');
     if(isset($items[$id]))
@@ -557,6 +562,7 @@ $returneds=Returned::whereBetween('created_at', [$from, $to])->get();
  public function complete()
  {
    $items=Session::get('cart');
+
    if(!$items)
    {
       return redirect()->back()->with('success','Please add items first. ');
@@ -570,6 +576,8 @@ $returneds=Returned::whereBetween('created_at', [$from, $to])->get();
       $price=$price+$item['price'];
    }
    $purchase->price=$price;
+   $purchase->date = $items[0]['date'];
+   $purchase->delivery_note = Session::get('note');
    $purchase->save();
 
    foreach($items as $item)
@@ -594,11 +602,72 @@ $returneds=Returned::whereBetween('created_at', [$from, $to])->get();
             }
       }
       Session::forget('cart');
+      Session::forget('note');
       return redirect()->route('purchase.index')->with('success', 'Purchase added successfully');
    }
 
+public function purchaseitemremove($id)
+{
+   $item = PurchaseItem::findOrFail($id);
+   $purchase = Purchase::where('id',$item->purchase_id)->first();
+   if($purchase)
+   {
+      $price = Price::where('item_id',$item->item_id)->first();
+      $purchase->price = $purchase->price - ($price->price * $item->quantity);
+      $purchase->save();
+   }
+   $item -> delete();
+   $items = PurchaseItem::where('purchase_id',$purchase->id)->count();
+   if($items<1)
+   {
+      $purchase->delete();
+      return redirect()->route('purchase.index')->with('success', 'Purchase removed successfully');
+   }
+   return redirect()->back()->with('success','Item removed from the purchase list');
+}
+public function purchaseitemadd($id,Request $request)
+{
+   $request->validate([
+      'item_id' => 'required',
+      'quantity' => 'integer|required',
+   ]);
 
+   $purchase = Purchase::findOrFail($id);
+   $price = Price::where('item_id',$request->item_id)->first();
+   $purchase->price = $purchase->price + ($price->price * $request->quantity);
+   $purchase->save();
 
+   $item = new PurchaseItem;
+   $item->item_id = $request->item_id;
+   $item-> purchase_id = $id;
+   $item-> quantity = $request->quantity;
+   $item -> save();
+
+   return redirect()->back()->with('success','Item added to purchase list successfully');
+}
+public function purchaseupdate($id,Request $request)
+{
+   $request->validate([
+      'PO_number' => 'required|string',
+      'date' => 'required|date',
+      'delivery_note' => 'nullable|mimes:pdf'
+   ]);
+
+   $purchase = Purchase::findOrFail($id);
+   $purchase->PO_number = $request->PO_number;
+   $purchase->date = $request->date;
+   $purchase->delivery_note = $purchase->delivery_note;
+   if($request->has('delivery_note'))
+   {
+      $file = $request->delivery_note;
+      $file_name = time().'.'.$file->getClientOriginalExtension();
+      $file->move(public_path('purchases_files'),$file_name);
+      $purchase->delivery_note = $file_name;
+   }
+   $purchase->save();
+
+   return redirect()->route('purchase.index')->with('success','Purchase updated successfully');
+}
    #teamlead request
    public function Request(Request $request)
    {

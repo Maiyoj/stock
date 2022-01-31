@@ -60,13 +60,6 @@
                                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                     Dashboard
                                 </a>
-                                
-
-
-
-
-
-                                
                                 @can('item')
                                 <a class="nav-link collapsed" href="{{route('item.index')}}"  data-bs-target="#collapseLayouts1" aria-expanded="false" aria-controls="collapseLayouts">
                                     <div class="sb-nav-link-icon"><i class="fab fa-product-hunt"></i></div>
@@ -253,6 +246,12 @@
                                 <a class="nav-link" href="{{route('requestengineer.index')}}">Requests</a>
                         </nav>
                         </div> 
+                        
+                        <a class="nav-link collapsed" href="{{route('report.index')}}" >
+                            <div class="sb-nav-link-icon"><i class="fas fa-book"></i></div>
+                          Reports
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
                         @endcan
 
                         {{-- @can('ereturns')
@@ -315,7 +314,7 @@
         <script src="assets/demo/chart-area-demo.js"></script>
         <script src="assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-        <script src="js/datatables-simple-demo.js"></script>
+        <script src="{{asset('js/datatables-simple-demo.js')}}"></script>
     
     </body>
 </html>

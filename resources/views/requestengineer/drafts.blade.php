@@ -95,7 +95,7 @@
                                                 <th> Received Status</th>
                                                 <th>Date Added</th>
                                             </tr>
-                                            <th colspan="2">Action</th>
+                                            <th colspan="3">Action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -110,6 +110,7 @@
                                             <td class="{{$requestengineer->rstatus=='Not Received' ? 'text-danger' :'text-success'}}">{{$requestengineer->rstatus}}</td>
                                              <td>{{$requestengineer->created_at}}</td>
                                             <td><a href="{{route('requestengineer.show', $requestengineer->id)}}"><i class="fa fa-eye text-primary"> </i></td>
+                                            <td><a href="{{route('requestengineer.edit',$requestengineer->id)}}"><i class="fa fa-edit text-primary"></i></td>
                                             <td>
                                                 <form action="{{url('requestengineer/'.$requestengineer->id)}}" method="post">
                                                     @csrf

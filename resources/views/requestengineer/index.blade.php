@@ -51,8 +51,9 @@
                                 {{--<div class="p-2 bd-highlight"><a href="" class="btn btn-danger"  id="deleteAllSelectedRecord" >Delete Selected</a></div> --}}
                                 <div class="p-2 bd-highlight"><a class="btn btn-success" href="{{ route('csv.requestengineer-export') }}">Export data</a></div>
                                 @can('requestengineer-create')
-                            <div class="p-2 bd-highlight"><a class="btn btn-primary" href="{{ route('requestengineer.create') }}">Add Request</a></div>
-                            @endcan
+                                <div class="p-2 bd-highlight"><a class="btn btn-primary" href="{{ route('requestengineer.create') }}">Add Request</a></div>
+                                @endcan
+                               
                             </div>
                         </div>
                     </div>
@@ -63,7 +64,7 @@
                                       
                                       <i class="fas fa-bars"></i> </button>
                                     <ul class="dropdown-menu">
-                                      <li><a class="dropdown-item" href="#">Export to PDF</a></li>
+                                      <li><a class="dropdown-item" href="{{route('requestsengineer-pdf')}}">Export to PDF</a></li>
                                       <li><a class="dropdown-item" href="#">Import Excel</a></li>
                                     </ul>
                                   </div> 

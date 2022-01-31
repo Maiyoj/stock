@@ -59,14 +59,19 @@ class ZoneController extends Controller
             
         ]);
 
-
-        $zone=new Zone;
-        $zone->user_id=$request->user_id;
-        $zone->zone=$request->zone;
-
-        $zone->save();
-
-
+        $zone = Zone::where('zone',$request->zone)->first();
+        if ($zone!=null) {
+            $zone->zone=$request->zone;
+            $zone->user_id=$request->user_id;
+            $zone->deleted_at = null;
+            $zone->save();
+        } else {
+            $zone=new Zone;
+            $zone->user_id=$request->user_id;
+            $zone->zone=$request->zone;
+            $zone->save();
+        }
+        
         return redirect()->route('zone.index')->with('success', 'Zone Added Sucessfully');
     }
 

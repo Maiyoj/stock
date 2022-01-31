@@ -47,4 +47,8 @@ public function returns()
  {
      return $this->hasMany(EngineerComment::class);
  }
+ public function reports()
+ {
+     return $this->hasMany(EngineerReport::class);
+ }
 }

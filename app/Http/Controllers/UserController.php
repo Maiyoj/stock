@@ -86,16 +86,29 @@ class UserController extends Controller
             
         ]);
 
-
-        $user=new User;
-        $user->name=$request->name;
-        $user->email=$request->email;
-        $user->password=Hash::make($request->password);
-        $user->assignRole($request->input('roles'));
-        $user->save();
-
-
-        Notification::send($user,new Welcome());
+        $user = User::where('email',$request->email)->first();
+        if(!$user)
+        {
+            $user=new User;
+            $user->name=$request->name;
+            $user->email=$request->email;
+            $user->password=Hash::make($request->password);
+            $user->assignRole($request->input('roles'));
+            $user->save();
+    
+            Notification::send($user,new Welcome());
+        }
+        else{
+            $user->name=$request->name;
+            $user->email=$request->email;
+            $user->password=Hash::make($request->password);
+            $user->assignRole($request->input('roles'));
+            $user->deleted_at = null;
+            $user->save();
+            
+            Notification::send($user,new Welcome());
+        }
+       
         return redirect()->route('user.index')->with('success','User added successfully');
 
     }

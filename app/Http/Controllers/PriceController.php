@@ -63,8 +63,6 @@ class PriceController extends Controller
     {
         $request->validate([
             
-           
-            
         ]);
 
 
