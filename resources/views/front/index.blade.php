@@ -116,7 +116,7 @@
                                 </div>
                               </a>
                               @endcan
-                              @can('stocks')
+                              @can('stock')
                               <a class="nav-link collapsed" href="{{route('stocks.index')}}"  data-bs-target="#collapseLayouts3" aria-expanded="false" aria-controls="collapseLayouts">
                                     <div class="sb-nav-link-icon"><i class="fa fa-archive"></i></div>
                                   Stocks
@@ -161,7 +161,7 @@
                                   @endcan
                         
                                 
-                                @can('teamleadstock')
+                                @can('team')
                                 <a class="nav-link collapsed" href="{{route('teamleadstocks.index')}}"  data-bs-target="#collapseLayouts3" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-box"></i></div>
                                Teamlead Stocks
@@ -233,7 +233,7 @@
                                                </div>
                                                @endcan
 
-                         <div class="sb-sidenav-menu-heading">Engineer Menu</div>
+                         <div class="sb-sidenav-menu-heading"></div>
                          @can('requestengineer')
                       <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"  data-bs-target="#collapseLayouts41" aria-expanded="false" aria-controls="collapseLayouts">
                             <div class="sb-nav-link-icon"><i class="fas fa-paper-plane"></i></div>

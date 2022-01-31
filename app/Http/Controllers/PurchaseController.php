@@ -16,10 +16,10 @@ class PurchaseController extends Controller
     {
 
         $this->middleware('auth');
-      $this->middleware('permission:purchase-list|purchase-create|purchase-edit|purchase-delete', ['only' => ['index', 'show']]);
-      $this->middleware('permission:purchase-create', ['only' => ['create', 'store']]);
-      $this->middleware('permission:purchase-edit', ['only' => ['edit', 'update']]);
-      $this->middleware('permission:purchase-delete', ['only' => ['destroy']]);
+      $this->middleware('permission:purchase|purchase|purchase|purchase', ['only' => ['index', 'show']]);
+      $this->middleware('permission:purchase', ['only' => ['create', 'store']]);
+      $this->middleware('permission:purchase', ['only' => ['edit', 'update']]);
+      $this->middleware('permission:purchase', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.

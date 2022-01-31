@@ -17,7 +17,7 @@ class PmController extends Controller
 
         $this->middleware('auth');
 
-        $this->middleware('permission:pm|pm-create|pm-edit|pm-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:pm|pm|pm|pm-', ['only' => ['index', 'show']]);
        
     }
 

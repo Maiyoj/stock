@@ -43,7 +43,7 @@
                                     <div class="d-flex flex-row bd-highlight mb-3">
                                     {{--<div class="p-2 bd-highlight"><a href="" class="btn btn-danger"  id="deleteAllSelectedRecord" >Delete Selected</a></div> --}}
                                     <div class="p-2 bd-highlight"> <a class="btn btn-success" href="{{ route('csv.request-export') }}">Export data</a></div>
-                                    @can('request-create')
+                                    @can('request')
                                 <div class="p-2 bd-highlight"><a class="btn btn-primary" href="{{ route('request.create') }}">Add Request</a></div>
                                 @endcan
                                 </div>
@@ -105,7 +105,7 @@
                                              <td><a href="{{route('request.show', $request->id)}}"><i class="fa fa-eye text-primary"> </i></td>
                                             <td><a href="{{route('request.edit',$request->id)}}"><i class="fa fa-edit"></i></a></td>
                                             <td>
-                                                @can('request-delete')
+                                                @can('request')
                                                 <form action="{{url('request/'.$request->id)}}" method="post">
                                                     @csrf
                                                     @method('DELETE')  

@@ -119,7 +119,7 @@
                                 </div>
                               </a>
                               @endcan
-                              @can('stocks')
+                              @can('stock')
                               <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts3" aria-expanded="false" aria-controls="collapseLayouts">
                                     <div class="sb-nav-link-icon"><i class="fa fa-archive"></i></div>
                                   Stocks
@@ -198,7 +198,7 @@
 
 
 
-                                    @can('report')
+                                    {{-- @can('report')
 
                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts16" aria-expanded="false" aria-controls="collapseLayouts">
                                     <div class="sb-nav-link-icon"><i class="fas fa-folder-open"></i></i></div>
@@ -221,7 +221,7 @@
                                 
                                 </nav>
                                 </div> 
-                                @endcan
+                                @endcan --}}
                                 @can('user')
                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts6" aria-expanded="false" aria-controls="collapseLayouts">
                                     <div class="sb-nav-link-icon"><i class="fa fa-users"></i></div>
@@ -248,7 +248,7 @@
                                 
                                  
                                 <div class="sb-sidenav-menu-heading">Teamlead Menu</div> 
-                                @can('teamleadstock')
+                                @can('team')
                                 <a class="nav-link collapsed" href="{{route('teamleadstocks.index')}}"  data-bs-target="#collapseLayouts3" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-box"></i></i></div>
                                Teamlead Stocks
@@ -277,7 +277,7 @@
                             </nav>
                             </div>
                             @endcan
-                        {{-- @can('returns-list')
+                        {{-- {{-- @can('returns-list')
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts8" aria-expanded="false" aria-controls="collapseLayouts">
                          <div class="sb-nav-link-icon"><i class="fa fa-file"></i></div>
                                         Teamlead Returns
@@ -289,8 +289,8 @@
                                              <a class="nav-link" href="{{route('returns.create')}}">Add Returns</a>
                          </nav>
                         </div>
-                         @endcan --}}
-                            @can('ereturns')
+                         @endcan 
+                             @can('ereturns')
                                 <a class="nav-link collapsed" href="{{route('returned.index')}}"  data-bs-target="#collapseLayouts8" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-undo-alt"></i></i></div>
                                            Engineer-returns
@@ -299,10 +299,10 @@
                                          <div class="collapse" id="collapseLayouts8" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                              <nav class="sb-sidenav-menu-nested nav">
                                                  {{-- <a class="nav-link" href="">View Returns</a>
-                                                 <a class="nav-link" href="{{route('returned.create')}}">Add Returns</a> --}}
+                                                 <a class="nav-link" href="{{route('returned.create')}}">Add Returns</a> 
                                          </nav>
                                      </div>   
-                                     @endcan
+                                     @endcan  --}}
                                 @can('approval')
                                 <a class="nav-link collapsed"  href="{{route('approval.index')}}" data-bs-target="#collapseLayouts89" aria-expanded="false" aria-controls="collapseLayouts">
                                         <div class="sb-nav-link-icon"><i class="fas fa-check-circle"></i></i></div>

@@ -18,7 +18,7 @@
                                 Files
                              <form action="{{ route('csv.price-import') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
-                               @can('permission-create')
+                               @can('permission')
                                 <div class="form-group mb-10" style="max-width: 400px; margin: 5 ;">
                                     
                                     <!-- <div class="custom-file text-right"   class="card mb-6">
@@ -68,10 +68,10 @@
                                             
                                              <td>{{$permission->created_at}}</td>
 
-                                             @can('permission-edit')
+                                             @can('permission')
                                             <td><a href="{{route('permissions.edit', $permission->id)}}"><i class="fa fa-edit text-primary"> </i></td>
                                                 @endcan
-                                                @can('permission-delete')
+                                                @can('permission')
                                             <td>
                                                 <form action="{{url('permissions/'.$permission->id)}}" method="post">
                                                     @csrf

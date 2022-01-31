@@ -13,10 +13,10 @@ class ItemController extends Controller
 
         $this->middleware('auth');
 
-      $this->middleware('permission:item|item-create|item-edit|item-delete', ['only' => ['index', 'show']]);
-        $this->middleware('permission:item-create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:item-edit', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:item-delete', ['only' => ['destroy']]);
+      $this->middleware('permission:item|item|item|item', ['only' => ['index', 'show']]);
+        $this->middleware('permission:item', ['only' => ['create', 'store']]);
+        $this->middleware('permission:item', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:item', ['only' => ['destroy']]);
 
     }
     /**

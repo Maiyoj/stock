@@ -24,10 +24,10 @@ class RequestsController extends Controller
         $this->middleware('auth');
 
 
-        $this->middleware('permission:request|request-create|requst-edit|request-delete', ['only' => ['index', 'show']]);
-        $this->middleware('permission:request-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:request|request|requst|request', ['only' => ['index', 'show']]);
+        $this->middleware('permission:request', ['only' => ['create', 'store']]);
         // $this->middleware('permission:request-edit', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:request-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:request', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.

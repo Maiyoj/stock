@@ -15,10 +15,10 @@ class VendorController extends Controller
         $this->middleware('auth');
 
 
-        $this->middleware('permission:vendor|vendor-create|vendor-edit|vendor-delete', ['only' => ['index', 'show']]);
-        $this->middleware('permission:vendor-create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:vendor-edit', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:vendor-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:vendor|vendor|vendor|vendor', ['only' => ['index', 'show']]);
+        $this->middleware('permission:vendor', ['only' => ['create', 'store']]);
+        $this->middleware('permission:vendor', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:vendor', ['only' => ['destroy']]);
 
     }
     /**

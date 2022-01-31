@@ -13,10 +13,10 @@ class ZoneController extends Controller
     {
 
         $this->middleware('auth');
-        $this->middleware('permission:zone|zone-create|zone-edit|zone-delete', ['only' => ['index', 'show']]);
-        $this->middleware('permission:zone-create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:zone-edit', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:zone-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:zone|zone|zone|zone', ['only' => ['index', 'show']]);
+        $this->middleware('permission:zone', ['only' => ['create', 'store']]);
+        $this->middleware('permission:zone', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:zone', ['only' => ['destroy']]);
 
 
     }
