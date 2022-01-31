@@ -27,10 +27,10 @@ class UserController extends Controller
         $this->middleware('auth');
 
 
-       $this->middleware('permission:user|user-create|user-edit|user-delete', ['only' => ['index','store']]);
-        $this->middleware('permission:user-create', ['only' => ['create','store']]);
-        $this->middleware('permission:user-edit', ['only' => ['edit','update']]);
-        $this->middleware('permission:user-delete', ['only' => ['destroy']]);
+       $this->middleware('permission:user|user|user|user', ['only' => ['index','store']]);
+        $this->middleware('permission:user', ['only' => ['create','store']]);
+        $this->middleware('permission:user', ['only' => ['edit','update']]);
+        $this->middleware('permission:user', ['only' => ['destroy']]);
 
 
     }
@@ -86,16 +86,29 @@ class UserController extends Controller
             
         ]);
 
-
-        $user=new User;
-        $user->name=$request->name;
-        $user->email=$request->email;
-        $user->password=Hash::make($request->password);
-        $user->assignRole($request->input('roles'));
-        $user->save();
-
-
-        Notification::send($user,new Welcome());
+        $user = User::where('email',$request->email)->first();
+        if(!$user)
+        {
+            $user=new User;
+            $user->name=$request->name;
+            $user->email=$request->email;
+            $user->password=Hash::make($request->password);
+            $user->assignRole($request->input('roles'));
+            $user->save();
+    
+            Notification::send($user,new Welcome());
+        }
+        else{
+            $user->name=$request->name;
+            $user->email=$request->email;
+            $user->password=Hash::make($request->password);
+            $user->assignRole($request->input('roles'));
+            $user->deleted_at = null;
+            $user->save();
+            
+            Notification::send($user,new Welcome());
+        }
+       
         return redirect()->route('user.index')->with('success','User added successfully');
 
     }

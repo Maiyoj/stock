@@ -75,6 +75,7 @@
                                             @can('approval-show')
                                             <td><a href="{{route('requestengineer.show', $requestengineer->id)}}"><i class="fa fa-eye text-primary"> </i></td>
                                                 @endcan
+                                                <td><a href="{{route('requestengineer.edit',$requestengineer->id)}}"><i class="fa fa-edit text-primary"></i></td>
                                                 @if ($requestengineer->status=='pending')
                                                 {{-- <td><a href="{{route('requestengineer.approvee', $requestengineer->id)}}"><i class="fa fa-check text-primary"> </i></td> --}}
                                                     <td><a href="{{route('requestengineer.approvee', $requestengineer->id)}}"><i class="btn-btn-primary text-danger"  type="submit">Approve</i></td>  

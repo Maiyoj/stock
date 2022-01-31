@@ -17,10 +17,10 @@ class PriceController extends Controller
 
         $this->middleware('auth');
 
-        $this->middleware('permission:price|price-create|price-edit|price-delete', ['only' => ['index', 'show']]);
-        $this->middleware('permission:price-create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:price-edit', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:price-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:price|price|price|price', ['only' => ['index', 'show']]);
+        $this->middleware('permission:price', ['only' => ['create', 'store']]);
+        $this->middleware('permission:price', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:price', ['only' => ['destroy']]);
 
 
     }
@@ -62,8 +62,6 @@ class PriceController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            
-           
             
         ]);
 

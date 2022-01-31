@@ -11,6 +11,7 @@
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">Show Request Details </li>
                         </ol>
+                        <div class="p-2 bd-highlight"><a class="btn btn-success text-white" href="{{ route('pdf.team',$request->id) }}">Export PDF</a></div>
                         <div class="card mb-12">
                             <div class="card-header">
                                 <i class="fab fa-product-hunt"></i>
@@ -73,7 +74,7 @@
                                     
                                     <div class="col-md-4">
                                         <h4>Request Items</h4>
-                                        <table class="table table-striped">
+                                        <table id="datatablesSimple">
                                             <thead>
                                               <tr>
                                                 <th scope="col">#</th>

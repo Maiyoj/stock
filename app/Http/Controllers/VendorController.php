@@ -15,10 +15,10 @@ class VendorController extends Controller
         $this->middleware('auth');
 
 
-        $this->middleware('permission:vendor|vendor-create|vendor-edit|vendor-delete', ['only' => ['index', 'show']]);
-        $this->middleware('permission:vendor-create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:vendor-edit', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:vendor-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:vendor|vendor|vendor|vendor', ['only' => ['index', 'show']]);
+        $this->middleware('permission:vendor', ['only' => ['create', 'store']]);
+        $this->middleware('permission:vendor', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:vendor', ['only' => ['destroy']]);
 
     }
     /**
@@ -58,15 +58,28 @@ class VendorController extends Controller
             'name'=>'required|string|unique:vendors'
         ]);
 
-
-        $vendor=new Vendor;
-        $vendor->title=$request->title;
-        $vendor->name=$request->name;
-        $vendor->email=$request->email;
-        $vendor->number=$request->number;
-        $vendor->address=$request->address;
-        $vendor->country=$request->country;
-        $vendor->save();
+        $vendor = Vendor::where('name',$request->name)->first();
+        if ($vendor!=null) {
+            $vendor->title=$request->title;
+            $vendor->name=$request->name;
+            $vendor->email=$request->email;
+            $vendor->number=$request->number;
+            $vendor->address=$request->address;
+            $vendor->country=$request->country;
+            $vendor->deleted_at = null;
+            $vendor->save();
+        } else {
+            $vendor=new Vendor;
+            $vendor->title=$request->title;
+            $vendor->name=$request->name;
+            $vendor->email=$request->email;
+            $vendor->number=$request->number;
+            $vendor->address=$request->address;
+            $vendor->country=$request->country;
+            $vendor->save();
+        }
+        
+       
 
         return redirect()->route('vendor.index')->with('success', 'Vendor added sucessfully');
 

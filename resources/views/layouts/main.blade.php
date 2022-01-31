@@ -119,7 +119,7 @@
                                 </div>
                               </a>
                               @endcan
-                              @can('stocks')
+                              @can('stock')
                               <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts3" aria-expanded="false" aria-controls="collapseLayouts">
                                     <div class="sb-nav-link-icon"><i class="fa fa-archive"></i></div>
                                   Stocks
@@ -248,7 +248,7 @@
                                 
                                  
                                 <div class="sb-sidenav-menu-heading">Teamlead Menu</div> 
-                                @can('teamleadstock')
+                                @can('team')
                                 <a class="nav-link collapsed" href="{{route('teamleadstocks.index')}}"  data-bs-target="#collapseLayouts3" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-box"></i></i></div>
                                Teamlead Stocks
@@ -381,7 +381,7 @@
         <script src="assets/demo/chart-area-demo.js"></script>
         <script src="assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-        <script src="js/datatables-simple-demo.js"></script>
+        <script src="{{asset('js/datatables-simple-demo.js')}}"></script>
         <script src="{{asset('js/delete.js')}}"></script>
     
     </body>

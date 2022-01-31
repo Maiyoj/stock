@@ -8,15 +8,13 @@ use App\Models\Zone;
 class ZoneController extends Controller
 {
 
-
     public function __construct()
     {
-
         $this->middleware('auth');
-        $this->middleware('permission:zone|zone-create|zone-edit|zone-delete', ['only' => ['index', 'show']]);
-        $this->middleware('permission:zone-create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:zone-edit', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:zone-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:zone|zone|zone|zone',['only' => ['index', 'show']]);
+        $this->middleware('permission:zone', ['only' => ['create', 'store']]);
+        $this->middleware('permission:zone', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:zone', ['only' => ['destroy']]);
 
 
     }
@@ -59,14 +57,19 @@ class ZoneController extends Controller
             
         ]);
 
-
-        $zone=new Zone;
-        $zone->user_id=$request->user_id;
-        $zone->zone=$request->zone;
-
-        $zone->save();
-
-
+        $zone = Zone::where('zone',$request->zone)->first();
+        if ($zone!=null) {
+            $zone->zone=$request->zone;
+            $zone->user_id=$request->user_id;
+            $zone->deleted_at = null;
+            $zone->save();
+        } else {
+            $zone=new Zone;
+            $zone->user_id=$request->user_id;
+            $zone->zone=$request->zone;
+            $zone->save();
+        }
+        
         return redirect()->route('zone.index')->with('success', 'Zone Added Sucessfully');
     }
 

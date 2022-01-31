@@ -13,13 +13,11 @@ class StockController extends Controller
     public function __construct()
     {
 
-        $this->middleware('auth');
-
-
+     $this->middleware('auth');
         
-      $this->middleware('permission:teamleadstock|teamleadstocks-create|teamleadstocks-edit|teamleadstock-delete', ['only' => ['index', 'show']]);
-      $this->middleware('permission:stocks|stocks-create|stocks-edit|stocks-delete', ['only' => ['index', 'show']]);
-      #$this->middleware('permission:team-list|team-create|team-edit|team-delete', ['only' => ['index', 'show']]);
+      $this->middleware('permission:stock|stock|stocks|stock', ['only' => ['index', 'show']]);
+     
+      $this->middleware('permission:team|team|team|team', ['only' => ['index', 'show']]);
     }
     public function index()
     {

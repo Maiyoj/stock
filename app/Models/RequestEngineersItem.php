@@ -14,6 +14,9 @@ class RequestEngineersItem extends Model
 }
 
 
-
+public function items()
+{
+    return $this->belongsTo(Item::class,'item_id');
+}
 
 }
