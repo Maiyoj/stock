@@ -261,3 +261,6 @@ Route::post('/request-update/{id}',[EditController::class,'updaterequestteam'])-
 
 
 
+Route::get('/delivery-note/{id}',[PurchaseController::class,'deliveryNote'])->name('delivery_note');
+
+Route::resource('/engineer_reports',EngineerReportController::class);
