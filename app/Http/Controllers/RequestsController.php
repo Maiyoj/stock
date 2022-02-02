@@ -36,9 +36,10 @@ class RequestsController extends Controller
      */
     public function index()
     {
+        
         $users=User::where('id',Auth::user()->id)->get();
-        $requests= Requests::where('user_id',Auth::user()->id)->where('draft',1)->get();
-        return view('request.index',compact('requests'));
+        $requests= Requests::where('teamlead_id',Auth::user()->id)->where('draft',1)->get();
+        return view('request.index',compact('requests', 'users'));
     }
     /**
      * Show the form for creating a new resource.
@@ -67,14 +68,14 @@ class RequestsController extends Controller
 
         $requests =  new Requests;
         $requests->user_id=$request->user_id;
+        $requests->teamlead_id= Auth::user()->id;
         $requests->zone_id=$request->zone_id;
         $requests->item_id=$request->item_id;
         $requests->quantity=$request->quantity;
         $requests->status ='pending';
         $requests->save();
-
-       $admin=User::where('role_id',0)->get();
-        Notification::send($admin,new Approval());
+        
+       
         return redirect()->route('request.drafts')->with('success','Draft added successfully');
     }
 
@@ -125,6 +126,7 @@ class RequestsController extends Controller
 
         $requests = Requests::findOrFail($id);
         $requests->user_id=$request->user_id;
+        $requests->teamlead_id= Auth::user()->id;
         $requests->zone_id=$request->zone_id;
         $requests->item_id=$request->item_id;
         $requests->quantity=$request->quantity;
@@ -152,8 +154,8 @@ class RequestsController extends Controller
     public function drafts(Request $request)
     {
        
-        $users=User::where('id',Auth::user()->id)->get();
-        $requests= Requests::where('user_id',Auth::user()->id)->where('draft',0)->get();
+       $users=User::where('id',Auth::user()->id)->get();
+        $requests= Requests::where('teamlead_id',Auth::user()->id)->where('draft',0)->get();
         return view('request.drafts',compact('requests'));
     }
     

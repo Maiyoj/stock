@@ -736,6 +736,7 @@ public function purchaseupdate($id,Request $request)
    $first_item = reset($items);
    $requests->user_id=$first_item['user_id'];
    $requests->zone_id=$first_item['zone_id'];
+   $requests->teamlead_id= Auth::user()->id;
    $requests->status ='pending';
    $requests->save();
    
@@ -744,6 +745,7 @@ public function purchaseupdate($id,Request $request)
       
          $request_item=new RequestItems();
          $request_item->requests_id=$requests->id;
+         #$requests->teamlead_id= Auth::user()->id;
          $request_item->item_id=$item['item_id'];
          $request_item->quantity=$item['quantity'];
          $request_item->save();
@@ -752,9 +754,10 @@ public function purchaseupdate($id,Request $request)
       $admin=User::where('hasRole',Admin)->get();
       Notification::send($admin,new Approval());
 */
-      /*$user=User::findOrFail($requests->user_id);
+      $user=User::findOrFail($requests->user_id);
       $user = User::where('id',$requests->user_id)->first();
-      $user->notify(new Approval());*/
+      $user->notify(new Approval());
+     
       Session::forget('request');
       return redirect()->route('request.drafts')->with('success','Request sent successfully');
    }

@@ -52,7 +52,10 @@ class ItemController extends Controller
     {
         $request->validate([
             
-            'name'=>'required|string'
+            'name'=>'required|string',
+            'sku'=>'required|string',
+            'threshold'=>'required|string',
+
         ]);
 
         $item = Item::withTrashed()-> where('name',$request->name)->first();
@@ -120,8 +123,9 @@ class ItemController extends Controller
     {
      
         $request->validate([
-            
-            'name'=>'required|string'
+           'name'=>'required|string',
+            'sku'=>'required|string',
+            'threshold'=>'required|string',
         ]);
 
 

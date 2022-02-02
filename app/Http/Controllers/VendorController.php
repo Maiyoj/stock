@@ -55,7 +55,11 @@ class VendorController extends Controller
 
         $request->validate([
             
-            'name'=>'required|string|unique:vendors'
+            'name'=>'required|string|unique:vendors',
+            'email'=>'required|string|unique:vendors',
+            'title'=>'required|string',
+            'number'=>'required|string',
+            
         ]);
 
         $vendor = Vendor::where('name',$request->name)->first();
@@ -121,7 +125,10 @@ class VendorController extends Controller
     {
            $request->validate([
             
-            'name'=>'required|string'
+            'name'=>'required|string|unique:vendors',
+            'email'=>'required|string|unique:vendors',
+            'title'=>'required|string',
+            'number'=>'required|string',
         ]);
 
 

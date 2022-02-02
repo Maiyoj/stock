@@ -21,7 +21,7 @@ class CreateEngineerReportsTable extends Migration
             $table->string('site_name');
             $table->string('client_name');
             $table->integer('allocated_quantity');
-            $table->string('document');
+            $table->string('document')->nullable();
             $table->timestamps();
         });
     }

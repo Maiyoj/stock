@@ -22,7 +22,7 @@ class Requests extends Model
    
     public function user()
     {
-        return $this->belongsTo(User::class)->withTrashed();
+        return $this->belongsTo(User::class, 'teamlead_id')->withTrashed();
     }
 
     public function stock()

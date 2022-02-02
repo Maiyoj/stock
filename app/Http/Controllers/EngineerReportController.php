@@ -47,7 +47,7 @@ class EngineerReportController extends Controller
             'site_name'=> 'required|string',
             'client_name'=> 'required|string',
             'quantity'=> 'required|integer',
-            'document'=> 'required|mimes:pdf',
+            'document'=> 'nullable|mimes:pdf',
         ]);
         $engineerReport = new EngineerReport();
         $engineerReport->user_id = Auth::user()->id;
@@ -58,11 +58,14 @@ class EngineerReportController extends Controller
         $engineerReport->allocated_quantity = $request->quantity;
 
         $file = $request->document;
+        if ($file !== null){
         $file_name = time().'.'.$file->getClientOriginalExtension();
+        
         $file->move(public_path().'/engineer_reports_files/',$file_name);
 
         $engineerReport->document = $file_name;
         $engineerReport->save();
+        }
 
         return redirect()->route('report.index')->with('success','Report added successfully');
 
