@@ -36,7 +36,7 @@ class RequestEngineercontroller extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {  
         $users=User::where('id',Auth::user()->id)->get();
         $requestengineers= RequestEngineer::where('engineer_id',Auth::user()->id)->where('draft',1)->get();
         return view('requestengineer.index',compact('requestengineers'));
@@ -96,7 +96,6 @@ class RequestEngineercontroller extends Controller
         $requestengineer=Requestengineer::findOrFail($id);
         $items=Item::all();
         $report = EngineerReport::where('request_engineer_id',$requestengineer->id)->get();
-    
         $comment=EngineerComment::where('request_engineer_id',$requestengineer->id)->get();
         return view('requestengineer.show',compact('requestengineer','items', 'comment','report'));
     }

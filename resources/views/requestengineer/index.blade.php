@@ -65,7 +65,6 @@
                                       <i class="fas fa-bars"></i> </button>
                                     <ul class="dropdown-menu">
                                       <li><a class="dropdown-item" href="{{route('requestsengineer-pdf')}}">Export to PDF</a></li>
-                                      <li><a class="dropdown-item" href="#">Import Excel</a></li>
                                     </ul>
                                   </div> 
                             </div>
@@ -116,7 +115,7 @@
                                             <td>{{$requestengineer->erequests_item->count()}}</td>
                                             <td>{{$requestengineer->purpose}}</td>
                                             <td class="{{$requestengineer->status=='pending' ? 'text-danger' :'text-success'}}">{{$requestengineer->status}}</td>
-                                            <td class="{{$requestengineer->rstatus=='Not received' ? 'text-danger' :'text-success'}}">{{$requestengineer->rstatus}}</td>
+                                            {{-- <td class="{{$requestengineer->rstatus=='Not received' ? 'text-danger' :'text-success'}}">{{$requestengineer->rstatus}}</td> --}}
                                              <td>{{$requestengineer->created_at}}</td>
                                              @can('requestengineer')
                                             <td><a href="{{route('requestengineer.show', $requestengineer->id)}}"><i class="fa fa-eye text-primary"> </i></td>

@@ -9,6 +9,7 @@ use App\Models\Vendor;
 use App\Models\Purchase;
 use App\Models\RequestEngineer;
 use App\Models\Requests;
+use App\Models\EngineerReport;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 class PdfController extends Controller
@@ -91,11 +92,11 @@ class PdfController extends Controller
     public function engineer($id)
     {
         $requestengineer=RequestEngineer::findOrFail($id);
-        
+        $report = EngineerReport::where('request_engineer_id',$requestengineer->id)->get();
         $items=Item::all();
           // share data to view
            view()->share('pdf/requestengineer',$requestengineer);
-            $pdf = PDF::loadView('pdf/requestengineer',['requestengineer'=>$requestengineer,'items'=>$items]);
+            $pdf = PDF::loadView('pdf/requestengineer',['requestengineer'=>$requestengineer,'items'=>$items, 'report'=>$report]);
             return $pdf->download('requestengineer.pdf');
     }
     public function team($id)

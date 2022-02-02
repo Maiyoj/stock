@@ -50,8 +50,6 @@
                     <td>{{$requestengineer->purpose}}</td>
                 </tr>                                                           
                 @empty
-                
-
                 @endforelse
             </tbody>
         </table>

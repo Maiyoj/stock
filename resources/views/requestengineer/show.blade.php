@@ -117,7 +117,7 @@
                                         </table>
                                     </div>
 
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <h4>Comments</h4>
                                     <table id="datatablesSimple">
                                         <thead>
@@ -135,6 +135,29 @@
                                 @endforelse
                             </tbody>
                         </table>
+
+                              <div class="col-md-4">
+                                        <h4>Site Details</h4>
+                                    <table id="datatablesSimple">
+                                        <thead>
+                                            <tr>
+                                            <th>ID</th>
+                                            <th>Site Name</th>
+                                            <th> Client Name</th>
+                                            </tr>
+                                        </thead>
+                                       
+                                    @forelse($report as $report)
+                                </tr>  
+                                <td>{{$report->site_name}}</td>
+                                <td>{{$report->client_name}}</td>
+                                
+                            </tr>
+                                @empty
+                                @endforelse
+                            </tbody>
+                        </table>
+                                    </div>
                                     </div>
                                 </div>
                             </div>
