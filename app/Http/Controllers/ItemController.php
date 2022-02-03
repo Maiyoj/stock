@@ -13,10 +13,10 @@ class ItemController extends Controller
 
         $this->middleware('auth');
 
-      $this->middleware('permission:item|item-create|item-edit|item-delete', ['only' => ['index', 'show']]);
-        $this->middleware('permission:item-create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:item-edit', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:item-delete', ['only' => ['destroy']]);
+      $this->middleware('permission:item|item|item-edit|item', ['only' => ['index', 'show']]);
+        $this->middleware('permission:item', ['only' => ['create', 'store']]);
+        $this->middleware('permission:item', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:item', ['only' => ['destroy']]);
 
     }
     /**
@@ -52,18 +52,32 @@ class ItemController extends Controller
     {
         $request->validate([
             
-            'name'=>'required|string|unique:items'
+            'name'=>'required|string'
         ]);
 
-
-        $item=new Item;
-        $item->type=$request->type;
-        $item->name=$request->name;
-        $item->description=$request->description;
-        $item->units=$request->units;
-        $item->threshold=$request->threshold;
-        $item->sku=$request->sku;
-        $item->save();
+        $item = Item::withTrashed()-> where('name',$request->name)->first();
+        if($item)
+        {
+            $item->type=$request->type;
+            $item->name=$request->name;
+            $item->description=$request->description;
+            $item->units=$request->units;
+            $item->threshold=$request->threshold;
+            $item->sku=$request->sku;
+            $item->save();
+        
+        }
+        else{
+            $item=new Item;
+            $item->type=$request->type;
+            $item->name=$request->name;
+            $item->description=$request->description;
+            $item->units=$request->units;
+            $item->threshold=$request->threshold;
+            $item->sku=$request->sku;
+            $item->save();
+        }
+      
 
         return redirect()->route('item.index')->with('success', 'Item added sucessfully');
 

@@ -48,7 +48,7 @@
                                 <div class="d-flex flex-row bd-highlight mb-3">
                                 {{--<div class="p-2 bd-highlight"><a href="" class="btn btn-danger"  id="deleteAllSelectedRecord" >Delete Selected</a></div> --}}
                                 <div class="p-2 bd-highlight"><a class="btn btn-success" href="{{ route('csv.requestengineer-export') }}">Export data</a></div>
-                                @can('requestengineer-create')
+                                @can('requestengineer')
                             <div class="p-2 bd-highlight"><a class="btn btn-primary" href="{{ route('requestengineer.create') }}">Add Request</a></div>
                             @endcan
                             </div>
@@ -95,7 +95,7 @@
                                                 <th> Received Status</th>
                                                 <th>Date Added</th>
                                             </tr>
-                                            <th colspan="2">Action</th>
+                                            <th colspan="3">Action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -109,8 +109,11 @@
                                             <td class="{{$requestengineer->status=='pending' ? 'text-danger' :'text-success'}}">{{$requestengineer->status}}</td>
                                             <td class="{{$requestengineer->rstatus=='Not Received' ? 'text-danger' :'text-success'}}">{{$requestengineer->rstatus}}</td>
                                              <td>{{$requestengineer->created_at}}</td>
+                                             @can('requestengineer')
                                             <td><a href="{{route('requestengineer.show', $requestengineer->id)}}"><i class="fa fa-eye text-primary"> </i></td>
+                                            <td><a href="{{route('requestengineer.edit',$requestengineer->id)}}"><i class="fa fa-edit text-primary"></i></td>
                                             <td>
+                                                @endcan
                                                 <form action="{{url('requestengineer/'.$requestengineer->id)}}" method="post">
                                                     @csrf
                                                     @method('DELETE')  

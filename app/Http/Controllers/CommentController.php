@@ -36,15 +36,9 @@ class CommentController extends Controller
      */
     public function store(Request $request, $id)
     {
-       
-    
-
-        
         $request=Requests::findOrFail($id);
          $request->status='rejected';
          $request->save();
-
-
 
          return redirect()->route('request.index')->with('success', 'Comments added sucessfully');
      

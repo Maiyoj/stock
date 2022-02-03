@@ -40,7 +40,7 @@
                                     <div class="d-flex flex-row bd-highlight mb-3">
                                     <div class="p-2 bd-highlight"><a href="" class="btn btn-danger"  id="deleteAllSelectedRecord" >Delete Selected</a></div>
                                     <div class="p-2 bd-highlight">   <a class="btn btn-success" href="{{ route('csv.user-export') }}">Export data</a></div>
-                                    @can('user-create')
+                                    @can('user')
                                 <div class="p-2 bd-highlight"><a class="btn btn-primary" href="{{ route('user.create') }}">Add User</a></div>
                                 @endcan
                             
@@ -108,10 +108,10 @@
                                         @endforeach
                                     @endif
                                 </td>
-                                         @can('user-edit')
+                                         @can('user')
                                             <td><a href="{{route('user.edit', $user->id)}}"><i class="fa fa-edit text-primary"> </i></td>
                                                 @endcan
-                                                @can('user-delete')
+                                                @can('user')
                                             <td>
                                                 <form action="{{url('user/'.$user->id)}}" method="post">
                                                     @csrf

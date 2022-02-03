@@ -24,10 +24,10 @@ class RequestsController extends Controller
         $this->middleware('auth');
 
 
-        $this->middleware('permission:request|request-create|requst-edit|request-delete', ['only' => ['index', 'show']]);
-        $this->middleware('permission:request-create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:request-edit', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:request-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:request|request|requst|request', ['only' => ['index', 'show']]);
+        $this->middleware('permission:request', ['only' => ['create', 'store']]);
+        // $this->middleware('permission:request-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:request', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.
@@ -37,7 +37,8 @@ class RequestsController extends Controller
     public function index()
     {
         $users=User::where('id',Auth::user()->id)->get();
-        $requests= Requests::where('user_id',Auth::user()->id)->where('draft',1)->get();
+        $requests= Requests::where('teamlead_id',Auth::user()->id)->where('draft',1)->get();
+        #dd($requests);
         return view('request.index',compact('requests'));
     }
     /**
@@ -49,7 +50,7 @@ class RequestsController extends Controller
     {
         $items=Item::all();
         $zones=Zone::all();
-        $users=User::where('id',Auth::user()->id)->get();
+        $users=User::all();
         return view('request.create',compact('items','zones','users'));
     }
 
@@ -70,10 +71,11 @@ class RequestsController extends Controller
         $requests->zone_id=$request->zone_id;
         $requests->item_id=$request->item_id;
         $requests->quantity=$request->quantity;
+        $requests->teamlead_id= Auth::user()->id;
         $requests->status ='pending';
         $requests->save();
 
-       #$admin=User::where('role_id',0)->get();
+       $admin=User::where('role_id',0)->get();
         Notification::send($admin,new Approval());
         return redirect()->route('request.drafts')->with('success','Draft added successfully');
     }
@@ -128,6 +130,7 @@ class RequestsController extends Controller
         $requests->zone_id=$request->zone_id;
         $requests->item_id=$request->item_id;
         $requests->quantity=$request->quantity;
+        $requests->teamlead_id= Auth::user()->id;
         $requests->status ='pending';
         $requests->save();
 
@@ -153,7 +156,7 @@ class RequestsController extends Controller
     {
        
         $users=User::where('id',Auth::user()->id)->get();
-        $requests= Requests::where('user_id',Auth::user()->id)->where('draft',0)->get();
+        $requests= Requests::where('teamlead_id',Auth::user()->id)->where('draft',0)->get();
         return view('request.drafts',compact('requests'));
     }
     

@@ -77,11 +77,11 @@
                                               
                                               <i class="fas fa-bars"></i> </button>
                                             <ul class="dropdown-menu">
-                                              <li><a class="dropdown-item" href="{{route('purchase-pdf')}}">Export to PDF</a></li>
-                                              <li><a class="dropdown-item" href="#">Import Excel</a></li>
+                                              <li><a class="dropdown-item" href="{{route('purchase-pdf',$purchase->id)}}">Export to PDF</a></li>
+                                              {{-- <li><a class="dropdown-item" href="#">Import Excel</a></li> --}}
                                             </ul>
                                           </div> 
-                                        <table class="table table-striped">
+                                        <table id="datatablesSimple">
                                             <thead>
                                               <tr>
                                                 <th scope="col">#</th>
@@ -96,7 +96,7 @@
                                                     @foreach ($items as $itm)
                                                         @if ($item->item_id ==$itm->id)
                                                         <tr>
-                                                            <th scope="row">{{$itm->id}}</th>
+                                                            <td >{{$itm->id}}</td>
                                                             <td>{{$itm->name}}</td>
                                                             <td>{{$item->quantity}}</td>
                                                             <td>{{$itm->itemprice[0]->price}}</td>

@@ -5,9 +5,11 @@ namespace App\Exports;
 use App\Models\Purchase;
 use Illuminate\Support\Facades\DB;
 
+use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class PurchaseExport implements FromCollection
+class PurchaseExport implements FromCollection, WithHeadings,ShouldAutoSize
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -15,13 +17,16 @@ class PurchaseExport implements FromCollection
     public function collection()
     {
 
-        $purchases= DB::table('purchases')
+    $purchases= DB::table('purchases')->where('purchases.deleted_at',null)
     ->join('vendors', 'vendors.id', '=','vendor_id')
-    ->join('purchase_items', 'purchase_items.item_id', '=','item_id')
-    ->join('items', 'items.id', '=','purchase_items.item_id')
-    ->select( 'vendors.name AS vendorname', 'PO_number','price', 'quantity', 'purchase_items.item_id', 'items.name AS itemname', 'purchases.created_at')
+    ->select('purchases.id AS id','vendors.name AS vendorname', 'PO_number','price','date')
     ->get();
-   
         return $purchases;
+    }
+    public function headings(): array
+    {
+            return[
+                "Purchase ID","Vendor","Purchase PO Number","Total Price","Date"
+            ];
     }
 }

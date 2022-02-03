@@ -134,7 +134,7 @@
                                              <td>{{$request->created_at}}</td>
 
                                             <td><a href="{{route('request.show', $request->id)}}"><i class="fa fa-eye text-primary"></i></td>
-                                    
+                                                <td><a href="{{route('request.edit',$request->id)}}"><i class="fa fa-edit"></i></a></td>
                                             @if ($request->status=='pending')
                                                 <td><a href="{{route('request.approve', $request->id)}}"><i class="fa fa-check text-primary" class="btn btn-primary"> </i></td>
                                                 {{-- <td><a href="#"><i class="fa fa-times text-danger"  data-bs-toggle="modal" data-bs-target="#exampleModal"> </i></td>   --}}

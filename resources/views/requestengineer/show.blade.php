@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('front.index')
 
 @section('title')
 <title>Show Request Details </title>
@@ -11,6 +11,8 @@
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">Show Request Details </li>
                         </ol>
+                        <div class="p-2 bd-highlight"><a class="btn btn-primary text-white" href="{{ route('report.show',$requestengineer->id) }}">Report</a></div>
+                        <div class="p-2 bd-highlight"><a class="btn btn-success text-white" href="{{ route('pdf.engineer',$requestengineer->id) }}">Export PDF</a></div>
                         <div class="card mb-12">
                             <div class="card-header">
                                 <i class="fab fa-product-hunt"></i>
@@ -77,23 +79,36 @@
                                     </div> 
                                     <div class="col-md-4">
                                         <h4>Request Items</h4>
-                                        <table class="table table-striped">
+                                        <table id="datatablesSimple">
                                             <thead>
                                               <tr>
                                                 <th scope="col">#</th>
                                                 <th>Item </th>
-                                                <th>Quantity</th>
+                                                <th>Allocated Quantity</th>
+                                                <th>Used Quantity</th>
+                                                <th>Remaining Quantity</th>
                                               </tr>
                                             </thead>
                                             <tbody>
                 
                                                 @foreach ($requestengineer->erequests_item as $item)
+                                                @php
+                                                    $used = 0;
+            
+                                                    $check = $report->where('item_id',$item->item_id)->first();
+                                                    if($check)
+                                                    {
+                                                        $used = $report->where('item_id',$item->item_id)->sum('allocated_quantity');
+                                                    }
+                                                @endphp
                                                     @foreach ($items as $itm)
                                                         @if ($item->item_id ==$itm->id)
                                                         <tr>
                                                             <th scope="row">{{$itm->id}}</th>
                                                             <td>{{$itm->name}}</td>
                                                             <td>{{$item->quantity}}</td>
+                                                            <td>{{$used==0 ? '0':$used}}</td>
+                                                            <td>{{$item->quantity-$used}}</td>
                                                         </tr>
                                                         @endif
                                                     @endforeach

@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use App\Models\TeamLeadStock;
 use App\Models\RequestEngineer;
 use App\Models\EngineerComment;
+use App\Models\EngineerReport;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\Approval;
 use Illuminate\Support\Facades\Auth;
@@ -23,10 +24,10 @@ class RequestEngineercontroller extends Controller
     {
         $this->middleware('auth');
 
-    $this->middleware('permission:requestengineer|requestengineer-create|requestengineer-edit|requestengineer-delete', ['only' => ['index', 'show']]);
-    $this->middleware('permission:requestengineer-create', ['only' => ['create', 'store']]);
-    $this->middleware('permission:requestengineer-edit', ['only' => ['edit', 'update']]);
-    $this->middleware('permission:requestengineer-delete', ['only' => ['destroy']]);
+    $this->middleware('permission:requestengineer|requestengineer|requestengineer|requestengineer', ['only' => ['index', 'show']]);
+    $this->middleware('permission:requestengineer', ['only' => ['create', 'store']]);
+    // $this->middleware('permission:requestengineer-edit', ['only' => ['edit', 'update']]);
+    $this->middleware('permission:requestengineer', ['only' => ['destroy']]);
 
     }
     /**
@@ -94,8 +95,10 @@ class RequestEngineercontroller extends Controller
     {
         $requestengineer=Requestengineer::findOrFail($id);
         $items=Item::all();
+        $report = EngineerReport::where('request_engineer_id',$requestengineer->id)->get();
+    
         $comment=EngineerComment::where('request_engineer_id',$requestengineer->id)->get();
-        return view('requestengineer.show',compact('requestengineer','items', 'comment'));
+        return view('requestengineer.show',compact('requestengineer','items', 'comment','report'));
     }
 
     /**
@@ -107,10 +110,12 @@ class RequestEngineercontroller extends Controller
     public function edit($id)
     {
         $requestengineer=RequestEngineer::findOrFail($id);
+       // dd($requestengineer);
         $items=Item::all();
         $zones=Zone::all();
         $users=User::all();
-        return view('requestengineer.edit',compact('requestengineer','users','zones','items'));
+        $comment=EngineerComment::where('request_engineer_id',$requestengineer->id)->get();
+        return view('requestengineer.edit',compact('requestengineer','users','zones','items','comment'));
     }
 
     /**
@@ -123,16 +128,11 @@ class RequestEngineercontroller extends Controller
    
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'quantity'=>'numeric|required'
-        ]);
-
+     
         $requestengineer = requestengineer::findOrFail($id);
         $requestengineer->user_id=$request->user_id;
         $requestengineer->engineer_id = Auth::user()->id;
         $requestengineer->zone_id=$request->zone_id;
-        $requestengineer->item_id=$request->item_id;  
-        $requestengineer->quantity=$request->quantity; 
         $requestengineer->purpose=$request->purpose;
         $requestengineer->status ='pending';
         $requestengineer->save();

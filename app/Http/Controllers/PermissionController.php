@@ -13,10 +13,10 @@ class PermissionController extends Controller
         $this->middleware('auth');
 
         
-        $this->middleware('permission:permission|permission-create|permission-edit|permission-delete', ['only' => ['index','store']]);
-        $this->middleware('permission:permission-create', ['only' => ['create','store']]);
-        $this->middleware('permission:permission-edit', ['only' => ['edit','update']]);
-        $this->middleware('permission:permission-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:permission|permission|permission|permission', ['only' => ['index','store']]);
+        $this->middleware('permission:permission', ['only' => ['create','store']]);
+        $this->middleware('permission:permission', ['only' => ['edit','update']]);
+        $this->middleware('permission:permission', ['only' => ['destroy']]);
        
     }
    

@@ -18,10 +18,10 @@ class ApprovalController extends Controller
     {
     
             $this->middleware('auth');
-            $this->middleware('permission:approval|approval-create|approval-edit|approval-delete', ['only' => ['index', 'show']]);
-            $this->middleware('permission:approval-create', ['only' => ['create', 'store']]);
-            $this->middleware('permission:approval-edit', ['only' => ['edit', 'update']]);
-             $this->middleware('permission:approval-delete', ['only' => ['destroy']]);
+            $this->middleware('permission:approval|approval|approval-edit|approval-delete', ['only' => ['index', 'show']]);
+            $this->middleware('permission:approval', ['only' => ['create', 'store']]);
+            $this->middleware('permission:approval', ['only' => ['edit', 'update']]);
+             $this->middleware('permission:approval', ['only' => ['destroy']]);
         
     }
     /**
