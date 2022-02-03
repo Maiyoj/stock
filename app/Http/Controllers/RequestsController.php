@@ -7,6 +7,7 @@ use App\Models\Issuance;
 use App\Models\Zone;
 use App\Models\User;
 use App\Models\Item;
+use App\Models\EngineerReport;
 use App\Models\Stock;
 use App\Models\Comments;
 use App\Models\TeamLeadStock;
@@ -91,10 +92,10 @@ class RequestsController extends Controller
     {
         $request=Requests::findOrFail($id);
         $items=Item::all();
-        $comment=Comments::where('requests_id',$request->id)->get();;
+        $comment=Comments::where('requests_id',$request->id)->get();
        
       
-        return view('request.show',compact('request','items', 'comment'));
+        return view('request.show',compact('request','items', 'comment', 'reports'));
     }
 
     /**

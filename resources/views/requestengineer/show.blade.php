@@ -65,6 +65,7 @@
                                                         <label for="inputFirstName">Zone</label>
                                                     </div>
                                                 </div>
+                                               
                                                 <div class="col-md-12 mt-4">
                                                     <div class="form-floating mb-3 mb-md-0">
                                                         <input class="form-control" id="inputFirstName" readonly type="address" value="{{$requestengineer->user->name}}" placeholder="Enter your first name" />
@@ -72,8 +73,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-
-
+                                           
+                                           
                                         
                                         </form>
                                     </div> 
@@ -117,7 +118,7 @@
                                         </table>
                                     </div>
 
-                                    <div class="col-md-4">
+                                    <div class="col-md-5">
                                         <h4>Comments</h4>
                                     <table id="datatablesSimple">
                                         <thead>
@@ -127,7 +128,7 @@
                                         </thead>
                                        
                                     @forelse($comment as $comment)
-                                </tr>  
+                                <tr>  
                                 <td>{{$comment->comment}}</td>
                                 
                             </tr>
@@ -136,6 +137,28 @@
                             </tbody>
                         </table>
                                     </div>
+
+                                    <div class="col-md-6">
+                                        <h4>Details</h4>
+                                    <table id="datatablesSimple">
+                                        <thead>
+                                            <tr>
+                                            <th>Site Name</th>
+                                            <th>Client  Name</th>
+                                            </tr>
+                                        </thead>
+                                       
+                                    @forelse($report as $report)
+                                <tr>  
+                                <td>{{$report->site_name}}</td>
+                                <td>{{$report->client_name}}</td>
+                            </tr>
+                                @empty
+                                @endforelse
+                            </tbody>
+                        </table>
+                                    </div>
+                                
                                 </div>
                             </div>
                         </div>

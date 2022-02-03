@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Purchases</title>
+        <title>Request</title>
      
         <style>
             table {
@@ -36,6 +36,7 @@
                     <th>ID</th>
                     <th>No of Items</th>
                     <th>Zone</th> 
+                    <th>User</th> 
                 </tr>
             </thead>
             <tbody>
@@ -44,6 +45,8 @@
                     <td>{{$request->id}}</td>
                     <td>{{$request->request_item->count()}}</td>
                     <td>{{$request->zone->zone}}</td>
+                    <td>{{$request->user->name}}</td>
+                    
                 </tr>                                                           
             </tbody>
         </table>

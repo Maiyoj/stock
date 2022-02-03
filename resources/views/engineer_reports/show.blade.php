@@ -34,7 +34,7 @@
                                             <th>ID</th>
                                             <th>Site Name</th>
                                             <th>Client Name</th>
-                                            <th>Item</th>
+                                            <th>Item</th>z
                                             <th>Used Quantity</th>
                                         </tr>
                                     </thead>

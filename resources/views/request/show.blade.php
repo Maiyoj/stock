@@ -58,7 +58,7 @@
                                                 <div class="col-md-12 mt-4">
                                                     <div class="form-floating mb-3 mb-md-0">
                                                         <input class="form-control" id="inputFirstName" readonly type="address" value="{{$request->user->name}}" placeholder="Enter your first name" />
-                                                        <label for="inputFirstName">Engineer Name</label>
+                                                        <label for="inputFirstName">User</label>
                                                     </div>
                                                 </div>
                                             </div>
