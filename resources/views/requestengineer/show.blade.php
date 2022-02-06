@@ -74,7 +74,8 @@
                                                 </div>
                                             </div>
                                            
-                                           
+                                          
+                                            
                                         
                                         </form>
                                     </div> 
@@ -140,18 +141,18 @@
 
                                     <div class="col-md-6">
                                         <h4>Details</h4>
-                                    <table id="datatablesSimple">
+                                    <table id="datatablesSimple"  style="  border: 1px solid black;">
                                         <thead>
-                                            <tr>
-                                            <th>Site Name</th>
-                                            <th>Client  Name</th>
+                                            <tr style="  border: 1px solid black;">
+                                            <th style="  border: 1px solid black;">Site Name</th>
+                                            <th style="  border: 1px solid black;">Client  Name</th>
                                             </tr>
                                         </thead>
                                        
                                     @forelse($report as $report)
                                 <tr>  
-                                <td>{{$report->site_name}}</td>
-                                <td>{{$report->client_name}}</td>
+                                <td style="  border: 1px solid black;">{{$report->site_name}}</td>
+                                <td style="  border: 1px solid black;">{{$report->client_name}}</td>
                             </tr>
                                 @empty
                                 @endforelse
