@@ -36,6 +36,7 @@
                                             <th>Client Name</th>
                                             <th>Item</th>z
                                             <th>Used Quantity</th>
+                                            <th>Download Document</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -45,16 +46,25 @@
                                             <th>Client Name</th>
                                             <th>Item</th>
                                             <th>Used Quantity</th>
+                                            <th>Download Document</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                         @forelse($request->reports as $report)
                                             <tr>
+                                           
                                                 <td>{{$report->id}}</td>
                                                 <td>{{$report->site_name}}</td>
                                                 <td>{{$report->client_name}}</td>
                                                 <td>{{$report->item->name}}</td>
                                                 <td>{{$report->allocated_quantity}}</td>
+                                                <td>
+                                                    @if ($report->document!=null)
+                                                       <a href="{{route('document.download',$report->id)}}"><i class="fa fa-download"></i></a> 
+                                                    @else
+                                                        No Attached Document
+                                                    @endif
+                                                </td>
                                             </tr>                                                           
                                         @empty
                                         

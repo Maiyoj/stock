@@ -58,30 +58,42 @@
                 <tr>
                     <th style="width:25%">#</th>
                     <th style="width:25%">Item Name</th>
-                    <th style="width:25%">Price</th>
-                    <th style="width:25%">Quantity</th> 
+                    <th style="width:25%">Allocated Quantity</th> 
+                    <th style="width:25%">Used Quantity</th> 
+                    <th style="width:25%">Remaining Quantity</th> 
                 </tr>
             </thead>
             <tbody>
+             
+               
                 @php
                     $id = 1;
                 @endphp
-                @foreach ($requestengineer->erequests_item as $item)
-                    @foreach ($items as $itm)
-                        @if ($item->item_id ==$itm->id)
-                        <tr>
-                            <td>{{$id}}</td>
-                            <td>{{$itm->name}}</td>
-                            <td>{{$item->quantity}}</td>
-                            <td>{{$itm->itemprice[0]->price}}</td>
-                        </tr>
-                        @php
-                            $id++;
-                        @endphp
-                        @endif
-                       
-                    @endforeach
-                @endforeach
+                  @foreach ($requestengineer->erequests_item as $item)
+                  @php
+                      $used = 0;
+
+                      $check = $report->where('item_id',$item->item_id)->first();
+                      if($check)
+                      {
+                          $used = $report->where('item_id',$item->item_id)->sum('allocated_quantity');
+                      }
+                  @endphp
+                      @foreach ($items as $itm)
+                          @if ($item->item_id ==$itm->id)
+                          <tr>
+                              <th scope="row">{{$itm->id}}</th>
+                              <td>{{$itm->name}}</td>
+                              <td>{{$item->quantity}}</td>
+                              <td>{{$used==0 ? '0':$used}}</td>
+                              <td>{{$item->quantity-$used}}</td>
+                          </tr>
+                          @endif
+                      @endforeach
+                    @php
+                      $id++;
+                    @endphp
+                  @endforeach
                   
             </tbody>
         </table>

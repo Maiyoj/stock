@@ -95,7 +95,7 @@ class RequestsController extends Controller
         $comment=Comments::where('requests_id',$request->id)->get();
        
       
-        return view('request.show',compact('request','items', 'comment', 'reports'));
+        return view('request.show',compact('request','items', 'comment'));
     }
 
     /**

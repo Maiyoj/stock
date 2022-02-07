@@ -246,6 +246,8 @@ Route::get('/reports',[EngineerReportController::class,'index'])->name('report.i
 Route::get('/report/{id}',[EngineerReportController::class,'create'])->name('report.create');
 Route::post('/report/{id}',[EngineerReportController::class,'store'])->name('report.store');
 Route::get('/report-show/{id}',[EngineerReportController::class,'show'])->name('report.show');
+Route::post('/add-session/{id}',[EngineerReportController::class,'session'])->name('session.add');
+Route::get('/document-download/{id}',[EngineerReportController::class,'download'])->name('document.download');
 
 Route::get('/request_item_edit/{id}',[EditController::class,'editrequestitem'])->name('request_item.edit');
 Route::post('/request_item_update/{id}',[EditController::class,'updaterequestitem'])->name('request_item.update');
