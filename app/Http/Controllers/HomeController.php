@@ -396,12 +396,12 @@ $returneds=Returned::whereBetween('created_at', [$from, $to])->get();
    
     foreach($items as  $item)
     {
-     $team_lead=TeamLeadStock::where('user_id',$request->user_id)->where('item_id',$item->item_id)->first();
+     $team_lead=TeamLeadStock::where('teamlead_id',$request->teamlead_id)->where('item_id',$item->item_id)->first();
      if( $team_lead==null)  
      
      {
         $new_stock=new TeamLeadStock;
-        $new_stock->user_id=$request->user_id;
+        $new_stock->teamlead_id=$request->teamlead_id;
         $new_stock->item_id=$item->item_id;
         $new_stock->quantity=$item->quantity;
         $new_stock->save();

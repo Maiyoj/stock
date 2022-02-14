@@ -155,10 +155,22 @@ class RequestsController extends Controller
 
     public function drafts(Request $request)
     {
+        if (Auth::check()){
        
         $users=User::where('id',Auth::user()->id)->get();
         $requests= Requests::where('teamlead_id',Auth::user()->id)->where('draft',0)->get();
         return view('request.drafts',compact('requests'));
+        }
+        else 
+        
+         if (Auth::user()->hasRole('Admin')){
+            $requests= Requests::all();
+            return view('request.drafts',compact('requests'));
+
+        }
+
+
+            
     }
     
 
