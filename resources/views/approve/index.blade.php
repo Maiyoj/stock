@@ -129,23 +129,23 @@
                                             <td>{{$request->user->name}}</td>
                                             <td>{{$request->zone->zone}}</td>
                                             <td>{{$request->request_item->count()}}</td>
+                                           
                                             <td class="{{$request->pmstatus=='waiting' ? 'text-danger' :'text-success'}}">{{$request->pmstatus}}</td>
                                            <td class="{{$request->status=='pending' ? 'text-danger' :'text-success'}}">{{$request->status}}</td>
                                              <td>{{$request->created_at}}</td>
 
                                             <td><a href="{{route('request.show', $request->id)}}"><i class="fa fa-eye text-primary"></i></td>
-                                                <td><a href="{{route('request.edit',$request->id)}}"><i class="fa fa-edit"></i></a></td>
+                                            <td><a href="{{route('request.edit',$request->id)}}"> @if ($request->status=='pending')<i class="fa fa-edit"></i></a></td>@endif
                                             @if ($request->status=='pending')
-                                                <td><a href="{{route('request.approve', $request->id)}}"><i class="fa fa-check text-primary" class="btn btn-primary"> </i></td>
+                                                <td><a href="{{route('request.approve', $request->id)}}">  @if ($request->status=='pending')<i class="fa fa-check text-primary" class="btn btn-primary"> </i></td>@endif
                                                 {{-- <td><a href="#"><i class="fa fa-times text-danger"  data-bs-toggle="modal" data-bs-target="#exampleModal"> </i></td>   --}}
-                                                      <td><a href="#"><i class="btn-btn-primary text-danger"  type="submit"  data-bs-toggle="modal" data-bs-target="#exampleModal">Reject</i></td>  
+                                                      <td><a href="#">  @if ($request->status=='pending')<i class="btn-btn-primary text-danger"  type="submit"  data-bs-toggle="modal" data-bs-target="#exampleModal">Reject</i></td>@endif  
                                             @endif
+                                            
                                             </tr>                                                           
                                         @empty
-                                       
+                
                                         @endforelse
-                                  
-                                        
                                        
                                     </tbody>
                                 </table>
