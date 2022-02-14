@@ -15,7 +15,7 @@ class CreateTeamLeadStocksTable extends Migration
     {
         Schema::create('team_lead_stocks', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
+            $table->integer('teamlead_id');
             $table->integer('item_id');
             $table->integer('quantity');
             $table->timestamps();

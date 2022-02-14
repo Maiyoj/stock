@@ -33,12 +33,21 @@ class StockController extends Controller
         if (Auth::check())
         {
             
-             $stocks=TeamLeadStock::where('user_id',Auth::user()->id)->get();
+             $stocks=TeamLeadStock::where('teamlead_id',Auth::user()->id)->get();
              return view('stocks.teamleadstocks',compact('stocks'));
         }
+
+        else
        /* $stocks=TeamLeadStock::where('id', Auth::id())->get();
          return view('stocks.teamleadstocks',compact('stocks'));*/
 
+
+
+          if (Auth::user()->hasRole('Admin')){
+
+                $stocks =TeamLeadStock::all();
+                return view('stocks.teamleadstocks',compact('stocks'));
+             }
          
     }
     public function engineerstocks()
