@@ -1,7 +1,6 @@
 
 
 @extends('front.index')
-
 @section('title')
 <title>Issuances Approval</title>
 @endsection
@@ -76,18 +75,9 @@
                                                 <td><a href="{{route('request.approve', $request->id)}}"><i class="fa fa-check text-primary"> </i></td>
                                                 <td><a href="{{route('request.reject', $request->id)}}"><i class="fa fa-times text-danger"> </i></td>
                                              @endif
-                                        
-                                            
-                        
-                                            
                                             </tr>                                                           
                                         @empty
-                                        
-
                                         @endforelse
-                                  
-                                        
-                                       
                                     </tbody>
                                 </table> --}}
                                 <table id="datatablesSimple">
@@ -130,9 +120,8 @@
                                             <td><a href="{{route('request.show', $request->id)}}"><i class="fa fa-eye text-primary"></i></td>
                                     
                                             @if ($request->pmstatus=='waiting')
-                                                <td><a href="{{route('pm.approve', $request->id)}}"><i class="fa fa-check text-primary"> </i></td>
-                                                {{-- <td><a href="{{route('pm.reject', $request->id)}}"><i class="fa fa-times text-danger"> </i></td> --}}
-                                                <td><a href="#"><i class="btn-btn-primary text-danger"  type="submit"  data-bs-toggle="modal" data-bs-target="#exampleModal">Reject</i></td>
+                                                <td><a href="{{route('pm.approve', $request->id)}}">  @if ($request->pmstatus=='waiting')<i class="fa fa-check text-primary"> </i></td>@endif
+                                                <td><a href="#"> @if ($request->pmstatus=='waiting')<i class="btn-btn-primary text-danger"  type="submit"  data-bs-toggle="modal" data-bs-target="#exampleModal">Reject</i></td>@endif
                                             @endif
                                             </tr>                                                           
                                            @empty
