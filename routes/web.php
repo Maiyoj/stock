@@ -121,7 +121,7 @@ Route::get('/returneds-reports', [App\Http\Controllers\HomeController::class, 'r
 
 
 
-//adding more than item routes
+//adding more than one item routes
 
 Route::post('add-item',[HomeController::class,'purchase'])->name('item.add');
 Route::get('remove-item/{id}',[HomeController::class,'remove'])->name('item.remove');
@@ -193,8 +193,6 @@ Route::get('returns-import-export', [CsvController::class, 'csv.returnsImportExp
 Route::post('returns-import', [CsvController::class, 'returnsImport'])->name('csv.returns-import');
 Route::get('returns-export', [CsvController::class, 'returnsExport'])->name('csv.returns-export');
 
-
-
 /*middleware routes
 Route::group(['middleware' => ['auth', 'appstrict']], function () {
     Route::resource('/item', ItemController::class);
@@ -203,14 +201,8 @@ Route::group(['middleware' => ['auth', 'appstrict']], function () {
     Route::resource('/user', UserController::class);
     Route::resource('/zone', ZoneController::class);
     Route::resource('/price', PriceController::class);
-  
-
     Route::get('/stocks',[StockController::class,'index'])->name('stocks.index');
-
-         
-    
      #purchase controller
-
     Route::post('add-item',[HomeController::class,'purchase'])->name('item.add');
     Route::get('remove-item/{id}',[HomeController::class,'remove'])->name('item.remove');
     Route::get('item-complete',[HomeController::class,'complete'])->name('items.complete');

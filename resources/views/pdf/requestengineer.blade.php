@@ -61,7 +61,7 @@
                     <th style="width:25%">Allocated Quantity</th> 
                     <th style="width:25%">Used Quantity</th> 
                     <th style="width:25%">Remaining Quantity</th> 
-                </tr>
+                   
             </thead>
             <tbody>
              

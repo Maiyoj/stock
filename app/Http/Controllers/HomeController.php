@@ -243,7 +243,7 @@ $zones=Zone::whereBetween('created_at', [$from, $to])->get();
     if($request->from!=null && $request->from!=null)
        {
 $from=Carbon::createFromFormat('Y-m-d',$request->from);
-  $to=Carbon::createFromFormat('Y-m-d',$request->to);
+$to=Carbon::createFromFormat('Y-m-d',$request->to);
 $issuances=Issuance::whereBetween('created_at', [$from, $to])->get();
     }
     else{
@@ -390,7 +390,11 @@ $returneds=Returned::whereBetween('created_at', [$from, $to])->get();
       $stock->save();
       #dd($stock);
    }
-   
+   $requests=Requests::findOrFail($id);
+   $comment= new Comments;
+   $comment->comments=$request->comments;
+   $comment->requests_id=$requests->id;
+   $comment->save();
     $request->status='approved';
     $request->save(); 
    

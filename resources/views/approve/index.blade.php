@@ -89,9 +89,6 @@
                                         
 
                                         @endforelse
-                                  
-                                        
-                                       
                                     </tbody>
                                 </table> --}}
                                 <table id="datatablesSimple">
@@ -139,14 +136,11 @@
                                             @if ($request->status=='pending')
                                                 {{-- <td><a href="{{route('request.approve', $request->id)}}">  @if ($request->status=='pending')<i class="fa fa-check text-primary" class="btn btn-primary"> </i></td>@endif --}}
                                                 <td><a href="#">  @if ($request->status=='pending')<i class="btn-btn-primary text-danger"  type="submit"  data-bs-toggle="modal" data-bs-target="#exampleModal">Reject</i></td>@endif  
-                                                <td><a href="#">  @if ($request->status=='pending')<i class="btn-btn-primary text-primary"  type="submit"  data-bs-toggle="modal" data-bs-target="#exampleModal">Approve</i></td>@endif
-
+                                                <td><a href="#">  @if ($request->status=='pending')<i class="btn-btn-primary text-primary"  type="submit"  data-bs-toggle="modal" data-bs-target="#exampleModal2">Approve</i></td>@endif
                                             @endif
                                             </tr>                                                           
                                         @empty
-                
                                         @endforelse
-                                       
                                     </tbody>
                                 </table>
                                 <div class="d-flex flex-row-reverse bd-highlight">
@@ -158,8 +152,7 @@
 
 
 
-                     {{-- Comments form --}}
-                    
+                     {{-- Comments form  reject--}}
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                           <div class="modal-content">
@@ -171,7 +164,6 @@
 
                                 <form action="{{route('request.reject',  $request->id)}}" method="HEAD">  
                                     @csrf
-                                 
                                     <div class="row mb-3">
                                     <div class="col-md-8">
 
@@ -180,9 +172,7 @@
                                     <div class="alert alert-danger">
                                         {{$error}}
                                 </div>
-
                                     @endforeach
-
                                     @endif
                                     <div class="form-floating mb-3 mb-md-0">
                                 <textarea rows = "5" cols = "50" name = "comments"></textarea>
@@ -190,13 +180,44 @@
                                     </div>
                                <div class="modal-footer">
                                 {{-- <td><a href="{{route('comments.store', $request->id)}}"><i class="btn-btn-primary text-danger"  type="submit"  data-bs-toggle="modal" data-bs-target="#exampleModal">Submit Comment</i></td>   --}}
-
                               <button type="submit" class="btn btn-primary">Save changes</button> 
                             </form>
                             </div>
                           </div>
                         </div>
                       </div>
-                      
-                </main>
-@endsection  
+                    {{-- create approval comment --}}
+                    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel"> Enter Comments</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                            <form action="{{route('request.approve',  $request->id)}}" method="HEAD">  
+                                    @csrf
+                                    <div class="row mb-3">
+                                    <div class="col-md-8">
+
+                                    @if ($errors->any())
+                                    @foreach($errors->all() as $error)
+                                    <div class="alert alert-danger">
+                                        {{$error}}
+                                </div>
+                                    @endforeach
+                                    @endif
+                                    <div class="form-floating mb-3 mb-md-0">
+                                <textarea rows = "5" cols = "50" name = "comments"></textarea>
+                                    </div>
+                                    </div>
+                               <div class="modal-footer">
+                                {{-- <td><a href="{{route('comments.store', $request->id)}}"><i class="btn-btn-primary text-danger"  type="submit"  data-bs-toggle="modal" data-bs-target="#exampleModal">Submit Comment</i></td>   --}}
+                              <button type="submit" class="btn btn-primary">Save changes</button> 
+                            </form>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  </main>
+                 @endsection  
